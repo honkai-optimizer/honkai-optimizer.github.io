@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="home.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Honkai: Star Rail Optimizer</title>
+    <title>Light Cones</title>
 </head>
 <body>
     <div class="topnav">
@@ -14,7 +13,7 @@
         <!-- Navigation links (hidden by default) -->
         <div id="myLinks">
             <a href="characters.html">Characters</a>
-            <a href="lightcones.html">Light Cones</a>
+            <a href="lightcones.html" style="border-bottom: white solid 3px;">Light Cones</a>
             <a href="relics.html">Relics</a>
             <a href="optimize.html">Optimize</a>
         </div>
@@ -24,16 +23,20 @@
         </a>
     </div>
 
+    <!-- Add or remove light cones-->
+    <div>
+        
+    </div>
+
+    <!-- Content -->
     <div class="box">
-        <h1>
-            A calculator for <u>Honkai: Star Rail</u>, helping you distribute your Relics optimally.
-        </h1>
-        <p>Open the menu on the top right to get started.</p>
+        <h1>Light Cones:</h1>
+        <div id="lightconeList">
+
+        </div>
     </div>
-    <div class="box" id="changelog">
-        <h2>Changelog:</h2>
-        <p>(2024/03/29) 0.0.1: Created the page.</p>
-    </div>
+
+
     <script>
         function menuClick() {
             var x = document.getElementById("myLinks");
@@ -46,9 +49,10 @@
     </script>
 
 
-    <footer>
+    <footer id="footer">
         <p>Up to date with: HSR Patch 2.0.</p>
         <p>If you encounter any problems, <a target="_blank" href="https://github.com/honkai-optimizer/honkai-optimizer.github.io/issues/new">submit the issue here!</a> </p>
     </footer>
 </body>
+</html>
 </html>
