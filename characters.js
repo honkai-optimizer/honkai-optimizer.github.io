@@ -57,7 +57,7 @@ function addCharToOwnedList(character) {
     const card = createStyledDiv("characterCard");
     card.innerHTML = /*HTML*/ `
         <div class="infoContainer">
-            <img src="./icons/chars/${character}/icon.png" height="124px" width="124px">
+            <img src="./icons/chars/${character}/icon.png" height="124px" width="112px">
             <div class="infoText">
                 <p>${val.key}<br><br>
                 Lvl. ${val.level} E${val.eidolon}</p>
