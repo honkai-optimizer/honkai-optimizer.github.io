@@ -1,0 +1,75 @@
+#characterButtons {
+    justify-content:center;
+    display: flex;
+    gap: 20px;
+}
+
+#buttonWrapper {
+    display:flex;
+    gap:20px;
+}
+
+.filterButtons {
+    display:flex;
+    gap:5px;
+    justify-content: center;
+}
+
+.toggleButton {
+    background-color: rgb(44, 44, 44);
+    padding: 3px;
+
+}
+
+#addCharacter, #deleteCharacters {
+    color:var(--textcolor);
+    background-color: rgb(126, 201, 13);
+    border: 0;
+    height:30px;
+    border-radius: 5px;
+    width:50%;
+}
+
+#deleteCharacters {
+    background-color: rgb(201, 13, 13);
+}
+
+.characterList {
+    display:flex;
+    flex-wrap: wrap;
+    gap:5px;
+    margin-top: 5px;
+}
+
+#dialogContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* visibility:hidden; */
+}
+
+#addCharacterDialog {
+    margin-inline: auto;
+    margin-top: 50px;
+    width:80%;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    text-align: center;
+}
+
+.characterCard {
+    display:flex;
+    padding:10px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.cardInfoContainer {
+    display:flex;
+}

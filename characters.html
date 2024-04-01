@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="characters.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Characters</title>
@@ -24,18 +25,70 @@
     </div>
 
     <!-- Add or remove characters-->
-    <div>
-        
+    <div class="box" id="characterButtons">
+        <button id="addCharacter">Add a Character</button>
+        <button id="deleteCharacters">Delete all Characters</button>
+    </div>
+
+    <div class="box" id="buttonWrapper">
+        <div class="filterButtons">
+            <div class="toggleButton">Fire</div>
+            <div class="toggleButton">Ice</div>
+            <div class="toggleButton">Lightning</div>
+            <div class="toggleButton">Wind</div>
+            <div class="toggleButton">Imaginary</div>
+            <div class="toggleButton">Quantum</div>
+            <div class="toggleButton">Physical</div>
+        </div>
+        <div class="filterButtons">
+            <div class="toggleButton">Abundance</div>
+            <div class="toggleButton">Destruction</div>
+            <div class="toggleButton">Erudition</div>
+            <div class="toggleButton">Harmony</div>
+            <div class="toggleButton">Hunt</div>
+            <div class="toggleButton">Nihility</div>
+            <div class="toggleButton">Preservation</div>
+        </div>
     </div>
 
     <!-- Content -->
     <div class="box">
         <h1>Characters:</h1>
-        <div id="characterList">
+        <div id="ownedCharacterList" class="characterList">
 
         </div>
     </div>
 
+    <div id="dialogContainer">
+        <div id="addCharacterDialog" class="box">
+            <div>
+                <h2>Select your Character</h2>
+            </div>
+            <div class="filterButtons">
+                <div class="toggleButton">Fire</div>
+                <div class="toggleButton">Ice</div>
+                <div class="toggleButton">Lightning</div>
+                <div class="toggleButton">Wind</div>
+                <div class="toggleButton">Imaginary</div>
+                <div class="toggleButton">Quantum</div>
+                <div class="toggleButton">Physical</div>
+            </div>
+            <div class="filterButtons">
+                <div class="toggleButton">Abundance</div>
+                <div class="toggleButton">Destruction</div>
+                <div class="toggleButton">Erudition</div>
+                <div class="toggleButton">Harmony</div>
+                <div class="toggleButton">Hunt</div>
+                <div class="toggleButton">Nihility</div>
+                <div class="toggleButton">Preservation</div>
+            </div>
+            <div id="createCharacterList" class="characterList">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="characters.js"></script>
 
     <script>
         function menuClick() {
@@ -45,7 +98,7 @@
             } else {
                 x.style.display = "block";
             }
-        } 
+        }
     </script>
 
 
