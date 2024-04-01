@@ -42,16 +42,15 @@
 }
 
 #dialogContainer {
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: fixed;
     top: 0;
     bottom: 0;
+    overflow: scroll;
     background-color: rgba(0, 0, 0, 0.5);
-    /* visibility:hidden; */
+    visibility:hidden;
 }
 
-#addCharacterDialog {
+#addCharacterDialog, #editCharacterDialog {
     margin-inline: auto;
     margin-top: 50px;
     width:80%;
@@ -68,8 +67,27 @@ h2 {
     padding:10px;
     background-color: black;
     border-radius: 5px;
+    flex-direction: column;
+    height:200px;
+    width: 300px;
 }
 
-.cardInfoContainer {
+.infoContainer, .cardTraces {
     display:flex;
+}
+
+.traceCircle {
+    display: flex;
+    background-color: gray;
+    margin: 5px;
+    height: 25px;
+    width: 25px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.infoText {
+    display:flex;
+    flex-direction: column;
 }

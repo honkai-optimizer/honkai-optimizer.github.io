@@ -26,8 +26,8 @@
 
     <!-- Add or remove characters-->
     <div class="box" id="characterButtons">
-        <button id="addCharacter">Add a Character</button>
-        <button id="deleteCharacters">Delete all Characters</button>
+        <button id="addCharacter" onclick="showDialog()">Add a Character</button>
+        <button id="deleteCharacters" onclick="deleteAllCharacters()">Delete all Characters</button>
     </div>
 
     <div class="box" id="buttonWrapper">
@@ -54,9 +54,7 @@
     <!-- Content -->
     <div class="box">
         <h1>Characters:</h1>
-        <div id="ownedCharacterList" class="characterList">
-
-        </div>
+        <div id="ownedCharacterList" class="characterList"></div>
     </div>
 
     <div id="dialogContainer">
@@ -85,6 +83,9 @@
             <div id="createCharacterList" class="characterList">
 
             </div>
+        </div>
+        <div id="editCharacterDialog" class="box">
+            
         </div>
     </div>
 
