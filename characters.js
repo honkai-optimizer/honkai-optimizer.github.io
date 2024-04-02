@@ -1,4 +1,4 @@
-const names = ['Acheron','Argenti','Arlan','Asta','Aventurine','Bailu','BlackSwan','Blade','Boothill','Bronya','Clara','DanHeng','DanHengImbibitorLunae','DrRatio','FuXuan','Gallagher','Gepard','Guinaifen','Hanya','Herta','Himeko','Hook','Huohuo','JingYuan','Jingliu','Kafka','Luka','Luocha','Lynx','March7th','Misha','Natasha','Pela','Qingque','Robin','RuanMei','Sampo','Seele','Serval','SilverWolf','Sparkle','Sushang','Tingyun','TopazAndNumby','TrailblazerFireF','TrailblazerPhysicalM','Welt','Xueyi','Yanqing','Yukong',];
+const names = ['Acheron','Argenti','Arlan','Asta','Aventurine','Bailu','BlackSwan','Blade','Boothill','Bronya','Clara','DanHeng','DanHengImbibitorLunae','DrRatio','FuXuan','Gallagher','Gepard','Guinaifen','Hanya','Herta','Himeko','Hook','Huohuo','JingYuan','Jingliu','Kafka','Luka','Luocha','Lynx','March7th','Misha','Natasha','Pela','Qingque','Robin','RuanMei','Sampo','Seele','Serval','SilverWolf','Sparkle','Sushang','Tingyun','TopazAndNumby','TrailblazerFire','TrailblazerPhysical','Welt','Xueyi','Yanqing','Yukong',];
 
 const ownedCharList = document.getElementById("ownedCharacterList");
 const createCharList = document.getElementById("createCharacterList");
@@ -19,20 +19,11 @@ function initialize() {
 
 function addCharToCreateList(createList, character) {
     const card = createStyledDiv("characterCard");
-    const portrait = createPortrait(character);
-    card.append(portrait);
-    const container = document.createElement("div");
-    card.append(container);
-    let name = character;
-    for(let i = 1; i < name.length; i++) {
-        if (name[i] === name[i].toUpperCase()) {
-            name = name.substring(0, i) + " " + name.substring(i);
-            i++;
-        }
-    }
-    const p = document.createElement("p");
-    p.innerText = name;
-    container.append(p);
+    let withSpaces = formatName(character);
+    card.innerHTML = /*HTML*/ `
+        <img src="./icons/chars/Codex Avatar_${withSpaces}.png" height="124px" width="112px">
+        <div>${withSpaces}</div>
+    `;
     createList.append(card);
     card.onclick = e => {
         localStorage.setItem("char_" + character, JSON.stringify({
@@ -52,12 +43,22 @@ function addCharToCreateList(createList, character) {
     }
 }
 
+function formatName(name) {
+    for(let i = 1; i < name.length; i++) {
+        if (name[i] === name[i].toUpperCase()) {
+            name = name.substring(0, i) + " " + name.substring(i);
+            i++;
+        }
+    }
+    return name;
+}
+
 function addCharToOwnedList(character) {
     const val = JSON.parse(localStorage.getItem("char_" + character));
     const card = createStyledDiv("characterCard");
     card.innerHTML = /*HTML*/ `
         <div class="infoContainer">
-            <img src="./icons/chars/${character}/icon.png" height="124px" width="112px">
+            <img src="./icons/chars/Codex Avatar_${character}.png" height="124px" width="112px">
             <div class="infoText">
                 <p>${val.key}<br><br>
                 Lvl. ${val.level} E${val.eidolon}</p>
