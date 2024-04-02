@@ -27,7 +27,7 @@ function addCharToCreateList(createList, character) {
     createList.append(card);
     card.onclick = e => {
         localStorage.setItem("char_" + character, JSON.stringify({
-            key: name,
+            key: withSpaces,
             level: 1,
             ascension: 0,
             traces: {
