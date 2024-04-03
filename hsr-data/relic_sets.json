@@ -1,0 +1,910 @@
+{
+    "Passerby of Wandering Cloud": {
+        "pieces": {
+            "Head": {
+                "name": "Passerby's Rejuvenated Wooden Hairstick",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/101_0.png"
+            },
+            "Hands": {
+                "name": "Passerby's Roaming Dragon Bracer",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/101_1.png"
+            },
+            "Body": {
+                "name": "Passerby's Ragged Embroided Coat",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/101_2.png"
+            },
+            "Feet": {
+                "name": "Passerby's Stygian Hiking Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/101_3.png"
+            }
+        },
+        "desc": [
+            "Increases Outgoing Healing by 10%.",
+            "At the start of the battle, immediately regenerates 1 Skill Point."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "heal",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Musketeer of Wild Wheat": {
+        "pieces": {
+            "Head": {
+                "name": "Musketeer's Wild Wheat Felt Hat",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/102_0.png"
+            },
+            "Hands": {
+                "name": "Musketeer's Coarse Leather Gloves",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/102_1.png"
+            },
+            "Body": {
+                "name": "Musketeer's Wind-Hunting Shawl",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/102_2.png"
+            },
+            "Feet": {
+                "name": "Musketeer's Rivets Riding Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/102_3.png"
+            }
+        },
+        "desc": [
+            "ATK increases by 12%.",
+            "The wearer's SPD increases by 6% and Basic ATK DMG increases by 10%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "atk_",
+                    "value": 0.12
+                }
+            ],
+            [
+                {
+                    "type": "spd_",
+                    "value": 0.06
+                }
+            ]
+        ]
+    },
+    "Knight of Purity Palace": {
+        "pieces": {
+            "Head": {
+                "name": "Knight's Forgiving Casque",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/103_0.png"
+            },
+            "Hands": {
+                "name": "Knight's Silent Oath Ring",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/103_1.png"
+            },
+            "Body": {
+                "name": "Knight's Solemn Breastplate",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/103_2.png"
+            },
+            "Feet": {
+                "name": "Knight's Iron Boots of Order",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/103_3.png"
+            }
+        },
+        "desc": [
+            "Increases DEF by 15%.",
+            "Increases the max DMG that can be absorbed by the Shield created by the wearer by 20%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "def_",
+                    "value": 0.15
+                }
+            ],
+            []
+        ]
+    },
+    "Hunter of Glacial Forest": {
+        "pieces": {
+            "Head": {
+                "name": "Hunter's Artaius Hood",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/104_0.png"
+            },
+            "Hands": {
+                "name": "Hunter's Lizard Gloves",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/104_1.png"
+            },
+            "Body": {
+                "name": "Hunter's Ice Dragon Cloak",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/104_2.png"
+            },
+            "Feet": {
+                "name": "Hunter's Soft Elkskin Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/104_3.png"
+            }
+        },
+        "desc": [
+            "Increases Ice DMG by 10%.",
+            "After the wearer uses their Ultimate, their CRIT DMG increases by 25% for 2 turn(s)."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "ice",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Champion of Streetwise Boxing": {
+        "pieces": {
+            "Head": {
+                "name": "Champion's Headgear",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/105_0.png"
+            },
+            "Hands": {
+                "name": "Champion's Heavy Gloves",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/105_1.png"
+            },
+            "Body": {
+                "name": "Champion's Chest Guard",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/105_2.png"
+            },
+            "Feet": {
+                "name": "Champion's Fleetfoot Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/105_3.png"
+            }
+        },
+        "desc": [
+            "Increases Physical DMG by 10%.",
+            "After the wearer attacks or is hit, their ATK increases by 5% for the rest of the battle. This effect can stack up to 5 time(s)."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "physical",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Guard of Wuthering Snow": {
+        "pieces": {
+            "Head": {
+                "name": "Guard's Cast Iron Helmet",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/106_0.png"
+            },
+            "Hands": {
+                "name": "Guard's Shining Gauntlets",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/106_1.png"
+            },
+            "Body": {
+                "name": "Guard's Uniform of Old",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/106_2.png"
+            },
+            "Feet": {
+                "name": "Guard's Silver Greaves",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/106_3.png"
+            }
+        },
+        "desc": [
+            "Reduces DMG taken by 8%.",
+            "At the beginning of the turn, if the wearer's HP is equal to or less than 50%, restores HP equal to 8% of their Max HP and regenerates 5 Energy."
+        ]
+    },
+    "Firesmith of Lava-Forging": {
+        "pieces": {
+            "Head": {
+                "name": "Firesmith's Obsidian Goggles",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/107_0.png"
+            },
+            "Hands": {
+                "name": "Firesmith's Ring of Flame-Mastery",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/107_1.png"
+            },
+            "Body": {
+                "name": "Firesmith's Fireproof Apron",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/107_2.png"
+            },
+            "Feet": {
+                "name": "Firesmith's Alloy Leg",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/107_3.png"
+            }
+        },
+        "desc": [
+            "Increases Fire DMG by 10%.",
+            "Increases the wearer's Skill DMG by 12%. After unleashing Ultimate, increases the wearer's Fire DMG by 12% for the next attack."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "fire",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Genius of Brilliant Stars": {
+        "pieces": {
+            "Head": {
+                "name": "Genius's Ultraremote Sensing Visor",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/108_0.png"
+            },
+            "Hands": {
+                "name": "Genius's Frequency Catcher",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/108_1.png"
+            },
+            "Body": {
+                "name": "Genius's Metafield Suit",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/108_2.png"
+            },
+            "Feet": {
+                "name": "Genius's Gravity Walker",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/108_3.png"
+            }
+        },
+        "desc": [
+            "Increases Quantum DMG by 10%.",
+            "When the wearer deals DMG to the target enemy, ignores 10% DEF. If the target enemy has Quantum Weakness, the wearer additionally ignores 10% DEF."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "quantum",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Band of Sizzling Thunder": {
+        "pieces": {
+            "Head": {
+                "name": "Band's Polarized Sunglasses",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/109_0.png"
+            },
+            "Hands": {
+                "name": "Band's Touring Bracelet",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/109_1.png"
+            },
+            "Body": {
+                "name": "Band's Leather Jacket With Studs",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/109_2.png"
+            },
+            "Feet": {
+                "name": "Band's Ankle Boots With Rivets",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/109_3.png"
+            }
+        },
+        "desc": [
+            "Increases Lightning DMG by 10%.",
+            "When the wearer uses their Skill, increases the wearer's ATK by 20% for 1 turn(s)."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "lightning",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Eagle of Twilight Line": {
+        "pieces": {
+            "Head": {
+                "name": "Eagle's Beaked Helmet",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/110_0.png"
+            },
+            "Hands": {
+                "name": "Eagle's Soaring Ring",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/110_1.png"
+            },
+            "Body": {
+                "name": "Eagle's Winged Suit Harness",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/110_2.png"
+            },
+            "Feet": {
+                "name": "Eagle's Quilted Puttees",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/110_3.png"
+            }
+        },
+        "desc": [
+            "Increases Wind DMG by 10%.",
+            "After the wearer uses their Ultimate, their action is Advanced Forward by 25%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "wind",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Thief of Shooting Meteor": {
+        "pieces": {
+            "Head": {
+                "name": "Thief's Myriad-Faced Mask",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/111_0.png"
+            },
+            "Hands": {
+                "name": "Thief's Gloves With Prints",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/111_1.png"
+            },
+            "Body": {
+                "name": "Thief's Steel Grappling Hook",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/111_2.png"
+            },
+            "Feet": {
+                "name": "Thief's Meteor Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/111_3.png"
+            }
+        },
+        "desc": [
+            "Increases Break Effect by 16%.",
+            "Increases the wearer's Break Effect by 16%. After the wearer inflicts Weakness Break on an enemy, regenerates 3 Energy."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "break",
+                    "value": 0.16
+                }
+            ],
+            [
+                {
+                    "type": "break",
+                    "value": 0.16
+                }
+            ]
+        ]
+    },
+    "Wastelander of Banditry Desert": {
+        "pieces": {
+            "Head": {
+                "name": "Wastelander's Breathing Mask",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/112_0.png"
+            },
+            "Hands": {
+                "name": "Wastelander's Desert Terminal",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/112_1.png"
+            },
+            "Body": {
+                "name": "Wastelander's Friar Robe",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/112_2.png"
+            },
+            "Feet": {
+                "name": "Wastelander's Powered Greaves",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/112_3.png"
+            }
+        },
+        "desc": [
+            "Increases Imaginary DMG by 10%.",
+            "When attacking debuffed enemies, the wearer's CRIT Rate increases by 10%, and their CRIT DMG increases by 20% against Imprisoned enemies."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "imaginary",
+                    "value": 0.1
+                }
+            ],
+            []
+        ]
+    },
+    "Longevous Disciple": {
+        "pieces": {
+            "Head": {
+                "name": "Disciple's Prosthetic Eye",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/113_0.png"
+            },
+            "Hands": {
+                "name": "Disciple's Ingenium Hand",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/113_1.png"
+            },
+            "Body": {
+                "name": "Disciple's Dewy Feather Garb",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/113_2.png"
+            },
+            "Feet": {
+                "name": "Disciple's Celestial Silk Sandals",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/113_3.png"
+            }
+        },
+        "desc": [
+            "Increases Max HP by 12%.",
+            "When the wearer is hit or has their HP consumed by an ally or themselves, their CRIT Rate increases by 8% for 2 turn(s) and up to 2 stacks."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "hp_",
+                    "value": 0.12
+                }
+            ],
+            []
+        ]
+    },
+    "Messenger Traversing Hackerspace": {
+        "pieces": {
+            "Head": {
+                "name": "Messenger's Holovisor",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/114_0.png"
+            },
+            "Hands": {
+                "name": "Messenger's Transformative Arm",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/114_1.png"
+            },
+            "Body": {
+                "name": "Messenger's Secret Satchel",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/114_2.png"
+            },
+            "Feet": {
+                "name": "Messenger's Par-kool Sneakers",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/114_3.png"
+            }
+        },
+        "desc": [
+            "Increases SPD by 6%.",
+            "When the wearer uses their Ultimate on an ally, SPD for all allies increases by 12% for 1 turn(s). This effect cannot be stacked."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "spd_",
+                    "value": 0.06
+                }
+            ],
+            []
+        ]
+    },
+    "The Ashblazing Grand Duke": {
+        "pieces": {
+            "Head": {
+                "name": "Grand Duke's Crown of Netherflame",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/115_0.png"
+            },
+            "Hands": {
+                "name": "Grand Duke's Gloves of Fieryfur",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/115_1.png"
+            },
+            "Body": {
+                "name": "Grand Duke's Robe of Grace",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/115_2.png"
+            },
+            "Feet": {
+                "name": "Grand Duke's Ceremonial Boots",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/115_3.png"
+            }
+        },
+        "desc": [
+            "Increases the DMG dealt by follow-up attacks by 20%.",
+            "When the wearer uses follow-up attacks, increases the wearer's ATK by 6% for every time the follow-up attack deals DMG. This effect can stack up to 8 time(s) and lasts for 3 turn(s). This effect is removed the next time the wearer uses a follow-up attack."
+        ]
+    },
+    "Prisoner in Deep Confinement": {
+        "pieces": {
+            "Head": {
+                "name": "Prisoner's Sealed Muzzle",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/116_0.png"
+            },
+            "Hands": {
+                "name": "Prisoner's Leadstone Shackles",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/116_1.png"
+            },
+            "Body": {
+                "name": "Prisoner's Repressive Straitjacket",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/116_2.png"
+            },
+            "Feet": {
+                "name": "Prisoner's Restrictive Fetters",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/116_3.png"
+            }
+        },
+        "desc": [
+            "ATK increases by 12%.",
+            "For every DoT the target enemy is afflicted with, the wearer will ignore 6% of its DEF when dealing DMG to it. This effect is valid for a max of 3 DoTs."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "atk_",
+                    "value": 0.12
+                }
+            ],
+            []
+        ]
+    },
+    "Pioneer Diver of Dead Waters": {
+        "pieces": {
+            "Head": {
+                "name": "Pioneer's Heatproof Shell",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/117_0.png"
+            },
+            "Hands": {
+                "name": "Pioneer's Lacuna Compass",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/117_1.png"
+            },
+            "Body": {
+                "name": "Pioneer's Sealed Lead Apron",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/117_2.png"
+            },
+            "Feet": {
+                "name": "Pioneer's Starfaring Anchor",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/117_3.png"
+            }
+        },
+        "desc": [
+            "Increases DMG dealt to enemies with debuffs by 12%.",
+            "Increases CRIT Rate by 4%. The wearer deals 8%/12% increased CRIT DMG to enemies with at least 2/3 debuffs. After the wearer inflicts a debuff on enemy targets, the aforementioned effects increase by 100%, lasting for 1 turn(s)."
+        ],
+        "modifiers": [
+            [],
+            [
+                {
+                    "type": "crit_rate",
+                    "value": 0.04
+                }
+            ]
+        ]
+    },
+    "Watchmaker, Master of Dream Machinations": {
+        "pieces": {
+            "Head": {
+                "name": "Watchmaker's Telescoping Lens",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/118_0.png"
+            },
+            "Hands": {
+                "name": "Watchmaker's Fortuitous Wristwatch",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/118_1.png"
+            },
+            "Body": {
+                "name": "Watchmaker's Illusory Formal Suit",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/118_2.png"
+            },
+            "Feet": {
+                "name": "Watchmaker's Dream-Concealing Dress Shoes",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/118_3.png"
+            }
+        },
+        "desc": [
+            "Increases Break Effect by 16%.",
+            "When the wearer uses their Ultimate on an ally, all allies' Break Effect increases by 30% for 2 turn(s). This effect cannot be stacked."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "break",
+                    "value": 0.16
+                }
+            ],
+            []
+        ]
+    },
+    "Space Sealing Station": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Herta's Space Station",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/301_0.png"
+            },
+            "Link Rope": {
+                "name": "Herta's Wandering Trek",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/301_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's ATK by 12%. When the wearer's SPD reaches 120 or higher, the wearer's ATK increases by an extra 12%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "atk_",
+                    "value": 0.12
+                }
+            ]
+        ]
+    },
+    "Fleet of the Ageless": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "The Xianzhou Luofu's Celestial Ark",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/302_0.png"
+            },
+            "Link Rope": {
+                "name": "The Xianzhou Luofu's Ambrosial Arbor Vines",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/302_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's Max HP by 12%. When the wearer's SPD reaches 120 or higher, all allies' ATK increases by 8%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "hp_",
+                    "value": 0.12
+                }
+            ]
+        ]
+    },
+    "Pan-Cosmic Commercial Enterprise": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "The IPC's Mega HQ",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/303_0.png"
+            },
+            "Link Rope": {
+                "name": "The IPC's Trade Route",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/303_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's Effect Hit Rate by 10%. Meanwhile, the wearer's ATK increases by an amount that is equal to 25% of the current Effect Hit Rate, up to a maximum of 25%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "effect_hit",
+                    "value": 0.1
+                }
+            ]
+        ]
+    },
+    "Belobog of the Architects": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Belobog's Fortress of Preservation",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/304_0.png"
+            },
+            "Link Rope": {
+                "name": "Belobog's Iron Defense",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/304_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's DEF by 15%. When the wearer's Effect Hit Rate is 50% or higher, the wearer gains an extra 15% DEF."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "def_",
+                    "value": 0.15
+                }
+            ]
+        ]
+    },
+    "Celestial Differentiator": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Planet Screwllum's Mechanical Sun",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/305_0.png"
+            },
+            "Link Rope": {
+                "name": "Planet Screwllum's Ring System",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/305_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's CRIT DMG by 16%. When the wearer's current CRIT DMG reaches 120% or higher, after entering battle, the wearer's CRIT Rate increases by 60% until the end of their first attack."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "crit_dmg",
+                    "value": 0.16
+                }
+            ]
+        ]
+    },
+    "Inert Salsotto": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Salsotto's Moving City",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/306_0.png"
+            },
+            "Link Rope": {
+                "name": "Salsotto's Terminator Line",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/306_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's CRIT Rate by 8%. When the wearer's current CRIT Rate reaches 50% or higher, the wearer's Ultimate and follow-up attack DMG increases by 15%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "crit_rate",
+                    "value": 0.08
+                }
+            ]
+        ]
+    },
+    "Talia: Kingdom of Banditry": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Talia's Nailscrap Town",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/307_0.png"
+            },
+            "Link Rope": {
+                "name": "Talia's Exposed Electric Wire",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/307_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's Break Effect by 16%. When the wearer's SPD reaches 145 or higher, the wearer's Break Effect increases by an extra 20%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "break",
+                    "value": 0.16
+                }
+            ]
+        ]
+    },
+    "Sprightly Vonwacq": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Vonwacq's Island of Birth",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/308_0.png"
+            },
+            "Link Rope": {
+                "name": "Vonwacq's Islandic Coast",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/308_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's Energy Regeneration Rate by 5%. When the wearer's SPD reaches 120 or higher, the wearer's action is Advanced Forward by 40% immediately upon entering battle."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "energy",
+                    "value": 0.05
+                }
+            ]
+        ]
+    },
+    "Rutilant Arena": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Taikiyan Laser Stadium",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/309_0.png"
+            },
+            "Link Rope": {
+                "name": "Taikiyan's Arclight Race Track",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/309_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's CRIT Rate by 8%. When the wearer's current CRIT Rate reaches 70% or higher, the wearer's Basic ATK and Skill DMG increase by 20%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "crit_rate",
+                    "value": 0.08
+                }
+            ]
+        ]
+    },
+    "Broken Keel": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Insumousu's Whalefall Ship",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/310_0.png"
+            },
+            "Link Rope": {
+                "name": "Insumousu's Frayed Hawser",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/310_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's Effect RES by 10%. When the wearer's Effect RES is at 30% or higher, all allies' CRIT DMG increases by 10%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "effect_res",
+                    "value": 0.1
+                }
+            ]
+        ]
+    },
+    "Firmament Frontline: Glamoth": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Glamoth's Iron Cavalry Regiment",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/311_0.png"
+            },
+            "Link Rope": {
+                "name": "Glamoth's Silent Tombstone",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/311_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's ATK by 12%. When the wearer's SPD is equal to or higher than 135/160, the wearer deals 12%/18% more DMG."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "atk_",
+                    "value": 0.12
+                }
+            ]
+        ]
+    },
+    "Penacony, Land of the Dreams": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Penacony's Grand Hotel",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/312_0.png"
+            },
+            "Link Rope": {
+                "name": "Penacony's Dream-Seeking Tracks",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/312_1.png"
+            }
+        },
+        "desc": [
+            "Increases wearer's Energy Regeneration Rate by 5%. Increases DMG by 10% for all other allies that are of the same Type as the wearer."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "energy",
+                    "value": 0.05
+                }
+            ]
+        ]
+    },
+    "Sigonia, the Unclaimed Desolation": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Sigonia's Gaiathra Berth",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/313_0.png"
+            },
+            "Link Rope": {
+                "name": "Sigonia's Knot of Cyclicality",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/313_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's CRIT Rate by 4%. When an enemy target gets defeated, the wearer's CRIT DMG increases by 4%, stacking up to 10 time(s)."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "crit_rate",
+                    "value": 0.04
+                }
+            ]
+        ]
+    },
+    "Izumo Gensei and Takama Divine Realm": {
+        "pieces": {
+            "Planar Sphere": {
+                "name": "Izumo's Magatsu no Morokami",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/314_0.png"
+            },
+            "Link Rope": {
+                "name": "Izumo's Blades of Origin and End",
+                "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/relic/314_1.png"
+            }
+        },
+        "desc": [
+            "Increases the wearer's ATK by 12%. When entering battle, if at least one other ally follows the same Path as the wearer, then the wearer's CRIT Rate increases by 12%."
+        ],
+        "modifiers": [
+            [
+                {
+                    "type": "atk_",
+                    "value": 0.12
+                }
+            ]
+        ]
+    }
+}

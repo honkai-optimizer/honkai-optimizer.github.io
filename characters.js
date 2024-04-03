@@ -5,6 +5,39 @@ const createCharList = document.getElementById("createCharacterList");
 const dialogContainer = document.getElementById("dialogContainer");
 const addDialog = document.getElementById("addCharacterDialog");
 const editDialog = document.getElementById("editCharacterDialog");
+let characterObjects;
+let relicRolls;
+let relicStats;
+let relicSets;
+let lightCones;
+
+async function fetchJSON() {
+    await fetch('./hsr-data/characters.json')
+    .then(response => response.json())
+    .then(data => {
+        characterObjects = data;
+    });
+    await fetch('hsr-data/light_cones.json')
+    .then(response => response.json())
+    .then(data => {
+        lightCones = data;
+    });
+    await fetch('hsr-data/relic_roll_vals.json')
+    .then(response => response.json())
+    .then(data => {
+        relicRolls = data;
+    });
+    await fetch('hsr-data/relic_sets.json')
+    .then(response => response.json())
+    .then(data => {
+        relicSets = data;
+    });
+    await fetch('hsr-data/relic_stat_vals.json')
+    .then(response => response.json())
+    .then(data => {
+        relicStats = data;
+    });
+}
 
 function initialize() {
     names.forEach(name => {
@@ -40,7 +73,15 @@ function addCharToCreateList(character) {
                 ultimate: 1
             },
             eidolon: 0,
-            equip: {}
+            equip: {
+                lc: null,
+                head: null,
+                hands: null,
+                body: null,
+                foot: null,
+                orb: null,
+                rope: null
+            }
         }));
         closeDialog();
         addCharToOwnedList(character);
@@ -115,44 +156,57 @@ function createStyledDiv(list) {
 }
 
 function openCharacterInfo(character) {
+    const charObject = JSON.parse(localStorage.getItem("char_" + character));
+    const stats = calculateStats(charObject);
     editDialog.innerHTML = /*HTML*/ `
-        <button id="deleteCharacter" onclick="deleteCharacter('${character}')">Delete Character</button>
+        <button id="deleteCharacter" onclick="deleteCharacter(${character})">Delete Character</button>
         <div id="editInfoContainer">
-            
             <div id="statContainer">
-                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="248px" width="224px">
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
-                <div class="statText" id="HP">HP: </div>
+                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="160px" width="160px">
+                <div class="statText" id="hp">HP: ${stats.hp}</div>
+                <div class="statText" id="atk">ATK: ${stats.atk}</div>
+                <div class="statText" id="def">DEF: ${stats.def}</div>
+                <div class="statText" id="speed">SPD: ${stats.spd}</div>
+                <div class="statText" id="crit_rate">Crit Rate: ${stats.crit_rate}</div>
+                <div class="statText" id="crit_dmg">Crit DMG: ${stats.crit_dmg}</div>
+                <div class="statText" id="element_damage">HP: </div>
+                <div class="statText" id="effect_hr">HP: </div>
+                <div class="statText" id="break_effect">HP: </div>
+                <div class="statText" id="energy_regeneration_rate">HP: </div>
+                <div class="statText" id="outgoing_healing">HP: </div>
+                <div class="statText" id="effect_res">HP: </div>
             </div>
             <div id="detailedEquipmentDisplay">
-                <div class="equipmentCard"></div>
-                <div class="equipmentCard"></div>
-                <div class="equipmentCard"></div>
-                <div class="equipmentCard"></div>
-                <div class="equipmentCard"></div>
-                <div class="equipmentCard"></div>
+                <div id="headCard" class="equipmentCard"></div>
+                <div id="handsCard" class="equipmentCard"></div>
+                <div id="bodyCard" class="equipmentCard"></div>
+                <div id="footCard" class="equipmentCard"></div>
+                <div id="orbCard" class="equipmentCard"></div>
+                <div id="ropeCard" class="equipmentCard"></div>
             </div>
         </div>
     `;
     showDialog(editDialog);
+}
+
+function calculateStats(charObject) {
+    const ascension = characterObjects[charObject.key].ascension[charObject.ascension];
+    const stats = {};
+    for (let key in ascension) {
+        switch (key) {
+            case "atk":
+            case "def":
+            case "hp":
+                stats[key] = Math.floor(ascension[key].base + ascension[key].step * (charObject.level - 1));
+                break;
+            case "crit_rate":
+            case "crit_dmg":
+            case "spd":
+                stats[key] = ascension[key].base;
+                break;
+        }
+    }
+    return stats;
 }
 
 function showDialog(div) {
@@ -188,4 +242,5 @@ function sortCards(list) {
     children.forEach(child => list.appendChild(child));
 }
 
+fetchJSON();
 initialize();
