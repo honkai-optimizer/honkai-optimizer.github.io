@@ -9,40 +9,34 @@
     gap:20px;
 }
 
-.filterButtons {
-    display:flex;
-    gap:5px;
-    justify-content: center;
-}
-
-.toggleButton {
-    background-color: rgb(44, 44, 44);
-    padding: 3px;
-
-}
-
-#addCharacter, #deleteCharacters {
+#addCharacter, #deleteCharacters, #deleteCharacter {
     color:var(--textcolor);
-    background-color: rgb(126, 201, 13);
     border: 0;
     height:30px;
     border-radius: 5px;
     width:50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-#deleteCharacters {
+#addCharacter {
+    background-color: rgb(126, 201, 13);
+}
+
+#deleteCharacters, #deleteCharacter {
     background-color: rgb(201, 13, 13);
 }
 
-.characterList {
-    display:flex;
-    flex-wrap: wrap;
-    gap:5px;
-    margin-top: 5px;
+#deleteCharacter {
+    margin-left: auto;
+    margin-bottom: 8px;
+    width:20%;
 }
 
 #dialogContainer {
     position: fixed;
+    width:100%;
     top: 0;
     bottom: 0;
     overflow: scroll;
@@ -56,38 +50,125 @@
     width:80%;
     display: flex;
     flex-direction: column;
+    display:none;
+    gap:8px;
+    padding:20px;
+}
+
+#editInfoContainer {
+    display:flex;
+    flex-flow:wrap;
+    width:100%;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#statContainer {
+    padding-block: 15px;
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+    height:100%;
+    flex-basis:25%;
+    max-width: 25%;
+    flex-grow: 0;
+    background-color: rgb(0, 103, 172)
+}
+
+#detailedEquipmentDisplay {
+    display:flex;
+    flex-flow:wrap;
+    flex-basis: 70%;
+    max-width: 70%;
+    gap:8px;
+    justify-content:right;
 }
 
 h2 {
     text-align: center;
 }
 
-.characterCard {
+.characterList {
+    display:flex;
+    flex-wrap: wrap;
+    gap:5px;
+    margin-top: 5px;
+    justify-content: center;
+}
+.characterCard, .miniCard, .equipmentCard {
     display:flex;
     padding:10px;
     background-color: black;
     border-radius: 5px;
     flex-direction: column;
-    height:200px;
+    justify-content: space-between;
+    height:180px;
     width: 300px;
+}
+
+.equipmentCard {
+    flex-basis: 30%;
+    flex-grow: 0;
+    max-width: 30%;
+}
+
+.miniCard {
+    height: 120px;
+    width: 250px;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
 }
 
 .infoContainer, .cardTraces {
     display:flex;
+    gap:15px;
+    align-items:center;
 }
 
 .traceCircle {
     display: flex;
     background-color: gray;
-    margin: 5px;
     height: 25px;
     width: 25px;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
+    margin-inline: 10px;
+}
+
+.equipmentDisplay {
+    display:flex;
+    gap:3px;
 }
 
 .infoText {
     display:flex;
     flex-direction: column;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.filterButtons {
+    display:flex;
+    gap:5px;
+    justify-content: center;
+}
+
+.toggleButton {
+    background-color: rgb(44, 44, 44);
+    padding: 3px;
+
+}
+
+.portrait {
+    margin-inline:auto;
+    background-color: rgb(51, 51, 51);
+    border-radius: 15%;
+}
+
+.statText {
+    margin-top: 8px;
+    margin-left: 40px;
+    font-weight: bold;
 }
