@@ -5,6 +5,10 @@ const createCharList = document.getElementById("createCharacterList");
 const dialogContainer = document.getElementById("dialogContainer");
 const addDialog = document.getElementById("addCharacterDialog");
 const editDialog = document.getElementById("editCharacterDialog");
+const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation','Hunt'];
+const types = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum','Wind'];
+let paths_on = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation','Hunt'];
+let types_on = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum','Wind'];
 let characterObjects;
 let relicRolls;
 let relicStats;
@@ -65,6 +69,8 @@ function addCharToCreateList(character) {
     card.onclick = e => {
         localStorage.setItem("char_" + character, JSON.stringify({
             key: withSpaces,
+            path: characterObjects[withSpaces].path,
+            type: characterObjects[withSpaces].element,
             level: 1,
             ascension: 0,
             traces: {
@@ -89,18 +95,23 @@ function addCharToCreateList(character) {
     }
 }
 
-
-
 function addCharToOwnedList(character) {
     const val = JSON.parse(localStorage.getItem("char_" + character));
-    const card = createStyledDiv("characterCard");
-    card.id = character
+    const card = createStyledDiv(["characterCard", val.path, val.type]);
+    card.id = character;
+    console.log(val.path);
     card.innerHTML = /*HTML*/ `
         <div class="infoContainer">
             <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="124px" width="112px">
+            <div class="flex_col gap_10">
+                <img src="./icons/path/path_${val.path}.png" height="24" width="24">
+                <img src="./icons/type/Type_${val.type}.png" height="24" width="24">
+            </div>
             <div class="infoText">
-                <p>${val.key}<br><br>
-                Lvl. ${val.level} E${val.eidolon}</p>
+                <div>
+                    <p>${val.key}<br><br>
+                    Lvl. ${val.level} E${val.eidolon}</p>
+                </div>
                 <div class="cardTraces">
                     <div class="traceCircle">${val.traces.basic}</div>
                     <div class="traceCircle">${val.traces.skill}</div>
@@ -131,6 +142,7 @@ function deleteCharacter(character) {
         sortCards(createCharList);
         closeDialog();
     }
+    //TODO: Remove character from relics and lightcone
 }
 
 function deleteAllCharacters() {
@@ -148,12 +160,6 @@ function deleteAllCharacters() {
     //TODO: Remove characters from relics and lightcones as well
 }
 
-function createStyledDiv(list) {
-    const div = document.createElement("div")
-    if (list.constructor === Array) div.classList.add(...list);
-    else div.classList.add(list);
-    return div;
-}
 
 function openCharacterInfo(character) {
     const charObject = JSON.parse(localStorage.getItem("char_" + character));
@@ -240,6 +246,122 @@ function sortCards(list) {
         return 0;
     });
     children.forEach(child => list.appendChild(child));
+}
+
+function toggleButtonClick(btn) {
+    if (types.includes(btn)) {
+        let buttons = document.querySelectorAll(".type_button");
+        if (types.length == types_on.length) {
+            //All buttons were on, turn all off except the clicked one
+            types_on = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            });
+        } else {
+            if (types_on.includes(btn)) {
+                types_on.splice(types_on.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (types_on.length == 0) {
+                    types_on = types;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                types_on.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
+    } else {
+        let buttons = document.querySelectorAll(".path_button");
+        if (paths.length == paths_on.length) {
+            //All buttons were on, turn all off except the clicked one
+            paths_on = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            })
+        } else {
+            if (paths_on.includes(btn)) {
+                paths_on.splice(paths_on.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (paths_on.length == 0) {
+                    paths_on = paths;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                paths_on.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
+    }
+    applyFilter();
+}
+
+function applyFilter() {
+    let cards = ownedCharList.querySelectorAll(".characterCard");
+    let show_type = [];
+    let show_path = [];
+    let show_both = [];
+    cards.forEach(character => {
+        types_on.forEach(type => {
+            if (character.classList.contains(type)) show_type.push(character);
+        });
+    });
+    cards.forEach(character => {
+        paths_on.forEach(path => {
+            if (character.classList.contains(path)) show_path.push(character);
+        });
+    });
+    show_type.forEach(character => {
+        if (show_path.includes(character)) show_both.push(character);
+    })
+    cards.forEach(character => {
+        character.style.display = show_both.includes(character) ? "flex" : "none";
+    });
+    console.log(show);
+}
+
+function createStyledDiv(list) {
+    const div = document.createElement("div")
+    if (list.constructor === Array) div.classList.add(...list);
+    else div.classList.add(list);
+    return div;
 }
 
 fetchJSON();
