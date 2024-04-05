@@ -1,4 +1,6 @@
-const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'BlackSwan', 'Blade', 'Boothill', 'Bronya', 'Clara', 'DanHeng', 'DanHengIL', 'DrRatio', 'FuXuan', 'Gallagher', 'Gepard', 'Guinaifen', 'Hanya', 'Herta', 'Himeko', 'Hook', 'Huohuo', 'JingYuan', 'Jingliu', 'Kafka', 'Luka', 'Luocha', 'Lynx', 'March7th', 'Misha', 'Natasha', 'Pela', 'Qingque', 'Robin', 'RuanMei', 'Sampo', 'Seele', 'Serval', 'SilverWolf', 'Sparkle', 'Sushang', 'Tingyun', 'TopazAndNumby', 'TrailblazerFire', 'TrailblazerPhysical', 'Welt', 'Xueyi', 'Yanqing', 'Yukong',];
+"useStrict";
+
+const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'BlackSwan', 'Blade', 'Bronya', 'Clara', 'DanHeng', 'DanHengIL', 'DrRatio', 'FuXuan', 'Gallagher', 'Gepard', 'Guinaifen', 'Hanya', 'Herta', 'Himeko', 'Hook', 'Huohuo', 'JingYuan', 'Jingliu', 'Kafka', 'Luka', 'Luocha', 'Lynx', 'March7th', 'Misha', 'Natasha', 'Pela', 'Qingque', 'RuanMei', 'Sampo', 'Seele', 'Serval', 'SilverWolf', 'Sparkle', 'Sushang', 'Tingyun', 'TopazAndNumby', 'TrailblazerFire', 'TrailblazerPhysical', 'Welt', 'Xueyi', 'Yanqing', 'Yukong',];
 
 const ownedCharList = document.getElementById("owned_character_list");
 const createCharList = document.getElementById("create_character_list");
@@ -9,6 +11,8 @@ const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', '
 const types = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
 let paths_on_owned = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
 let types_on_owned = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
+let paths_on_create = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let types_on_create = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
 let characterObjects;
 let relicRolls;
 let relicStats;
@@ -50,13 +54,16 @@ function initialize() {
         else addCharToCreateList(name);
     });
     dialogContainer.addEventListener("click", e => {
-        if (e.target === dialogContainer)
+        if (e.target === dialogContainer) {
             closeDialog();
+        }
     });
 }
 
 function addCharToCreateList(character) {
-    const card = createStyledDiv(["mini_card", "flex_col"]);
+    const type = characterObjects[addSpaces(character)].element;
+    const path = characterObjects[addSpaces(character)].path;
+    const card = createDiv(["mini_card", "flex_col", characterObjects[addSpaces(character)].element, characterObjects[addSpaces(character)].path]);
     card.id = character;
     let withSpaces = addSpaces(character);
     card.innerHTML = /*HTML*/ `
@@ -76,7 +83,9 @@ function addCharToCreateList(character) {
             traces: {
                 basic: 1,
                 skill: 1,
-                ultimate: 1
+                ultimate: 1,
+                stats: [0,0,0,0,0,0,0,0,0,0],
+                abilities: [0,0,0]
             },
             eidolon: 0,
             equip: {
@@ -97,9 +106,8 @@ function addCharToCreateList(character) {
 
 function addCharToOwnedList(character) {
     const val = JSON.parse(localStorage.getItem("char_" + character));
-    const card = createStyledDiv(["character_card", "flex_col", val.path, val.type]);
+    const card = createDiv(["character_card", "flex_col", val.path, val.type]);
     card.id = character;
-    console.log(val.path);
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
             <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="124px" width="112px">
@@ -135,6 +143,7 @@ function addCharToOwnedList(character) {
 }
 
 function deleteCharacter(character) {
+    console.log(character);
     if (confirm("Are you sure you want to delete " + character + "?")) {
         localStorage.removeItem("char_" + character);
         document.getElementById(character).remove();
@@ -164,23 +173,24 @@ function deleteAllCharacters() {
 function openCharacterInfo(character) {
     const charObject = JSON.parse(localStorage.getItem("char_" + character));
     const stats = calculateStats(charObject);
+    console.log(character);
     editDialog.innerHTML = /*HTML*/ `
-        <button id="delete_character" onclick="deleteCharacter(${character})">Delete Character</button>
+        <button id="delete_character" onclick="deleteCharacter('${character}')">Delete Character</button>
         <div id="edit_info_container">
             <div id="stat_container" class="flex_col">
-                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="160px" width="160px">
+                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="165px" width="149px">
                 <div class="stat_text" id="hp">HP: ${stats.hp}</div>
                 <div class="stat_text" id="atk">ATK: ${stats.atk}</div>
                 <div class="stat_text" id="def">DEF: ${stats.def}</div>
-                <div class="stat_text" id="speed">SPD: ${stats.spd}</div>
+                <div class="stat_text" id="spd">SPD: ${stats.spd}</div>
                 <div class="stat_text" id="crit_rate">Crit Rate: ${stats.crit_rate}</div>
                 <div class="stat_text" id="crit_dmg">Crit DMG: ${stats.crit_dmg}</div>
-                <div class="stat_text" id="element_damage">HP: </div>
-                <div class="stat_text" id="effect_hr">HP: </div>
-                <div class="stat_text" id="break_effect">HP: </div>
-                <div class="stat_text" id="energy_regeneration_rate">HP: </div>
-                <div class="stat_text" id="outgoing_healing">HP: </div>
-                <div class="stat_text" id="effect_res">HP: </div>
+                <div class="stat_text" id="type_damage">Bonus ${charObject.type} DMG: ${stats.type_damage}%</div>
+                <div class="stat_text" id="effect_hr">Effect Hit Rate: ${stats.effect_hr}%</div>
+                <div class="stat_text" id="break_effect">Break Effect: ${stats.break_effect}%</div>
+                <div class="stat_text" id="energy_regeneration_rate">Energy Regeneration Rate: ${stats.energy_regeneration_rate}%</div>
+                <div class="stat_text" id="outgoing_healing">Bonus Outgoing Healing: ${stats.outgoing_healing}%</div>
+                <div class="stat_text" id="effect_res">Effect RES: ${stats.effect_res}%</div>
             </div>
             <div id="detailed_equipment_display">
                 <div id="head_card" class="equipment_card flex_col"></div>
@@ -195,6 +205,12 @@ function openCharacterInfo(character) {
     showDialog(editDialog);
 }
 
+/**
+ * Calculates the combat stats of the passed character based on their level, equipment, traces and any potentially active buffs from teammates.
+ * @param {Object} charObject The character whose stats are to be calculated. This should be an object from localStorage with the key "char_<name>", without spaces.
+ * @returns An object containing all the relevant stats with the following keys:
+ *          atk, def, hp, spd, crit_rate, crit_dmg, type_damage, effect_hr, break_effect, energy_regeneration_rate, outgoing_healing, effect_res
+ */
 function calculateStats(charObject) {
     const ascension = characterObjects[charObject.key].ascension[charObject.ascension];
     const stats = {};
@@ -215,16 +231,20 @@ function calculateStats(charObject) {
     return stats;
 }
 
+/**
+ * Shows the dialog represented by the passed div element. It should be a child of the div dialog_container.
+ * @param {HTMLDivElement} div The element to display. 
+ */
 function showDialog(div) {
     dialogContainer.style.visibility = "visible";
     div.style.display = "flex";
 }
 
-function closeDialog() {
-    dialogContainer.style.visibility = "hidden";
-    for (const child of dialogContainer.children) child.style.display = "none";
-}
-
+/**
+ * Takes a string and adds spaces in front of every capital letter that isn't the first letter in the string.
+ * @param {string} name The name to be formatted.
+ * @returns 
+ */
 function addSpaces(name) {
     if (name === "DanHengIL") return "Dan Heng IL";
     for (let i = 1; i < name.length; i++) {
@@ -236,6 +256,10 @@ function addSpaces(name) {
     return name;
 }
 
+/**
+ * Sorts all the character cards within the passed list alphabetically in ascending order (e.g. from A to Z).
+ * @param {HTMLDivElement} list The div element containing the cards to sort.
+ */
 function sortCards(list) {
     const children = Array.from(list.children)
     children.sort((a, b) => {
@@ -248,9 +272,17 @@ function sortCards(list) {
     children.forEach(child => list.appendChild(child));
 }
 
+/**
+ * Toggles the filter buttons.
+ * If every button in the clicked button's group is on, every other button in the group gets turned off.
+ * If toggling the clicked button off would leave the entire group turned off, it turns the whole group (including the clicked button) on.
+ * In all other cases, simply switches the button on or off as expected.
+ * @param {string} list The list this filter button applies to - pass 'owned' to specify the list of owned characters, and 'create' for the list of creatable characters.
+ * @param {string} btn This argument should be the type or path that the button represents, with the first letter capitalized (for example 'Erudition').
+ */
 function toggleButtonClick(list, btn) {
-    if (types.includes(btn)) {
-        let buttons = document.querySelectorAll(".type_button");
+    if (types.includes(btn) && list == 'owned') {
+        let buttons = document.getElementById("button_wrapper").querySelectorAll(".type_button");
         if (types.length == types_on_owned.length) {
             types_on_owned = [btn];
             buttons.forEach(button => {
@@ -288,8 +320,8 @@ function toggleButtonClick(list, btn) {
                 });
             }
         }
-    } else {
-        let buttons = document.querySelectorAll(".path_button");
+    } else if (paths.includes(btn) && list == 'owned') {
+        let buttons = document.getElementById("button_wrapper").querySelectorAll(".path_button");
         if (paths.length == paths_on_owned.length) {
             paths_on_owned = [btn];
             buttons.forEach(button => {
@@ -327,40 +359,170 @@ function toggleButtonClick(list, btn) {
                 });
             }
         }
+    } else if (types.includes(btn)) {
+        let buttons = addDialog.querySelectorAll(".type_button");
+        if (types.length == types_on_create.length) {
+            types_on_create = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            });
+        } else {
+            if (types_on_create.includes(btn)) {
+                types_on_create.splice(types_on_create.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (types_on_create.length == 0) {
+                    types_on_create = types;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                types_on_create.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
+    } else {
+        let buttons = addDialog.querySelectorAll(".path_button");
+        if (paths.length == paths_on_create.length) {
+            paths_on_create = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            })
+        } else {
+            if (paths_on_create.includes(btn)) {
+                paths_on_create.splice(paths_on_create.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (paths_on_create.length == 0) {
+                    paths_on_create = paths;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                paths_on_create.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
     }
-    applyFilter();
+    applyFilter(list);
 }
 
-function applyFilter() {
-    let cards = ownedCharList.querySelectorAll(".character_card");
+/**
+ * Applies the specified list's filter to that list.
+ * @param {string} list The list the filter applies to - pass 'owned' to specify the list of owned characters, and 'create' for the list of creatable characters.
+ */
+function applyFilter(list) {
     let show_type = [];
     let show_path = [];
     let show_both = [];
-    cards.forEach(character => {
-        types_on_owned.forEach(type => {
-            if (character.classList.contains(type)) show_type.push(character);
+    let cards;
+    if (list == 'owned') {
+        cards = ownedCharList.querySelectorAll(".character_card");
+        cards.forEach(character => {
+            types_on_owned.forEach(type => {
+                if (character.classList.contains(type)) show_type.push(character);
+            });
         });
-    });
-    cards.forEach(character => {
-        paths_on_owned.forEach(path => {
-            if (character.classList.contains(path)) show_path.push(character);
+        cards.forEach(character => {
+            paths_on_owned.forEach(path => {
+                if (character.classList.contains(path)) show_path.push(character);
+            });
         });
-    });
-    show_type.forEach(character => {
-        if (show_path.includes(character)) show_both.push(character);
-    })
-    cards.forEach(character => {
-        character.style.display = show_both.includes(character) ? "flex" : "none";
-    });
-    console.log(show);
+        show_type.forEach(character => {
+            if (show_path.includes(character)) show_both.push(character);
+        })
+        cards.forEach(character => {
+            character.style.display = show_both.includes(character) ? "flex" : "none";
+        });
+    }
+    else {
+        cards = createCharList.querySelectorAll(".mini_card");
+        cards.forEach(character => {
+            types_on_create.forEach(type => {
+                if (character.classList.contains(type)) show_type.push(character);
+            });
+        });
+        cards.forEach(character => {
+            paths_on_create.forEach(path => {
+                if (character.classList.contains(path)) show_path.push(character);
+            });
+        });
+        show_type.forEach(character => {
+            if (show_path.includes(character)) show_both.push(character);
+        })
+        cards.forEach(character => {
+            character.style.display = show_both.includes(character) ? "flex" : "none";
+        });
+    }
 }
 
-function createStyledDiv(list) {
+/**
+ * Closes any dialog and resets the filter on the list of characters in the creation dialog.
+ */
+function closeDialog() {
+    dialogContainer.style.visibility = "hidden";
+    for (const child of dialogContainer.children) child.style.display = "none";
+    addDialog.querySelectorAll(".path_button, .type_button").forEach(button => {
+        button.classList.add("on");
+        button.classList.remove("off");
+    });
+    paths_on_create = paths;
+    types_on_create = types;
+    applyFilter('create');
+}
+
+/**
+ * Creates a div element and adds CSS class(es) to the class list.
+ * @param {(string | string[])} arr A string or array of strings representing css class(es) to be added to the class list.
+ * @returns the styled div
+ */
+function createDiv(arr) {
     const div = document.createElement("div")
-    if (list.constructor === Array) div.classList.add(...list);
-    else div.classList.add(list);
+    if (arr.constructor === Array) div.classList.add(...arr);
+    else div.classList.add(arr);
     return div;
 }
 
-fetchJSON();
-initialize();
+/**
+ * Waits for the JSON files to be fetched and then initializes the website.
+ */
+async function boot() {
+    await fetchJSON();
+    initialize();
+}
+
+boot();
