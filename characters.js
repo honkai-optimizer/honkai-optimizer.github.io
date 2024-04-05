@@ -1,14 +1,14 @@
-const names = ['Acheron','Argenti','Arlan','Asta','Aventurine','Bailu','BlackSwan','Blade','Boothill','Bronya','Clara','DanHeng','DanHengIL','DrRatio','FuXuan','Gallagher','Gepard','Guinaifen','Hanya','Herta','Himeko','Hook','Huohuo','JingYuan','Jingliu','Kafka','Luka','Luocha','Lynx','March7th','Misha','Natasha','Pela','Qingque','Robin','RuanMei','Sampo','Seele','Serval','SilverWolf','Sparkle','Sushang','Tingyun','TopazAndNumby','TrailblazerFire','TrailblazerPhysical','Welt','Xueyi','Yanqing','Yukong',];
+const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'BlackSwan', 'Blade', 'Boothill', 'Bronya', 'Clara', 'DanHeng', 'DanHengIL', 'DrRatio', 'FuXuan', 'Gallagher', 'Gepard', 'Guinaifen', 'Hanya', 'Herta', 'Himeko', 'Hook', 'Huohuo', 'JingYuan', 'Jingliu', 'Kafka', 'Luka', 'Luocha', 'Lynx', 'March7th', 'Misha', 'Natasha', 'Pela', 'Qingque', 'Robin', 'RuanMei', 'Sampo', 'Seele', 'Serval', 'SilverWolf', 'Sparkle', 'Sushang', 'Tingyun', 'TopazAndNumby', 'TrailblazerFire', 'TrailblazerPhysical', 'Welt', 'Xueyi', 'Yanqing', 'Yukong',];
 
-const ownedCharList = document.getElementById("ownedCharacterList");
-const createCharList = document.getElementById("createCharacterList");
-const dialogContainer = document.getElementById("dialogContainer");
-const addDialog = document.getElementById("addCharacterDialog");
-const editDialog = document.getElementById("editCharacterDialog");
-const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation','Hunt'];
-const types = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum','Wind'];
-let paths_on = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation','Hunt'];
-let types_on = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum','Wind'];
+const ownedCharList = document.getElementById("owned_character_list");
+const createCharList = document.getElementById("create_character_list");
+const dialogContainer = document.getElementById("dialog_container");
+const addDialog = document.getElementById("add_character_dialog");
+const editDialog = document.getElementById("edit_character_dialog");
+const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+const types = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
+let paths_on_owned = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let types_on_owned = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
 let characterObjects;
 let relicRolls;
 let relicStats;
@@ -17,30 +17,30 @@ let lightCones;
 
 async function fetchJSON() {
     await fetch('./hsr-data/characters.json')
-    .then(response => response.json())
-    .then(data => {
-        characterObjects = data;
-    });
+        .then(response => response.json())
+        .then(data => {
+            characterObjects = data;
+        });
     await fetch('hsr-data/light_cones.json')
-    .then(response => response.json())
-    .then(data => {
-        lightCones = data;
-    });
+        .then(response => response.json())
+        .then(data => {
+            lightCones = data;
+        });
     await fetch('hsr-data/relic_roll_vals.json')
-    .then(response => response.json())
-    .then(data => {
-        relicRolls = data;
-    });
+        .then(response => response.json())
+        .then(data => {
+            relicRolls = data;
+        });
     await fetch('hsr-data/relic_sets.json')
-    .then(response => response.json())
-    .then(data => {
-        relicSets = data;
-    });
+        .then(response => response.json())
+        .then(data => {
+            relicSets = data;
+        });
     await fetch('hsr-data/relic_stat_vals.json')
-    .then(response => response.json())
-    .then(data => {
-        relicStats = data;
-    });
+        .then(response => response.json())
+        .then(data => {
+            relicStats = data;
+        });
 }
 
 function initialize() {
@@ -51,18 +51,18 @@ function initialize() {
     });
     dialogContainer.addEventListener("click", e => {
         if (e.target === dialogContainer)
-        closeDialog();
+            closeDialog();
     });
 }
 
 function addCharToCreateList(character) {
-    const card = createStyledDiv("miniCard");
+    const card = createStyledDiv(["mini_card", "flex_col"]);
     card.id = character;
     let withSpaces = addSpaces(character);
     card.innerHTML = /*HTML*/ `
-        <div class="infoContainer">
+        <div class="info_container">
             <img class="portrait" src="./icons/chars/Codex Avatar_${withSpaces}.png" height="124px" width="112px">
-            <div class="infoText">${withSpaces}</div>
+            <div class="info_text flex_col">${withSpaces}</div>
         </div>
     `;
     createCharList.append(card);
@@ -97,11 +97,11 @@ function addCharToCreateList(character) {
 
 function addCharToOwnedList(character) {
     const val = JSON.parse(localStorage.getItem("char_" + character));
-    const card = createStyledDiv(["characterCard", val.path, val.type]);
+    const card = createStyledDiv(["character_card", "flex_col", val.path, val.type]);
     card.id = character;
     console.log(val.path);
     card.innerHTML = /*HTML*/ `
-        <div class="infoContainer">
+        <div class="info_container">
             <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="124px" width="112px">
             <div class="flex_col gap_10">
                 <img src="./icons/path/path_${val.path}.png" height="24" width="24">
@@ -112,14 +112,14 @@ function addCharToOwnedList(character) {
                     <p>${val.key}<br><br>
                     Lvl. ${val.level} E${val.eidolon}</p>
                 </div>
-                <div class="cardTraces">
-                    <div class="traceCircle">${val.traces.basic}</div>
-                    <div class="traceCircle">${val.traces.skill}</div>
-                    <div class="traceCircle">${val.traces.ultimate}</div>
+                <div class="card_traces">
+                    <div class="trace_circle">${val.traces.basic}</div>
+                    <div class="trace_circle">${val.traces.skill}</div>
+                    <div class="trace_circle">${val.traces.ultimate}</div>
                 </div>
             </div>
         </div>
-        <div class="equipmentDisplay">
+        <div class="equipment_display">
             <img src="./icons/lightcones/empty.png" height="38px" width="38px"><!-- light cone -->
             <img src="./icons/relic/Default/head.png" height="38px" width="38px"><!-- head -->
             <img src="./icons/relic/Default/hands.png" height="38px" width="38px"><!-- hands -->
@@ -148,12 +148,12 @@ function deleteCharacter(character) {
 function deleteAllCharacters() {
     if (confirm("Are you sure you want to delete all characters?")) {
         names.forEach(character => {
-        localStorage.removeItem("char_" + character);
-        let card = document.getElementById(character);
-        if (card != null) {
-            card.remove();
-            addCharToCreateList(character);
-        }
+            localStorage.removeItem("char_" + character);
+            let card = document.getElementById(character);
+            if (card != null) {
+                card.remove();
+                addCharToCreateList(character);
+            }
         });
         sortCards(createCharList);
     }
@@ -165,30 +165,30 @@ function openCharacterInfo(character) {
     const charObject = JSON.parse(localStorage.getItem("char_" + character));
     const stats = calculateStats(charObject);
     editDialog.innerHTML = /*HTML*/ `
-        <button id="deleteCharacter" onclick="deleteCharacter(${character})">Delete Character</button>
-        <div id="editInfoContainer">
-            <div id="statContainer">
+        <button id="delete_character" onclick="deleteCharacter(${character})">Delete Character</button>
+        <div id="edit_info_container">
+            <div id="stat_container" class="flex_col">
                 <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="160px" width="160px">
-                <div class="statText" id="hp">HP: ${stats.hp}</div>
-                <div class="statText" id="atk">ATK: ${stats.atk}</div>
-                <div class="statText" id="def">DEF: ${stats.def}</div>
-                <div class="statText" id="speed">SPD: ${stats.spd}</div>
-                <div class="statText" id="crit_rate">Crit Rate: ${stats.crit_rate}</div>
-                <div class="statText" id="crit_dmg">Crit DMG: ${stats.crit_dmg}</div>
-                <div class="statText" id="element_damage">HP: </div>
-                <div class="statText" id="effect_hr">HP: </div>
-                <div class="statText" id="break_effect">HP: </div>
-                <div class="statText" id="energy_regeneration_rate">HP: </div>
-                <div class="statText" id="outgoing_healing">HP: </div>
-                <div class="statText" id="effect_res">HP: </div>
+                <div class="stat_text" id="hp">HP: ${stats.hp}</div>
+                <div class="stat_text" id="atk">ATK: ${stats.atk}</div>
+                <div class="stat_text" id="def">DEF: ${stats.def}</div>
+                <div class="stat_text" id="speed">SPD: ${stats.spd}</div>
+                <div class="stat_text" id="crit_rate">Crit Rate: ${stats.crit_rate}</div>
+                <div class="stat_text" id="crit_dmg">Crit DMG: ${stats.crit_dmg}</div>
+                <div class="stat_text" id="element_damage">HP: </div>
+                <div class="stat_text" id="effect_hr">HP: </div>
+                <div class="stat_text" id="break_effect">HP: </div>
+                <div class="stat_text" id="energy_regeneration_rate">HP: </div>
+                <div class="stat_text" id="outgoing_healing">HP: </div>
+                <div class="stat_text" id="effect_res">HP: </div>
             </div>
-            <div id="detailedEquipmentDisplay">
-                <div id="headCard" class="equipmentCard"></div>
-                <div id="handsCard" class="equipmentCard"></div>
-                <div id="bodyCard" class="equipmentCard"></div>
-                <div id="footCard" class="equipmentCard"></div>
-                <div id="orbCard" class="equipmentCard"></div>
-                <div id="ropeCard" class="equipmentCard"></div>
+            <div id="detailed_equipment_display">
+                <div id="head_card" class="equipment_card flex_col"></div>
+                <div id="hands_card" class="equipment_card flex_col"></div>
+                <div id="body_card" class="equipment_card flex_col"></div>
+                <div id="foot_card" class="equipment_card flex_col"></div>
+                <div id="orb_card" class="equipment_card flex_col"></div>
+                <div id="rope_card" class="equipment_card flex_col"></div>
             </div>
         </div>
     `;
@@ -227,7 +227,7 @@ function closeDialog() {
 
 function addSpaces(name) {
     if (name === "DanHengIL") return "Dan Heng IL";
-    for(let i = 1; i < name.length; i++) {
+    for (let i = 1; i < name.length; i++) {
         if (name[i] === name[i].toUpperCase()) {
             name = name.substring(0, i) + " " + name.substring(i);
             i++;
@@ -238,7 +238,7 @@ function addSpaces(name) {
 
 function sortCards(list) {
     const children = Array.from(list.children)
-    children.sort((a,b) => {
+    children.sort((a, b) => {
         const idA = a.id.toUpperCase();
         const idB = b.id.toUpperCase();
         if (idA < idB) return -1;
@@ -248,12 +248,11 @@ function sortCards(list) {
     children.forEach(child => list.appendChild(child));
 }
 
-function toggleButtonClick(btn) {
+function toggleButtonClick(list, btn) {
     if (types.includes(btn)) {
         let buttons = document.querySelectorAll(".type_button");
-        if (types.length == types_on.length) {
-            //All buttons were on, turn all off except the clicked one
-            types_on = [btn];
+        if (types.length == types_on_owned.length) {
+            types_on_owned = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -264,23 +263,23 @@ function toggleButtonClick(btn) {
                 }
             });
         } else {
-            if (types_on.includes(btn)) {
-                types_on.splice(types_on.indexOf(btn), 1);
+            if (types_on_owned.includes(btn)) {
+                types_on_owned.splice(types_on_owned.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (types_on.length == 0) {
-                    types_on = types;
+                if (types_on_owned.length == 0) {
+                    types_on_owned = types;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                types_on.push(btn);
+                types_on_owned.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -291,9 +290,8 @@ function toggleButtonClick(btn) {
         }
     } else {
         let buttons = document.querySelectorAll(".path_button");
-        if (paths.length == paths_on.length) {
-            //All buttons were on, turn all off except the clicked one
-            paths_on = [btn];
+        if (paths.length == paths_on_owned.length) {
+            paths_on_owned = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -304,23 +302,23 @@ function toggleButtonClick(btn) {
                 }
             })
         } else {
-            if (paths_on.includes(btn)) {
-                paths_on.splice(paths_on.indexOf(btn), 1);
+            if (paths_on_owned.includes(btn)) {
+                paths_on_owned.splice(paths_on_owned.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (paths_on.length == 0) {
-                    paths_on = paths;
+                if (paths_on_owned.length == 0) {
+                    paths_on_owned = paths;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                paths_on.push(btn);
+                paths_on_owned.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -334,17 +332,17 @@ function toggleButtonClick(btn) {
 }
 
 function applyFilter() {
-    let cards = ownedCharList.querySelectorAll(".characterCard");
+    let cards = ownedCharList.querySelectorAll(".character_card");
     let show_type = [];
     let show_path = [];
     let show_both = [];
     cards.forEach(character => {
-        types_on.forEach(type => {
+        types_on_owned.forEach(type => {
             if (character.classList.contains(type)) show_type.push(character);
         });
     });
     cards.forEach(character => {
-        paths_on.forEach(path => {
+        paths_on_owned.forEach(path => {
             if (character.classList.contains(path)) show_path.push(character);
         });
     });

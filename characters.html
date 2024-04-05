@@ -13,7 +13,7 @@
     <!-- Hamburger Menu -->
     <div class="topnav">
         <a href="index.html" class="active">Honkai: Star Rail Optimizer</a>
-        <div id="myLinks">
+        <div id="my_links" style="display:none;">
             <a href="characters.html" style="border-bottom: white solid 3px;">Characters</a>
             <a href="lightcones.html">Light Cones</a>
             <a href="relics.html">Relics</a>
@@ -25,55 +25,55 @@
     </div>
 
     <!-- Add or remove characters-->
-    <div class="box" id="characterButtons">
-        <button id="addCharacter" onclick="showDialog(document.getElementById('addCharacterDialog'))">Add a Character</button>
-        <button id="deleteCharacters" onclick="deleteAllCharacters()">Delete all Characters</button>
+    <div class="box" id="character_buttons">
+        <button id="add_character" onclick="showDialog(document.getElementById('add_character_dialog'))">Add a Character</button>
+        <button id="delete_characters" onclick="deleteAllCharacters()">Delete all Characters</button>
     </div>
 
-    <div class="box" id="buttonWrapper">
-        <div class="filterButtons">
-            <div class="path_button on Abundance" onclick="toggleButtonClick('Abundance')">
+    <div class="box" id="button_wrapper">
+        <div class="filter_buttons">
+            <div class="path_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
                 <img src="./icons/path/Path_Abundance.png" width="24" height="24">
             </div>
-            <div class="path_button on Destruction" onclick="toggleButtonClick('Destruction')">
+            <div class="path_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
                 <img src="./icons/path/Path_Destruction.png" width="24" height="24">
             </div>
-            <div class="path_button on Erudition" onclick="toggleButtonClick('Erudition')">
+            <div class="path_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
                 <img src="./icons/path/Path_Erudition.png" width="24" height="24">
             </div>
-            <div class="path_button on Harmony" onclick="toggleButtonClick('Harmony')">
+            <div class="path_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
                 <img src="./icons/path/Path_Harmony.png" width="24" height="24">
             </div>
-            <div class="path_button on Nihility" onclick="toggleButtonClick('Nihility')">
+            <div class="path_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
                 <img src="./icons/path/Path_Nihility.png" width="24" height="24">
             </div>
-            <div class="path_button on Preservation" onclick="toggleButtonClick('Preservation')">
+            <div class="path_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
                 <img src="./icons/path/Path_Preservation.png" width="24" height="24">
             </div>
-            <div class="path_button on Hunt" onclick="toggleButtonClick('Hunt')">
+            <div class="path_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
                 <img src="./icons/path/Path_The_Hunt.png" width="24" height="24">
             </div>
         </div>
-        <div class="filterButtons">
-            <div class="type_button on Fire" onclick="toggleButtonClick('Fire')">
+        <div class="filter_buttons">
+            <div class="type_button on Fire" onclick="toggleButtonClick('owned', 'Fire')">
                 <img src="./icons/type/Type_Fire.png" width="24" height="24">
             </div>
-            <div class="type_button on Ice" onclick="toggleButtonClick('Ice')">
+            <div class="type_button on Ice" onclick="toggleButtonClick('owned', 'Ice')">
                 <img src="./icons/type/Type_Ice.png" width="24" height="24">
             </div>
-            <div class="type_button on Imaginary" onclick="toggleButtonClick('Imaginary')">
+            <div class="type_button on Imaginary" onclick="toggleButtonClick('owned', 'Imaginary')">
                 <img src="./icons/type/Type_Imaginary.png" width="24" height="24">
             </div>
-            <div class="type_button on Lightning" onclick="toggleButtonClick('Lightning')">
+            <div class="type_button on Lightning" onclick="toggleButtonClick('owned', 'Lightning')">
                 <img src="./icons/type/Type_Lightning.png" width="24" height="24">
             </div>
-            <div class="type_button on Physical" onclick="toggleButtonClick('Physical')">
+            <div class="type_button on Physical" onclick="toggleButtonClick('owned', 'Physical')">
                 <img src="./icons/type/Type_Physical.png" width="24" height="24">
             </div>
-            <div class="type_button on Quantum" onclick="toggleButtonClick('Quantum')">
+            <div class="type_button on Quantum" onclick="toggleButtonClick('owned', 'Quantum')">
                 <img src="./icons/type/Type_Quantum.png" width="24" height="24">
             </div>
-            <div class="type_button on Wind" onclick="toggleButtonClick('Wind')">
+            <div class="type_button on Wind" onclick="toggleButtonClick('owned', 'Wind')">
                 <img src="./icons/type/Type_Wind.png" width="24" height="24">
             </div>
         </div>
@@ -82,37 +82,37 @@
     <!-- Content -->
     <div class="box">
         <h1>Characters:</h1>
-        <div id="ownedCharacterList" class="characterList"></div>
+        <div id="owned_character_list" class="character_list"></div>
     </div>
 
-    <div id="dialogContainer">
-        <div id="addCharacterDialog" class="box">
+    <div id="dialog_container">
+        <div id="add_character_dialog" class="box flex_col">
             <div>
                 <h2>Select your Character</h2>
             </div>
-            <div class="filterButtons">
-                <div class="toggleButton">Fire</div>
-                <div class="toggleButton">Ice</div>
-                <div class="toggleButton">Lightning</div>
-                <div class="toggleButton">Wind</div>
-                <div class="toggleButton">Imaginary</div>
-                <div class="toggleButton">Quantum</div>
-                <div class="toggleButton">Physical</div>
+            <div class="filter_buttons">
+                <div class="toggle_button">Fire</div>
+                <div class="toggle_button">Ice</div>
+                <div class="toggle_button">Lightning</div>
+                <div class="toggle_button">Wind</div>
+                <div class="toggle_button">Imaginary</div>
+                <div class="toggle_button">Quantum</div>
+                <div class="toggle_button">Physical</div>
             </div>
-            <div class="filterButtons">
-                <div class="toggleButton">Abundance</div>
-                <div class="toggleButton">Destruction</div>
-                <div class="toggleButton">Erudition</div>
-                <div class="toggleButton">Harmony</div>
-                <div class="toggleButton">Hunt</div>
-                <div class="toggleButton">Nihility</div>
-                <div class="toggleButton">Preservation</div>
+            <div class="filter_buttons">
+                <div class="toggle_button">Abundance</div>
+                <div class="toggle_button">Destruction</div>
+                <div class="toggle_button">Erudition</div>
+                <div class="toggle_button">Harmony</div>
+                <div class="toggle_button">Hunt</div>
+                <div class="toggle_button">Nihility</div>
+                <div class="toggle_button">Preservation</div>
             </div>
-            <div id="createCharacterList" class="characterList">
+            <div id="create_character_list" class="character_list">
 
             </div>
         </div>
-        <div id="editCharacterDialog" class="box">
+        <div id="edit_character_dialog" class="box flex_col">
             
         </div>
     </div>
@@ -121,7 +121,7 @@
 
     <script>
         function menuClick() {
-            var x = document.getElementById("myLinks");
+            var x = document.getElementById("my_links");
             if (x.style.display === "block") {
                 x.style.display = "none";
             } else {

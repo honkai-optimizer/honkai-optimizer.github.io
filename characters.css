@@ -1,16 +1,16 @@
-#characterButtons {
+#character_buttons {
     justify-content:center;
     display: flex;
     gap: 20px;
 }
 
-#buttonWrapper {
+#button_wrapper {
     display:flex;
     gap:20px;
     justify-content: center;
 }
 
-#addCharacter, #deleteCharacters, #deleteCharacter {
+#add_character, #delete_characters, #delete_character {
     color:var(--textcolor);
     border: 0;
     height:30px;
@@ -21,21 +21,21 @@
     overflow: hidden;
 }
 
-#addCharacter {
+#add_character {
     background-color: rgb(126, 201, 13);
 }
 
-#deleteCharacters, #deleteCharacter {
+#delete_characters, #delete_character {
     background-color: rgb(201, 13, 13);
 }
 
-#deleteCharacter {
+#delete_character {
     margin-left: auto;
     margin-bottom: 8px;
     width:20%;
 }
 
-#dialogContainer {
+#dialog_container {
     position: fixed;
     width:100%;
     top: 0;
@@ -45,18 +45,16 @@
     visibility:hidden;
 }
 
-#addCharacterDialog, #editCharacterDialog {
+#add_character_dialog, #edit_character_dialog {
     margin-inline: auto;
     margin-top: 50px;
     width:80%;
-    display: flex;
-    flex-direction: column;
     display:none;
     gap:8px;
     padding:20px;
 }
 
-#editInfoContainer {
+#edit_info_container {
     display:flex;
     flex-flow:wrap;
     width:100%;
@@ -64,10 +62,8 @@
     gap: 8px;
 }
 
-#statContainer {
+#stat_container {
     padding-block: 15px;
-    display:flex;
-    flex-direction:column;
     gap: 8px;
     height:100%;
     flex-basis:25%;
@@ -76,7 +72,7 @@
     background-color: rgb(0, 103, 172)
 }
 
-#detailedEquipmentDisplay {
+#detailed_equipment_display {
     display:flex;
     flex-flow:wrap;
     flex-basis: 70%;
@@ -89,31 +85,29 @@ h2 {
     text-align: center;
 }
 
-.characterList {
+.character_list {
     display:flex;
     flex-wrap: wrap;
     gap:5px;
     margin-top: 5px;
     justify-content: center;
 }
-.characterCard, .miniCard, .equipmentCard {
-    display:flex;
+.character_card, .mini_card, .equipment_card {
     padding:10px;
     background-color: black;
     border-radius: 5px;
-    flex-direction: column;
     justify-content: space-between;
     height:180px;
     width: 330px;
 }
 
-.equipmentCard {
+.equipment_card {
     flex-basis: 30%;
     flex-grow: 0;
     max-width: 30%;
 }
 
-.miniCard {
+.mini_card {
     height: 120px;
     width: 250px;
     flex-direction: row;
@@ -121,13 +115,13 @@ h2 {
     gap:10px;
 }
 
-.infoContainer, .cardTraces {
+.info_container, .card_traces {
     display:flex;
     gap:15px;
     align-items:center;
 }
 
-.traceCircle {
+.trace_circle {
     display: flex;
     background-color: gray;
     height: 25px;
@@ -138,20 +132,18 @@ h2 {
     margin-inline: 10px;
 }
 
-.equipmentDisplay {
+.equipment_display {
     display:flex;
     gap:3px;
     justify-content: space-between;
 }
 
-.infoText {
-    display:flex;
-    flex-direction: column;
+.info_text {
     font-weight:bold;
     font-size:18px;
 }
 
-.filterButtons {
+.filter_buttons {
     display:flex;
     justify-content: center;
 }
@@ -186,7 +178,7 @@ h2 {
     border-radius: 15%;
 }
 
-.statText {
+.stat_text {
     margin-top: 8px;
     margin-left: 40px;
     font-weight: bold;
