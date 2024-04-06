@@ -173,9 +173,11 @@ function deleteAllCharacters() {
 function openCharacterInfo(character) {
     const charObject = JSON.parse(localStorage.getItem("char_" + character));
     const stats = calculateStats(charObject);
-    console.log(character);
+    const abilityNames = getAbilityNames(addSpaces(character));
+    for (let i = 0; i < abilityNames.length; i++)
+        abilityNames[i] = abilityNames[i].replace(/ /g, "_");
     editDialog.innerHTML = /*HTML*/ `
-        <button id="delete_character" onclick="deleteCharacter('${character}')">Delete Character</button>
+        <button id="delete_character" type="button" class="no_text_wrap_overflow" onclick="deleteCharacter('${character}')">Delete Character</button>
         <div id="edit_info_container">
             <div id="stat_container" class="flex_col">
                 <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="165px" width="149px">
@@ -192,13 +194,32 @@ function openCharacterInfo(character) {
                 <div class="stat_text" id="outgoing_healing">Bonus Outgoing Healing: ${stats.outgoing_healing}%</div>
                 <div class="stat_text" id="effect_res">Effect RES: ${stats.effect_res}%</div>
             </div>
-            <div id="detailed_equipment_display">
-                <div id="head_card" class="equipment_card flex_col"></div>
-                <div id="hands_card" class="equipment_card flex_col"></div>
-                <div id="body_card" class="equipment_card flex_col"></div>
-                <div id="foot_card" class="equipment_card flex_col"></div>
-                <div id="orb_card" class="equipment_card flex_col"></div>
-                <div id="rope_card" class="equipment_card flex_col"></div>
+            <div id="trace_equipment_display" class="flex_col">
+                <div id="trace_edit">
+                    <div id="basic" class="dropdown_button">
+                        <img src="./icons/abilities/Ability_${abilityNames[0]}.png" width="32px" height="32px">
+                        <p class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
+                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    </div>
+                    <div id="skill" class="dropdown_button">
+                        <img src="./icons/abilities/Ability_${abilityNames[1]}.png" width="32px" height="32px">
+                        <p class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
+                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    </div>
+                    <div id="ultimate" class="dropdown_button">
+                        <img src="./icons/abilities/Ability_${abilityNames[2]}.png" width="32px" height="32px">
+                        <p class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
+                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    </div>
+                </div>
+                <div id="detailed_equipment_display">
+                    <div id="head_card" class="equipment_card flex_col"></div>
+                    <div id="hands_card" class="equipment_card flex_col"></div>
+                    <div id="body_card" class="equipment_card flex_col"></div>
+                    <div id="foot_card" class="equipment_card flex_col"></div>
+                    <div id="orb_card" class="equipment_card flex_col"></div>
+                    <div id="rope_card" class="equipment_card flex_col"></div>
+                </div>
             </div>
         </div>
     `;
@@ -515,6 +536,25 @@ function createDiv(arr) {
     if (arr.constructor === Array) div.classList.add(...arr);
     else div.classList.add(arr);
     return div;
+}
+
+/**
+ * Gets a character's ability names from the global JSON file.
+ * @param {string} character The name of the character with spaces.
+ * @returns The ability names in an array, with position 0, 1 and 2 being the basic, skill and ultimate respectively.
+ */
+function getAbilityNames(character) {
+    let arr = ["", "", ""]
+    if (Array.isArray(characterObjects[character].skills.basic))
+        arr[0] = characterObjects[character].skills.basic[0].name;
+    else arr[0] = characterObjects[character].skills.basic.name;
+    if (Array.isArray(characterObjects[character].skills.skill))
+        arr[1] = characterObjects[character].skills.skill[0].name;
+    else arr[1] = characterObjects[character].skills.skill.name;
+    if (Array.isArray(characterObjects[character].skills.ult))
+        arr[2] = characterObjects[character].skills.ult[0].name;
+    else arr[2] = characterObjects[character].skills.ult.name;
+    return arr;
 }
 
 /**
