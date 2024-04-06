@@ -12028,41 +12028,87 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Direct Punch",
-                    "max_level": 9,
-                    "desc": "Deals Physical DMG equal to {0}% of Luka's ATK to a single enemy.",
-                    "params": [
-                        [
-                            "50"
+                "basic": [
+                    {
+                        "name": "Direct Punch",
+                        "max_level": 9,
+                        "desc": "Deals Physical DMG equal to {0}% of Luka's ATK to a single enemy.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1111_basic_atk.png"
+                    },
+                    {
+                        "name": "Sky-Shatter Fist",
+                        "max_level": 9,
+                        "desc": "Consumes 2 stacks of Fighting Will. First, uses Direct Punch to deal 3 hits, with each hit dealing Physical DMG equal to {0}% of Luka's ATK to a single enemy target. Then, uses Rising Uppercut to deal 1 hit, dealing Physical DMG equal to {1}% of Luka's ATK to the single enemy target.",
+                        "params": [
+                            [
+                                "10",
+                                "40"
+                            ],
+                            [
+                                "12",
+                                "48"
+                            ],
+                            [
+                                "14",
+                                "56"
+                            ],
+                            [
+                                "16",
+                                "64"
+                            ],
+                            [
+                                "18",
+                                "72"
+                            ],
+                            [
+                                "20",
+                                "80"
+                            ],
+                            [
+                                "22",
+                                "88"
+                            ],
+                            [
+                                "24",
+                                "96"
+                            ],
+                            [
+                                "26",
+                                "104"
+                            ]
                         ],
-                        [
-                            "70"
-                        ],
-                        [
-                            "80"
-                        ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1111_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1111_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "Lacerating Fist",
                     "max_level": 15,
@@ -13264,41 +13310,87 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Flower Pick",
-                    "max_level": 9,
-                    "desc": "Tosses 1 jade tile from the suit with the fewest tiles in hand to deal Quantum DMG equal to {0}% of Qingque's ATK to a single enemy.",
-                    "params": [
-                        [
-                            "50"
+                "basic": [
+                    {
+                        "name": "Flower Pick",
+                        "max_level": 9,
+                        "desc": "Tosses 1 jade tile from the suit with the fewest tiles in hand to deal Quantum DMG equal to {0}% of Qingque's ATK to a single enemy.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1201_basic_atk.png"
+                    },
+                    {
+                        "name": "Cherry on Top!",
+                        "max_level": 9,
+                        "desc": "Deals Quantum DMG equal to {0}% of Qingque's ATK to a single enemy, and deals Quantum DMG equal to {1}% of Qingque's ATK to enemies adjacent to it. \"Cherry on Top!\" cannot recover Skill Points.",
+                        "params": [
+                            [
+                                "120",
+                                "50"
+                            ],
+                            [
+                                "144",
+                                "60"
+                            ],
+                            [
+                                "168",
+                                "70"
+                            ],
+                            [
+                                "192",
+                                "80"
+                            ],
+                            [
+                                "216",
+                                "90"
+                            ],
+                            [
+                                "240",
+                                "100"
+                            ],
+                            [
+                                "264",
+                                "110"
+                            ],
+                            [
+                                "288",
+                                "120"
+                            ],
+                            [
+                                "312",
+                                "130"
+                            ]
                         ],
-                        [
-                            "70"
-                        ],
-                        [
-                            "80"
-                        ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1201_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1201_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "A Scoop of Moon",
                     "max_level": 15,
@@ -15676,41 +15768,105 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Shard Sword",
-                    "max_level": 9,
-                    "desc": "Deals {0}% of Blade's ATK as Wind DMG to a target enemy.",
-                    "params": [
-                        [
-                            "50"
+                "basic": [
+                    {
+                        "name": "Shard Sword",
+                        "max_level": 9,
+                        "desc": "Deals {0}% of Blade's ATK as Wind DMG to a target enemy.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1205_basic_atk.png"
+                    },
+                    {
+                        "name": "Forest of Swords",
+                        "max_level": 9,
+                        "desc": "Consumes HP equal to 10% of Blade's Max HP and deals Wind DMG equal to the sum of {0}% of his ATK and {1}% of his Max HP to a single enemy. In addition, deals Wind DMG equal to the sum of {2}% of Blade's ATK and {3}% of his Max HP to adjacent targets. If Blade's current HP is insufficient, his HP will be reduced to 1 when using Forest of Swords. Forest of Swords cannot regenerate Skill Points.",
+                        "params": [
+                            [
+                                "20",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "60",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "70",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "80",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "90",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "100",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "110",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "120",
+                                "50",
+                                "8",
+                                "20"
+                            ],
+                            [
+                                "130",
+                                "50",
+                                "8",
+                                "20"
+                            ]
                         ],
-                        [
-                            "70"
-                        ],
-                        [
-                            "80"
-                        ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1205_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1205_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "Hellscape",
                     "max_level": 15,
@@ -20202,59 +20358,129 @@
                     ],
                     "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1212_basic_atk.png"
                 },
-                "skill": {
-                    "name": "Transcendent Flash",
-                    "max_level": 15,
-                    "desc": "Deals Ice DMG equal to {0}% of Jingliu's ATK to a single enemy and obtains 1 stack(s) of Syzygy.",
-                    "params": [
-                        [
-                            "100"
+                "skill": [
+                    {
+                        "name": "Transcendent Flash",
+                        "max_level": 15,
+                        "desc": "Deals Ice DMG equal to {0}% of Jingliu's ATK to a single enemy and obtains 1 stack(s) of Syzygy.",
+                        "params": [
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ],
+                            [
+                                "140"
+                            ],
+                            [
+                                "150"
+                            ],
+                            [
+                                "162"
+                            ],
+                            [
+                                "175"
+                            ],
+                            [
+                                "187"
+                            ],
+                            [
+                                "200"
+                            ],
+                            [
+                                "210"
+                            ],
+                            [
+                                "220"
+                            ],
+                            [
+                                "229"
+                            ],
+                            [
+                                "240"
+                            ],
+                            [
+                                "250"
+                            ]
                         ],
-                        [
-                            "110"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1212_skill.png"
+                    },
+                    {
+                        "name": "Moon On Glacial River",
+                        "max_level": 15,
+                        "desc": "Deals Ice DMG equal to {0}% of Jingliu's ATK to a single enemy, and deals Ice DMG equal to {1}% of Jingliu's ATK to adjacent enemies. Consumes 1 stack(s) of Syzygy. Using this ability does not consume Skill Points.",
+                        "params": [
+                            [
+                                "125",
+                                "62.5"
+                            ],
+                            [
+                                "137.5",
+                                "68.75"
+                            ],
+                            [
+                                "150",
+                                "75"
+                            ],
+                            [
+                                "162.5",
+                                "81.25"
+                            ],
+                            [
+                                "175",
+                                "87.5"
+                            ],
+                            [
+                                "187.5",
+                                "93.75"
+                            ],
+                            [
+                                "203.125",
+                                "101.5625"
+                            ],
+                            [
+                                "218.75",
+                                "109.375"
+                            ],
+                            [
+                                "234.375",
+                                "117.1875"
+                            ],
+                            [
+                                "250",
+                                "125"
+                            ],
+                            [
+                                "262.5",
+                                "131.25"
+                            ],
+                            [
+                                "275",
+                                "137.5"
+                            ],
+                            [
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "250",
+                                "0"
+                            ]
                         ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ],
-                        [
-                            "140"
-                        ],
-                        [
-                            "150"
-                        ],
-                        [
-                            "162"
-                        ],
-                        [
-                            "175"
-                        ],
-                        [
-                            "187"
-                        ],
-                        [
-                            "200"
-                        ],
-                        [
-                            "210"
-                        ],
-                        [
-                            "220"
-                        ],
-                        [
-                            "229"
-                        ],
-                        [
-                            "240"
-                        ],
-                        [
-                            "250"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1212_skill.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1212_skill.png"
+                    }
+                ],
                 "ult": {
                     "name": "Florephemeral Dreamflux",
                     "max_level": 15,
@@ -20785,41 +21011,166 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Beneficent Lotus",
-                    "max_level": 9,
-                    "desc": "Uses a 2-hit attack and deals Imaginary DMG equal to {0}% of Dan Heng \u2022 Imbibitor Lunae's ATK to a single enemy target.",
-                    "params": [
-                        [
-                            "50"
+                "basic": [
+                    {
+                        "name": "Beneficent Lotus",
+                        "max_level": 9,
+                        "desc": "Uses a 2-hit attack and deals Imaginary DMG equal to {0}% of Dan Heng \u2022 Imbibitor Lunae's ATK to a single enemy target.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1213_basic_atk.png"
+                    },
+                    {
+                        "name": "Transcendence",
+                        "max_level": 9,
+                        "desc": "Uses a 3-hit attack and deals Imaginary DMG equal to {0}% of Dan Heng \u2022 Imbibitor Lunae's ATK to a single enemy target.",
+                        "params": [
+                            [
+                                "130"
+                            ],
+                            [
+                                "156"
+                            ],
+                            [
+                                "182"
+                            ],
+                            [
+                                "208"
+                            ],
+                            [
+                                "234"
+                            ],
+                            [
+                                "260"
+                            ],
+                            [
+                                "286"
+                            ],
+                            [
+                                "312"
+                            ],
+                            [
+                                "338"
+                            ]
                         ],
-                        [
-                            "70"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1213_basic_atk.png"
+                    },
+                    {
+                        "name": "Divine Spear",
+                        "max_level": 9,
+                        "desc": "Uses a 5-hit attack and deals Imaginary DMG equal to {0}% of Dan Heng \u2022 Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deals Imaginary DMG equal to {1}% of Dan Heng \u2022 Imbibitor Lunae's ATK to adjacent targets.",
+                        "params": [
+                            [
+                                "190",
+                                "30"
+                            ],
+                            [
+                                "228",
+                                "36"
+                            ],
+                            [
+                                "266",
+                                "42"
+                            ],
+                            [
+                                "304",
+                                "48"
+                            ],
+                            [
+                                "342",
+                                "54"
+                            ],
+                            [
+                                "380",
+                                "60"
+                            ],
+                            [
+                                "418",
+                                "66"
+                            ],
+                            [
+                                "456",
+                                "72"
+                            ],
+                            [
+                                "492",
+                                "78"
+                            ]
                         ],
-                        [
-                            "80"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1213_basic_atk.png"
+                    },
+                    {
+                        "name": "Fulgurant Leap",
+                        "max_level": 9,
+                        "desc": "Uses a 7-hit attack and deals Imaginary DMG equal to {0}% of Dan Heng \u2022 Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deal Imaginary DMG equal to {1}% of Dan Heng \u2022 Imbibitor Lunae's ATK to adjacent targets.",
+                        "params": [
+                            [
+                                "250",
+                                "90"
+                            ],
+                            [
+                                "300",
+                                "108"
+                            ],
+                            [
+                                "350",
+                                "126"
+                            ],
+                            [
+                                "400",
+                                "144"
+                            ],
+                            [
+                                "450",
+                                "162"
+                            ],
+                            [
+                                "500",
+                                "180"
+                            ],
+                            [
+                                "550",
+                                "198"
+                            ],
+                            [
+                                "600",
+                                "216"
+                            ],
+                            [
+                                "650",
+                                "234"
+                            ]
                         ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1213_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1213_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "Dracore Libre",
                     "max_level": 15,
@@ -23272,41 +23623,87 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Corkage Fee",
-                    "max_level": 9,
-                    "desc": "Deals Fire DMG equal to {0}% of Gallagher's ATK to a single target enemy.",
-                    "params": [
-                        [
-                            "50"
+                "basic":[
+                    {
+                        "name": "Corkage Fee",
+                        "max_level": 9,
+                        "desc": "Deals Fire DMG equal to {0}% of Gallagher's ATK to a single target enemy.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1301_basic_atk.png"
+                    },
+                    {
+                        "name": "Nectar Blitz",
+                        "max_level": 9,
+                        "desc": "Deals Fire DMG equal to {0}% of Gallagher's ATK to a single target enemy. And reduces the target's ATK by {1}%, lasting for 2 turns.",
+                        "params": [
+                            [
+                                "125",
+                                "10"
+                            ],
+                            [
+                                "150",
+                                "11"
+                            ],
+                            [
+                                "175",
+                                "12"
+                            ],
+                            [
+                                "200",
+                                "13"
+                            ],
+                            [
+                                "225",
+                                "14"
+                            ],
+                            [
+                                "250",
+                                "15"
+                            ],
+                            [
+                                "275",
+                                "16"
+                            ],
+                            [
+                                "300",
+                                "17"
+                            ],
+                            [
+                                "325",
+                                "18"
+                            ]
                         ],
-                        [
-                            "70"
-                        ],
-                        [
-                            "80"
-                        ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1301_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1301_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "Special Brew",
                     "max_level": 15,
@@ -23963,59 +24360,129 @@
                     ],
                     "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1302_skill.png"
                 },
-                "ult": {
-                    "name": "For In This Garden, Supreme Beauty Bestows",
-                    "max_level": 15,
-                    "desc": "Consumes 90 Energy and deals Physical DMG equal to {0}% of Argenti's ATK to all enemies.",
-                    "params": [
-                        [
-                            "96"
+                "ult": [
+                    {
+                        "name": "For In This Garden, Supreme Beauty Bestows",
+                        "max_level": 15,
+                        "desc": "Consumes 90 Energy and deals Physical DMG equal to {0}% of Argenti's ATK to all enemies.",
+                        "params": [
+                            [
+                                "96"
+                            ],
+                            [
+                                "102"
+                            ],
+                            [
+                                "108"
+                            ],
+                            [
+                                "115"
+                            ],
+                            [
+                                "121"
+                            ],
+                            [
+                                "128"
+                            ],
+                            [
+                                "136"
+                            ],
+                            [
+                                "144"
+                            ],
+                            [
+                                "152"
+                            ],
+                            [
+                                "160"
+                            ],
+                            [
+                                "166"
+                            ],
+                            [
+                                "172"
+                            ],
+                            [
+                                "179"
+                            ],
+                            [
+                                "185"
+                            ],
+                            [
+                                "192"
+                            ]
                         ],
-                        [
-                            "102"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1302_ultimate.png"
+                    },
+                    {
+                        "name": "Merit Bestowed in \"My\" Garden",
+                        "max_level": 15,
+                        "desc": "Consumes 180 Energy and deals Physical DMG equal to {0}% of Argenti's ATK to all enemies, and further deals DMG for 6 extra time(s), with each time dealing Physical DMG equal to {1}% of Argenti's ATK to a random enemy.",
+                        "params": [
+                            [
+                                "168",
+                                "57"
+                            ],
+                            [
+                                "179.2",
+                                "60.8"
+                            ],
+                            [
+                                "190.4",
+                                "64.6"
+                            ],
+                            [
+                                "201.6",
+                                "68.4"
+                            ],
+                            [
+                                "212.8",
+                                "72.2"
+                            ],
+                            [
+                                "224",
+                                "76"
+                            ],
+                            [
+                                "238",
+                                "80.75"
+                            ],
+                            [
+                                "252",
+                                "85.5"
+                            ],
+                            [
+                                "266",
+                                "90.25"
+                            ],
+                            [
+                                "280",
+                                "95"
+                            ],
+                            [
+                                "291.2",
+                                "98.8"
+                            ],
+                            [
+                                "302.4",
+                                "102.6"
+                            ],
+                            [
+                                "313.6",
+                                "106.4"
+                            ],
+                            [
+                                "324.8",
+                                "110.2"
+                            ],
+                            [
+                                "336",
+                                "114"
+                            ]
                         ],
-                        [
-                            "108"
-                        ],
-                        [
-                            "115"
-                        ],
-                        [
-                            "121"
-                        ],
-                        [
-                            "128"
-                        ],
-                        [
-                            "136"
-                        ],
-                        [
-                            "144"
-                        ],
-                        [
-                            "152"
-                        ],
-                        [
-                            "160"
-                        ],
-                        [
-                            "166"
-                        ],
-                        [
-                            "172"
-                        ],
-                        [
-                            "179"
-                        ],
-                        [
-                            "185"
-                        ],
-                        [
-                            "192"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1302_ultimate.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/1302_ultimate.png"
+                    }
+                ],
                 "talent": {
                     "name": "Sublime Object",
                     "max_level": 15,
@@ -29515,41 +29982,87 @@
                 }
             ],
             "skills": {
-                "basic": {
-                    "name": "Ice-Breaking Light",
-                    "max_level": 9,
-                    "desc": "Deals Fire DMG equal to {0}% of the Trailblazer's ATK to a single enemy and gains 1 stack of Magma Will.",
-                    "params": [
-                        [
-                            "50"
+                "basic": [
+                    {
+                        "name": "Ice-Breaking Light",
+                        "max_level": 9,
+                        "desc": "Deals Fire DMG equal to {0}% of the Trailblazer's ATK to a single enemy and gains 1 stack of Magma Will.",
+                        "params": [
+                            [
+                                "50"
+                            ],
+                            [
+                                "60"
+                            ],
+                            [
+                                "70"
+                            ],
+                            [
+                                "80"
+                            ],
+                            [
+                                "90"
+                            ],
+                            [
+                                "100"
+                            ],
+                            [
+                                "110"
+                            ],
+                            [
+                                "120"
+                            ],
+                            [
+                                "130"
+                            ]
                         ],
-                        [
-                            "60"
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/8004_basic_atk.png"
+                    },
+                    {
+                        "name": "Ice-Breaking Light",
+                        "max_level": 9,
+                        "desc": "Consumes 4 stacks of Magma Will to enhance Basic ATK, dealing Fire DMG equal to {0}% of the Trailblazer's ATK to a single enemy and Fire DMG to equal to {1}% of the Trailblazer's ATK to enemies adjacent to it.",
+                        "params": [
+                            [
+                                "90",
+                                "36"
+                            ],
+                            [
+                                "99",
+                                "39.6"
+                            ],
+                            [
+                                "108",
+                                "43.2"
+                            ],
+                            [
+                                "117",
+                                "46.8"
+                            ],
+                            [
+                                "126",
+                                "50.4"
+                            ],
+                            [
+                                "135",
+                                "54"
+                            ],
+                            [
+                                "146.3",
+                                "58.5"
+                            ],
+                            [
+                                "157.6",
+                                "63"
+                            ],
+                            [
+                                "168.9",
+                                "67.5"
+                            ]
                         ],
-                        [
-                            "70"
-                        ],
-                        [
-                            "80"
-                        ],
-                        [
-                            "90"
-                        ],
-                        [
-                            "100"
-                        ],
-                        [
-                            "110"
-                        ],
-                        [
-                            "120"
-                        ],
-                        [
-                            "130"
-                        ]
-                    ],
-                    "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/8004_basic_atk.png"
-                },
+                        "icon": "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/icon/skill/8004_basic_atk.png"
+                    }
+                ],
                 "skill": {
                     "name": "Ever-Burning Amber",
                     "max_level": 15,
