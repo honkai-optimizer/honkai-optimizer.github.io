@@ -181,6 +181,15 @@ function openCharacterInfo(character) {
         <div id="edit_info_container">
             <div id="stat_container" class="flex_col">
                 <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="165px" width="149px">
+                <div id="level_container">
+                    <div class="stat_text">Lvl. ${charObject.level}/${charObject.ascension * 10 + 20}</div>
+                    <div class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleLevelDropdown('${character}')">
+                            <p>Select</p>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
                 <div class="stat_text" id="hp">HP: ${stats.hp}</div>
                 <div class="stat_text" id="atk">ATK: ${stats.atk}</div>
                 <div class="stat_text" id="def">DEF: ${stats.def}</div>
@@ -196,23 +205,30 @@ function openCharacterInfo(character) {
             </div>
             <div id="trace_equipment_display" class="flex_col">
                 <div id="trace_edit">
-                    <div id="basic" class="dropdown_button">
-                        <img src="./icons/abilities/Ability_${abilityNames[0]}.png" width="32px" height="32px">
-                        <p class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
-                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    <div id="basic" class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'basic')">
+                            <img src="./icons/abilities/Ability_${abilityNames[0]}.png" width="32px" height="32px">
+                            <p id="basic_text" class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
                     </div>
-                    <div id="skill" class="dropdown_button">
-                        <img src="./icons/abilities/Ability_${abilityNames[1]}.png" width="32px" height="32px">
-                        <p class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
-                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    <div id="skill" class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'skill')">
+                            <img src="./icons/abilities/Ability_${abilityNames[1]}.png" width="32px" height="32px">
+                            <p id="skill_text" class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
                     </div>
-                    <div id="ultimate" class="dropdown_button">
-                        <img src="./icons/abilities/Ability_${abilityNames[2]}.png" width="32px" height="32px">
-                        <p class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
-                        <img src="./assets/down_arrow.png" width="16px" height="16px">
+                    <div id="ultimate" class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'ultimate')">
+                            <img src="./icons/abilities/Ability_${abilityNames[2]}.png" width="32px" height="32px">
+                            <p id="ultimate_text" class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
                     </div>
                 </div>
-                <div id="detailed_equipment_display">
+                <div class="lightcone_card"></div>
+                <div id="detailed_relic_display">
                     <div id="head_card" class="equipment_card flex_col"></div>
                     <div id="hands_card" class="equipment_card flex_col"></div>
                     <div id="body_card" class="equipment_card flex_col"></div>
@@ -220,10 +236,95 @@ function openCharacterInfo(character) {
                     <div id="orb_card" class="equipment_card flex_col"></div>
                     <div id="rope_card" class="equipment_card flex_col"></div>
                 </div>
+                <div id="eidolon_display">
+                    <div id="eidolon_1" class="eidolon_card"></div>
+                    <div id="eidolon_2" class="eidolon_card"></div>
+                    <div id="eidolon_3" class="eidolon_card"></div>
+                    <div id="eidolon_4" class="eidolon_card"></div>
+                    <div id="eidolon_5" class="eidolon_card"></div>
+                    <div id="eidolon_6" class="eidolon_card"></div>
+                </div>
             </div>
         </div>
     `;
     showDialog(editDialog);
+}
+
+function toggleLevelDropdown(name) {
+    let container = document.getElementById("level_container").querySelector(".dropdown_container");
+    container.classList.toggle("open");
+    let img = container.querySelector("i");
+    img.classList.toggle("fa-chevron-up");
+    img.classList.toggle("fa-chevron-down");
+    if (!container.classList.contains("open")) {
+        container.querySelector(".dropdown_menu").remove();
+        return;
+    }
+    let menu = createDiv(["dropdown_menu", "flex_col"]);
+    container.append(menu);
+    for (let i = 0; i <= 6; i++) {
+        let option_1 = createDiv("dropdown_option");
+        option_1.style.paddingInline = "5px";
+        option_1.innerText = (i == 0 ? 1 : (i - 1) * 10 + 20) + "/" + (i * 10 + 20);
+        option_1.onclick = e => {
+            let obj = JSON.parse(localStorage.getItem("char_" + name));
+            obj.level = option_1.innerText.split("/")[0];
+            obj.ascension = i;
+            localStorage.setItem("char_" + name, JSON.stringify(obj));
+            container.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + (obj.ascension * 10 + 20);
+            toggleLevelDropdown(name);
+            updateStats(obj);
+        };
+        let option_2 = createDiv("dropdown_option");
+        option_2.style.paddingInline = "5px";
+        option_2.innerText = (i * 10 + 20) + "/" + (i * 10 + 20);
+        option_2.onclick = e => {
+            let obj = JSON.parse(localStorage.getItem("char_" + name));
+            obj.level = option_2.innerText.split("/")[0];
+            obj.ascension = i;
+            localStorage.setItem("char_" + name, JSON.stringify(obj));
+            container.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + obj.level;
+            toggleLevelDropdown(name);
+            updateStats(obj);
+        };
+        menu.append(option_1);
+        menu.append(option_2);
+    }
+}
+
+function updateStats(obj) {
+    const stats = calculateStats(obj);
+    for (let key in stats) {
+        document.getElementById(key).innerText = "HP: " + stats[key];
+    }
+}
+
+function toggleTraceDropdown(name, id) {
+    let container = document.getElementById(id);
+    container.classList.toggle("open");
+    let img = container.querySelector("i");
+    img.classList.toggle("fa-chevron-up");
+    img.classList.toggle("fa-chevron-down");
+    if (!container.classList.contains("open")) {
+        container.querySelector(".dropdown_menu").remove();
+        return;
+    }
+    let maxLevel = id == 'basic' ? 7 : 12;
+    let menu = createDiv(["dropdown_menu", "flex_col"]);
+    menu.style.position = "relative";
+    container.append(menu);
+    for (let i = 1; i <= maxLevel; i++) {
+        let option = createDiv("dropdown_option");
+        option.innerText = "Level " + i;
+        option.onclick = e => {
+            let obj = JSON.parse(localStorage.getItem("char_" + name));
+            obj.traces[id] = i;
+            localStorage.setItem("char_" + name, JSON.stringify(obj));
+            document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
+            toggleTraceDropdown(name, id);
+        };
+        menu.append(option);
+    }
 }
 
 /**

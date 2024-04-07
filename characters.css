@@ -66,7 +66,7 @@
     flex-basis:29%;
     max-width: 29%;
     flex-grow: 0;
-    background-color: rgb(30, 30, 90);
+    background-color: var(--custom-dark-purple);
 }
 
 #trace_equipment_display {
@@ -74,11 +74,11 @@
     flex-flow: wrap;
     flex-basis: 69%;
     max-width: 69%;
-    gap: 8px;
+    gap: 5px;
     align-content: flex-start;
 }
 
-#detailed_equipment_display {
+#detailed_relic_display {
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
@@ -87,8 +87,25 @@
 #trace_edit {
     display:flex;
     width:100%;
-    height:30px;
+    height:35px;
     gap: 3px;
+}
+
+#eidolon_display {
+    display:flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+}
+
+#level_container {
+    display: flex;
+    gap: 5px;
+    align-items:center;
+    height: 35px;
+    overflow: visible;
+}
+#level_container.open {
+    background-color: var(--custom-light-purple);
 }
 
 h2 {
@@ -103,24 +120,19 @@ h2 {
     justify-content: center;
 }
 
-.character_card, .mini_card, .equipment_card {
+.character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card {
     padding: 10px;
-    background-color: black;
+    background-color: var(--custom-dark-purple);
     border-radius: 5px;
     height: 180px;
     width: 330px;
-}
-
-.dropdown_button {
-    width: 33%;
-    height: 35px;
 }
 
 .character_card {
     justify-content: space-around;
 }
 
-.equipment_card {
+.equipment_card, .eidolon_card {
     box-sizing: border-box;
     flex-basis: 33%;
     flex-grow: 0;
@@ -135,6 +147,21 @@ h2 {
     align-items: center;
     gap:10px;
 }
+
+.lightcone_card {
+    width: 100%;
+}
+
+.dropdown_container {
+    width: 33%;
+    height: 100%;
+}
+
+.dropdown_button {
+    width: 100%;
+    height: inherit;
+}
+
 
 .info_container, .card_traces {
     display: flex;
@@ -202,14 +229,11 @@ h2 {
     padding: 3px;
     height:30px;
     width:50px;
+    border-radius: 0;
     border-right: white solid 1px;
     display:flex;
     justify-content: center;
     align-items: center;
-}
-
-.path_button:hover, .type_button:hover {
-    background-color: #575757;
 }
 
 .path_button:first-child, .type_button:first-child {
@@ -276,7 +300,11 @@ h2 {
 }
 
 .path_button.off, .type_button.off {
-    background-color: #202020;
+    background-color: var(--button-off);
+}
+
+.path_button.on:hover, .type_button.on:hover, .path_button.off:hover, .type_button.off:hover {
+    background-color: var(--button-off);
 }
 
 .no_text_wrap_overflow {
