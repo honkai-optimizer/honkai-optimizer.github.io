@@ -1,5 +1,3 @@
-"useStrict";
-
 const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'BlackSwan', 'Blade', 'Bronya', 'Clara', 'DanHeng', 'DanHengIL', 'DrRatio', 'FuXuan', 'Gallagher', 'Gepard', 'Guinaifen', 'Hanya', 'Herta', 'Himeko', 'Hook', 'Huohuo', 'JingYuan', 'Jingliu', 'Kafka', 'Luka', 'Luocha', 'Lynx', 'March7th', 'Misha', 'Natasha', 'Pela', 'Qingque', 'RuanMei', 'Sampo', 'Seele', 'Serval', 'SilverWolf', 'Sparkle', 'Sushang', 'Tingyun', 'TopazAndNumby', 'TrailblazerFire', 'TrailblazerPhysical', 'Welt', 'Xueyi', 'Yanqing', 'Yukong',];
 
 const ownedCharList = document.getElementById("owned_character_list");
@@ -60,12 +58,12 @@ function initialize() {
     });
 }
 
-function addCharToCreateList(character) {
-    const type = characterObjects[addSpaces(character)].element;
-    const path = characterObjects[addSpaces(character)].path;
-    const card = createDiv(["mini_card", "flex_col", characterObjects[addSpaces(character)].element, characterObjects[addSpaces(character)].path]);
-    card.id = character;
-    let withSpaces = addSpaces(character);
+function addCharToCreateList(name) {
+    const type = characterObjects[addSpaces(name)].element;
+    const path = characterObjects[addSpaces(name)].path;
+    const card = createDiv(["mini_card", "flex_col", characterObjects[addSpaces(name)].element, characterObjects[addSpaces(name)].path]);
+    card.id = name;
+    let withSpaces = addSpaces(name);
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
             <img class="portrait" src="./icons/chars/Codex Avatar_${withSpaces}.png" height="124px" width="112px">
@@ -74,7 +72,7 @@ function addCharToCreateList(character) {
     `;
     createCharList.append(card);
     card.onclick = e => {
-        localStorage.setItem("char_" + character, JSON.stringify({
+        localStorage.setItem("char_" + name, JSON.stringify({
             key: withSpaces,
             path: characterObjects[withSpaces].path,
             type: characterObjects[withSpaces].element,
@@ -84,6 +82,7 @@ function addCharToCreateList(character) {
                 basic: 1,
                 skill: 1,
                 ultimate: 1,
+                talent: 1,
                 stats: [0,0,0,0,0,0,0,0,0,0],
                 abilities: [0,0,0]
             },
@@ -99,18 +98,18 @@ function addCharToCreateList(character) {
             }
         }));
         closeDialog();
-        addCharToOwnedList(character);
+        addCharToOwnedList(name);
         card.remove();
     }
 }
 
-function addCharToOwnedList(character) {
-    const val = JSON.parse(localStorage.getItem("char_" + character));
+function addCharToOwnedList(name) {
+    const val = JSON.parse(localStorage.getItem("char_" + name));
     const card = createDiv(["character_card", "flex_col", val.path, val.type]);
-    card.id = character;
+    card.id = name;
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
-            <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="124px" width="112px">
+            <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(name)}.png" height="124px" width="112px">
             <div class="flex_col gap_10">
                 <img src="./icons/path/path_${val.path}.png" height="24" width="24">
                 <img src="./icons/type/Type_${val.type}.png" height="24" width="24">
@@ -137,17 +136,19 @@ function addCharToOwnedList(character) {
             <img src="./icons/relic/Default/rope.png" height="38px" width="38px"><!-- rope -->
         </div>
     `;
-    card.onclick = e => openCharacterInfo(card.id);
+    card.onclick = e => {
+        openCharacterInfo(card.id);
+        toggleEidolons(card.id);
+    } 
     ownedCharList.append(card);
     sortCards(ownedCharList);
 }
 
-function deleteCharacter(character) {
-    console.log(character);
-    if (confirm("Are you sure you want to delete " + character + "?")) {
-        localStorage.removeItem("char_" + character);
-        document.getElementById(character).remove();
-        addCharToCreateList(character);
+function deleteCharacter(name) {
+    if (confirm("Are you sure you want to delete " + name + "?")) {
+        localStorage.removeItem("char_" + name);
+        document.getElementById(name).remove();
+        addCharToCreateList(name);
         sortCards(createCharList);
         closeDialog();
     }
@@ -170,32 +171,31 @@ function deleteAllCharacters() {
 }
 
 
-function openCharacterInfo(character) {
-    const charObject = JSON.parse(localStorage.getItem("char_" + character));
+function openCharacterInfo(name) {
+    const charObject = JSON.parse(localStorage.getItem("char_" + name));
     const stats = calculateStats(charObject);
-    const abilityNames = getAbilityNames(addSpaces(character));
-    for (let i = 0; i < abilityNames.length; i++)
-        abilityNames[i] = abilityNames[i].replace(/ /g, "_");
+    const abilityNames = getAbilityInfos(addSpaces(name));
+    console.log(abilityNames);
     editDialog.innerHTML = /*HTML*/ `
-        <button id="delete_character" type="button" class="no_text_wrap_overflow" onclick="deleteCharacter('${character}')">Delete Character</button>
+        <button id="delete_character" type="button" class="no_text_wrap_overflow" onclick="deleteCharacter('${name}')">Delete Character</button>
         <div id="edit_info_container">
             <div id="stat_container" class="flex_col">
-                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(character)}.png" height="165px" width="149px">
+                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(name)}.png" height="165px" width="149px">
                 <div id="level_container">
                     <div class="stat_text">Lvl. ${charObject.level}/${charObject.ascension * 10 + 20}</div>
-                    <div class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleLevelDropdown('${character}')">
+                    <div id="level" class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleLevelDropdown('${name}')">
                             <p>Select</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                 </div>
-                <div class="stat_text" id="hp">HP: ${stats.hp}</div>
-                <div class="stat_text" id="atk">ATK: ${stats.atk}</div>
-                <div class="stat_text" id="def">DEF: ${stats.def}</div>
-                <div class="stat_text" id="spd">SPD: ${stats.spd}</div>
-                <div class="stat_text" id="crit_rate">Crit Rate: ${stats.crit_rate}</div>
-                <div class="stat_text" id="crit_dmg">Crit DMG: ${stats.crit_dmg}</div>
+                <div class="stat_text" id="HP">HP: ${stats.HP}</div>
+                <div class="stat_text" id="ATK">ATK: ${stats.ATK}</div>
+                <div class="stat_text" id="DEF">DEF: ${stats.DEF}</div>
+                <div class="stat_text" id="SPD">SPD: ${stats.SPD}</div>
+                <div class="stat_text" id="CRIT_RATE">CRIT RATE: ${stats.CRIT_RATE}</div>
+                <div class="stat_text" id="CRIT_DMG">CRIT DMG: ${stats.CRIT_DMG}</div>
                 <div class="stat_text" id="type_damage">Bonus ${charObject.type} DMG: ${stats.type_damage}%</div>
                 <div class="stat_text" id="effect_hr">Effect Hit Rate: ${stats.effect_hr}%</div>
                 <div class="stat_text" id="break_effect">Break Effect: ${stats.break_effect}%</div>
@@ -206,23 +206,30 @@ function openCharacterInfo(character) {
             <div id="trace_equipment_display" class="flex_col">
                 <div id="trace_edit">
                     <div id="basic" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'basic')">
-                            <img src="./icons/abilities/Ability_${abilityNames[0]}.png" width="32px" height="32px">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'basic')">
+                            <img src="${abilityNames[1][0]}" width="32px" height="32px">
                             <p id="basic_text" class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="skill" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'skill')">
-                            <img src="./icons/abilities/Ability_${abilityNames[1]}.png" width="32px" height="32px">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'skill')">
+                            <img src="${abilityNames[1][1]}" width="32px" height="32px">
                             <p id="skill_text" class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="ultimate" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${character}', 'ultimate')">
-                            <img src="./icons/abilities/Ability_${abilityNames[2]}.png" width="32px" height="32px">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'ultimate')">
+                            <img src="${abilityNames[1][2]}" width="32px" height="32px">
                             <p id="ultimate_text" class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div id="talent" class="dropdown_container">
+                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'talent')">
+                            <img src="${abilityNames[1][3]}" width="32px" height="32px">
+                            <p id="talent_text" class="no_text_wrap_overflow">Talent Lv. ${charObject.traces.talent}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
@@ -237,12 +244,48 @@ function openCharacterInfo(character) {
                     <div id="rope_card" class="equipment_card flex_col"></div>
                 </div>
                 <div id="eidolon_display">
-                    <div id="eidolon_1" class="eidolon_card"></div>
-                    <div id="eidolon_2" class="eidolon_card"></div>
-                    <div id="eidolon_3" class="eidolon_card"></div>
-                    <div id="eidolon_4" class="eidolon_card"></div>
-                    <div id="eidolon_5" class="eidolon_card"></div>
-                    <div id="eidolon_6" class="eidolon_card"></div>
+                    <div id="eidolon_1" class="eidolon_card flex_col" onclick="changeEidolon('${name}','1')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][0]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][0]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][0]}</p>
+                    </div>
+                    <div id="eidolon_2" class="eidolon_card flex_col" onclick="changeEidolon('${name}','2')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][1]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][1]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][1]}</p>
+                    </div>
+                    <div id="eidolon_3" class="eidolon_card flex_col" onclick="changeEidolon('${name}','3')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][2]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][2]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][2]}</p>
+                    </div>
+                    <div id="eidolon_4" class="eidolon_card flex_col" onclick="changeEidolon('${name}','4')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][3]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][3]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][3]}</p>
+                    </div>
+                    <div id="eidolon_5" class="eidolon_card flex_col" onclick="changeEidolon('${name}','5')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][4]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][4]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][4]}</p>
+                    </div>
+                    <div id="eidolon_6" class="eidolon_card flex_col" onclick="changeEidolon('${name}','6')">
+                        <div class="eidolon_title">
+                            <img src="${abilityNames[0][2][5]}" width="48px" height="48px">
+                            <div class="statText">${abilityNames[0][0][5]}</div>
+                        </div>
+                        <p>${abilityNames[0][1][5]}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -251,6 +294,7 @@ function openCharacterInfo(character) {
 }
 
 function toggleLevelDropdown(name) {
+    closeDropdown("level");
     let container = document.getElementById("level_container").querySelector(".dropdown_container");
     container.classList.toggle("open");
     let img = container.querySelector("i");
@@ -271,7 +315,7 @@ function toggleLevelDropdown(name) {
             obj.level = option_1.innerText.split("/")[0];
             obj.ascension = i;
             localStorage.setItem("char_" + name, JSON.stringify(obj));
-            container.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + (obj.ascension * 10 + 20);
+            container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + (obj.ascension * 10 + 20);
             toggleLevelDropdown(name);
             updateStats(obj);
         };
@@ -283,7 +327,8 @@ function toggleLevelDropdown(name) {
             obj.level = option_2.innerText.split("/")[0];
             obj.ascension = i;
             localStorage.setItem("char_" + name, JSON.stringify(obj));
-            container.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + obj.level;
+            container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + obj.level;
+            //toggleAllowedTraces(obj);
             toggleLevelDropdown(name);
             updateStats(obj);
         };
@@ -295,11 +340,12 @@ function toggleLevelDropdown(name) {
 function updateStats(obj) {
     const stats = calculateStats(obj);
     for (let key in stats) {
-        document.getElementById(key).innerText = "HP: " + stats[key];
+        document.getElementById(key).innerText = key.replace(/_/g, " ") +": " + stats[key];
     }
 }
 
 function toggleTraceDropdown(name, id) {
+    closeDropdown(id);
     let container = document.getElementById(id);
     container.classList.toggle("open");
     let img = container.querySelector("i");
@@ -309,44 +355,65 @@ function toggleTraceDropdown(name, id) {
         container.querySelector(".dropdown_menu").remove();
         return;
     }
-    let maxLevel = id == 'basic' ? 7 : 12;
+    let menuLength = id == 'basic' ? 7 : 12;
+    let maxLevel = getMaxTraceLevel(name, id);
     let menu = createDiv(["dropdown_menu", "flex_col"]);
     menu.style.position = "relative";
     container.append(menu);
-    for (let i = 1; i <= maxLevel; i++) {
+    for (let i = 1; i <= menuLength; i++) {
         let option = createDiv("dropdown_option");
         option.innerText = "Level " + i;
-        option.onclick = e => {
-            let obj = JSON.parse(localStorage.getItem("char_" + name));
-            obj.traces[id] = i;
-            localStorage.setItem("char_" + name, JSON.stringify(obj));
-            document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
-            toggleTraceDropdown(name, id);
-        };
+        if (i <= maxLevel) {
+            option.onclick = e => {
+                let obj = JSON.parse(localStorage.getItem("char_" + name));
+                obj.traces[id] = i;
+                localStorage.setItem("char_" + name, JSON.stringify(obj));
+                document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
+                toggleTraceDropdown(name, id);
+            };
+        } else {
+            option.style.backgroundColor = "var(--custom-gray-purple)";
+            option.style.color = "var(--textcolor-off)";
+        }
         menu.append(option);
     }
 }
 
+function closeDropdown(id) {
+    let parent = document.querySelector(".dropdown_menu")?.parentElement;
+    if (parent && parent.id != id) {
+        let img = parent.querySelector("i");
+        swapChevron(img);
+        parent.classList.toggle("open");
+        parent.querySelector(".dropdown_menu").remove();
+    }
+}
+
+function swapChevron(img) {
+    img.classList.toggle("fa-chevron-up");
+    img.classList.toggle("fa-chevron-down");
+}
+
 /**
  * Calculates the combat stats of the passed character based on their level, equipment, traces and any potentially active buffs from teammates.
- * @param {Object} charObject The character whose stats are to be calculated. This should be an object from localStorage with the key "char_<name>", without spaces.
+ * @param {Object} obj The character whose stats are to be calculated. This should be an object from localStorage with the key "char_<name>", without spaces.
  * @returns An object containing all the relevant stats with the following keys:
- *          atk, def, hp, spd, crit_rate, crit_dmg, type_damage, effect_hr, break_effect, energy_regeneration_rate, outgoing_healing, effect_res
+ *          ATK, DEF, HP, SPD, CRIT RATE, CRIT DMG, type_damage, effect_hr, break_effect, energy_regeneration_rate, outgoing_healing, effect_res
  */
-function calculateStats(charObject) {
-    const ascension = characterObjects[charObject.key].ascension[charObject.ascension];
+function calculateStats(obj) {
+    const ascension = characterObjects[obj.key].ascension[obj.ascension];
     const stats = {};
     for (let key in ascension) {
         switch (key) {
             case "atk":
             case "def":
             case "hp":
-                stats[key] = Math.floor(ascension[key].base + ascension[key].step * (charObject.level - 1));
+                stats[key.toUpperCase()] = Math.floor(ascension[key].base + ascension[key].step * (obj.level - 1));
                 break;
             case "crit_rate":
             case "crit_dmg":
             case "spd":
-                stats[key] = ascension[key].base;
+                stats[key.toUpperCase()] = ascension[key].base;
                 break;
         }
     }
@@ -640,22 +707,63 @@ function createDiv(arr) {
 }
 
 /**
- * Gets a character's ability names from the global JSON file.
- * @param {string} character The name of the character with spaces.
- * @returns The ability names in an array, with position 0, 1 and 2 being the basic, skill and ultimate respectively.
+ * Gets a character's eidolon names, descriptions and icons as well as ability icons and returns them in an array.
+ * @param {string} name The name of the character with spaces.
+ * @returns The data array. [0][0][i] is the name, [0][1][i] the description and [0][2][i] the icon path of the (i+1)-th eidolon.
+ * The [1] array holds the basic, skill, ultimate and talent icon path in that order.
  */
-function getAbilityNames(character) {
-    let arr = ["", "", ""]
-    if (Array.isArray(characterObjects[character].skills.basic))
-        arr[0] = characterObjects[character].skills.basic[0].name;
-    else arr[0] = characterObjects[character].skills.basic.name;
-    if (Array.isArray(characterObjects[character].skills.skill))
-        arr[1] = characterObjects[character].skills.skill[0].name;
-    else arr[1] = characterObjects[character].skills.skill.name;
-    if (Array.isArray(characterObjects[character].skills.ult))
-        arr[2] = characterObjects[character].skills.ult[0].name;
-    else arr[2] = characterObjects[character].skills.ult.name;
+function getAbilityInfos(name) {
+    let arr = [[[],[],[]],[]];
+    for(let i = 0; i <= 5; i++) {
+        arr[0][0].push(characterObjects[name].eidolons[i].name);
+        arr[0][1].push(characterObjects[name].eidolons[i].desc);
+        arr[0][2].push(characterObjects[name].eidolons[i].icon);
+    }
+    let skills = characterObjects[name].skills;
+    arr[1].push(Array.isArray(skills['basic']) ? skills['basic'][0].icon : skills['basic'].icon);
+    arr[1].push(Array.isArray(skills['skill']) ? skills['skill'][0].icon : skills['skill'].icon);
+    arr[1].push(Array.isArray(skills['ult']) ? skills['ult'][0].icon : skills['ult'].icon);
+    arr[1].push(Array.isArray(skills['talent']) ? skills['talent'][0].icon : skills['talent'].icon);
     return arr;
+}
+
+function getMaxTraceLevel(name, id) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    let e3 = characterObjects[addSpaces(name)].eidolons[2].level_up_skills;
+    let e5 = characterObjects[addSpaces(name)].eidolons[4].level_up_skills;
+    let max = 1;
+    switch (id) {
+        case "basic":
+            if (e3.hasOwnProperty('basic') && obj.eidolon >= 3 || obj.eidolon >= 5) max++;
+            return obj.ascension < 2 ? max : obj.ascension;
+        case "skill":
+            if (e3.hasOwnProperty('skill') && obj.eidolon >= 3 || obj.eidolon >= 5) max = max + 2;
+            return obj.ascension <= 3 ? obj.ascension + max : max + obj.ascension + obj.ascension - 3;
+        case "ultimate":
+            if (e3.hasOwnProperty('ultimate') && obj.eidolon >= 3 || obj.eidolon >= 5) max = max + 2;
+            return obj.ascension <= 3 ? obj.ascension + max : max + obj.ascension + obj.ascension - 3;
+        case "talent":
+            if (e3.hasOwnProperty('talent') && obj.eidolon >= 3 || obj.eidolon >= 5) max = max + 2;
+            return obj.ascension <= 3 ? obj.ascension + max : max + obj.ascension + obj.ascension - 3;
+    }
+}
+
+function toggleEidolons(name) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    for (let i = 1; i <= 6; i++) {
+        if(i > obj.eidolon)
+            document.getElementById("eidolon_" + i).classList.add("off");
+        else
+            document.getElementById("eidolon_" + i).classList.remove("off");
+    }
+}
+
+function changeEidolon(name, val) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    if (obj.eidolon == val) obj.eidolon = val - 1;
+    else obj.eidolon = +val;
+    localStorage.setItem("char_" + name, JSON.stringify(obj));
+    toggleEidolons(name);
 }
 
 /**

@@ -85,9 +85,10 @@
 }
 
 #trace_edit {
-    display:flex;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 35px 35px;
     width:100%;
-    height:35px;
     gap: 3px;
 }
 
@@ -134,10 +135,25 @@ h2 {
 
 .equipment_card, .eidolon_card {
     box-sizing: border-box;
-    flex-basis: 33%;
     flex-grow: 0;
-    max-width: 33%;
     margin-bottom: 5px;
+}
+
+.equipment_card {
+    max-width: 33%;
+    flex-basis: 33%;
+}
+
+.eidolon_card {
+    max-width: 49%;
+    flex-basis: 49%;
+    margin-right: 5px;
+    overflow: auto;
+}
+
+.eidolon_card.off {
+    background-color: var(--custom-gray-purple);
+    color: var(--textcolor-off);
 }
 
 .mini_card {
@@ -152,8 +168,24 @@ h2 {
     width: 100%;
 }
 
+.eidolon_title {
+    display: flex;
+    align-items: center;
+    height: 30%;
+    background-color: var(--custom-light-purple);
+
+}
+
+.off .eidolon_title {
+    display: flex;
+    align-items: center;
+    height: 30%;
+    background-color: var(--custom-dark-purple);
+
+}
+
 .dropdown_container {
-    width: 33%;
+    width: 100%;
     height: 100%;
 }
 
@@ -304,7 +336,7 @@ h2 {
 }
 
 .path_button.on:hover, .type_button.on:hover, .path_button.off:hover, .type_button.off:hover {
-    background-color: var(--button-off);
+    background-color: var(--button-hover);
 }
 
 .no_text_wrap_overflow {

@@ -1,11 +1,14 @@
 :root{
     font: 16px Roboto, Arial, sans-serif;
     --textcolor: rgb(233, 233, 233);
+    --textcolor-off: rgba(233, 233, 233, 0.666);
     --boxcolor: #8a8a8a;
     --custom-blue: #43ffe6;
     --custom-dark-purple: #170547;
-    --custom-light-purple: #5b3cb1;
-    --button-off: #101010;
+    --custom-light-purple: #6d38ff;
+    --custom-gray-purple: #3b3357;
+    --button-hover: #7fbb84;
+    --button-off: #111111;
     color:var(--textcolor);
 }
 
@@ -94,10 +97,18 @@ body {
 .dropdown_option {
   text-align: center;
   padding-block: 5px;
+  border-radius: 0;
 }
 
 .dropdown_option:hover {
   background-color: rgb(45, 45, 130);
+}
+
+.dropdown_option:first-child {
+  border-radius: 8px 8px 0 0;
+}
+.dropdown_option:last-child {
+  border-radius: 0 0 8px 8px;
 }
 
 footer {
