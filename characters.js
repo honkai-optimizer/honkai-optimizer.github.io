@@ -64,6 +64,7 @@ function addCharToCreateList(name) {
     const card = createDiv(["mini_card", "flex_col", characterObjects[addSpaces(name)].element, characterObjects[addSpaces(name)].path]);
     card.id = name;
     let withSpaces = addSpaces(name);
+    const traceInfo = getTraceInfo(withSpaces);
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
             <img class="portrait" src="./icons/chars/Codex Avatar_${withSpaces}.png" height="124px" width="112px">
@@ -84,6 +85,8 @@ function addCharToCreateList(name) {
                 ultimate: 1,
                 talent: 1,
                 stats: [0,0,0,0,0,0,0,0,0,0],
+                types: traceInfo[0],
+                amounts: traceInfo[1],
                 abilities: [0,0,0]
             },
             eidolon: 0,
@@ -123,6 +126,7 @@ function addCharToOwnedList(name) {
                     <div class="trace_circle">${val.traces.basic}</div>
                     <div class="trace_circle">${val.traces.skill}</div>
                     <div class="trace_circle">${val.traces.ultimate}</div>
+                    <div class="trace_circle">${val.traces.talent}</div>
                 </div>
             </div>
         </div>
@@ -174,61 +178,129 @@ function deleteAllCharacters() {
 function openCharacterInfo(name) {
     const charObject = JSON.parse(localStorage.getItem("char_" + name));
     const stats = calculateStats(charObject);
-    const abilityNames = getAbilityInfos(addSpaces(name));
-    console.log(abilityNames);
+    const abilityInfo = getAbilityInfos(addSpaces(name));
     editDialog.innerHTML = /*HTML*/ `
         <button id="delete_character" type="button" class="no_text_wrap_overflow" onclick="deleteCharacter('${name}')">Delete Character</button>
         <div id="edit_info_container">
-            <div id="stat_container" class="flex_col">
-                <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(name)}.png" height="165px" width="149px">
-                <div id="level_container">
-                    <div class="stat_text">Lvl. ${charObject.level}/${charObject.ascension * 10 + 20}</div>
-                    <div id="level" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleLevelDropdown('${name}')">
-                            <p>Select</p>
-                            <i class="fa fa-chevron-down"></i>
+            <div id="edit_info_left_segment" class="flex_col">
+                <div id="stat_container" class="flex_col">
+                    <img class="portrait" src="./icons/chars/Codex Avatar_${addSpaces(name)}.png" height="165px" width="149px">
+                    <div id="level_container">
+                        <div class="stat_text">Lvl. ${charObject.level}/${charObject.ascension * 10 + 20}</div>
+                        <div id="level" class="dropdown_container">
+                            <div class="dropdown_button" onclick="toggleLevelDropdown('${name}')">
+                                <p>Select</p>
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat_text" id="HP">HP: ${stats.HP}</div>
+                    <div class="stat_text" id="ATK">ATK: ${stats.ATK}</div>
+                    <div class="stat_text" id="DEF">DEF: ${stats.DEF}</div>
+                    <div class="stat_text" id="SPD">SPD: ${stats.SPD}</div>
+                    <div class="stat_text" id="CRIT_RATE">CRIT RATE: ${stats.CRIT_RATE}</div>
+                    <div class="stat_text" id="CRIT_DMG">CRIT DMG: ${stats.CRIT_DMG}</div>
+                    <div class="stat_text" id="type_damage">Bonus ${charObject.type} DMG: ${stats.type_damage}%</div>
+                    <div class="stat_text" id="effect_hr">Effect Hit Rate: ${stats.effect_hr}%</div>
+                    <div class="stat_text" id="break_effect">Break Effect: ${stats.break_effect}%</div>
+                    <div class="stat_text" id="energy_regeneration_rate">Energy Regeneration Rate: ${stats.energy_regeneration_rate}%</div>
+                    <div class="stat_text" id="outgoing_healing">Bonus Outgoing Healing: ${stats.outgoing_healing}%</div>
+                    <div class="stat_text" id="effect_res">Effect RES: ${stats.effect_res}%</div>
+                </div>
+                <div id="trace_container" class="flex_col">
+                    <div id="major_trace_container" class="flex_col">
+                        <div id="major_1" class="major_card">
+                            <div class="card_title">
+                                <img src="${abilityInfo[2][2][0]}" width="48px" height="48px">
+                                <p>${abilityInfo[2][0][0]}</p>
+                            </div>
+                            <p>${abilityInfo[2][1][0]}</p>
+                        </div>
+                        <div id="major_2" class="major_card">
+                            <div class="card_title">
+                                <img src="${abilityInfo[2][2][1]}" width="48px" height="48px">
+                                <p>${abilityInfo[2][0][1]}</p>
+                            </div>
+                            <p>${abilityInfo[2][1][1]}</p>
+                        </div>
+                        <div id="major_3" class="major_card">
+                            <div class="card_title">
+                                <img src="${abilityInfo[2][2][2]}" width="48px" height="48px">
+                                <p>${abilityInfo[2][0][2]}</p>
+                            </div>
+                            <p>${abilityInfo[2][1][2]}</p>
+                        </div>
+                    </div>
+                    <div id="minor_trace_container">
+                        <div id="minor_1" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[0]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[0] * 100}%</p>
+                        </div>
+                        <div id="minor_2" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[1]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[1] * 100}%</p>
+                        </div>
+                        <div id="minor_3" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[2]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[2] * 100}%</p>
+                        </div>
+                        <div id="minor_4" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[3]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[3] * 100}%</p>
+                        </div>
+                        <div id="minor_5" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[4]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[4] * 100}%</p>
+                        </div>
+                        <div id="minor_6" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[5]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[5] * 100}%</p>
+                        </div>
+                        <div id="minor_7" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[6]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[6] * 100}%</p>
+                        </div>
+                        <div id="minor_8" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[7]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[7] * 100}%</p>
+                        </div>
+                        <div id="minor_9" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[8]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[8] * 100}%</p>
+                        </div>
+                        <div id="minor_10" class="minor_card">
+                            <img src="./icons/stats/${charObject.traces.types[9]}.png" width="32px" height="32px">
+                            <p>+${charObject.traces.amounts[9] * 100}%</p>
                         </div>
                     </div>
                 </div>
-                <div class="stat_text" id="HP">HP: ${stats.HP}</div>
-                <div class="stat_text" id="ATK">ATK: ${stats.ATK}</div>
-                <div class="stat_text" id="DEF">DEF: ${stats.DEF}</div>
-                <div class="stat_text" id="SPD">SPD: ${stats.SPD}</div>
-                <div class="stat_text" id="CRIT_RATE">CRIT RATE: ${stats.CRIT_RATE}</div>
-                <div class="stat_text" id="CRIT_DMG">CRIT DMG: ${stats.CRIT_DMG}</div>
-                <div class="stat_text" id="type_damage">Bonus ${charObject.type} DMG: ${stats.type_damage}%</div>
-                <div class="stat_text" id="effect_hr">Effect Hit Rate: ${stats.effect_hr}%</div>
-                <div class="stat_text" id="break_effect">Break Effect: ${stats.break_effect}%</div>
-                <div class="stat_text" id="energy_regeneration_rate">Energy Regeneration Rate: ${stats.energy_regeneration_rate}%</div>
-                <div class="stat_text" id="outgoing_healing">Bonus Outgoing Healing: ${stats.outgoing_healing}%</div>
-                <div class="stat_text" id="effect_res">Effect RES: ${stats.effect_res}%</div>
             </div>
             <div id="trace_equipment_display" class="flex_col">
                 <div id="trace_edit">
                     <div id="basic" class="dropdown_container">
                         <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'basic')">
-                            <img src="${abilityNames[1][0]}" width="32px" height="32px">
+                            <img src="${abilityInfo[1][0]}" width="32px" height="32px">
                             <p id="basic_text" class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="skill" class="dropdown_container">
                         <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'skill')">
-                            <img src="${abilityNames[1][1]}" width="32px" height="32px">
+                            <img src="${abilityInfo[1][1]}" width="32px" height="32px">
                             <p id="skill_text" class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="ultimate" class="dropdown_container">
                         <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'ultimate')">
-                            <img src="${abilityNames[1][2]}" width="32px" height="32px">
+                            <img src="${abilityInfo[1][2]}" width="32px" height="32px">
                             <p id="ultimate_text" class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="talent" class="dropdown_container">
                         <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'talent')">
-                            <img src="${abilityNames[1][3]}" width="32px" height="32px">
+                            <img src="${abilityInfo[1][3]}" width="32px" height="32px">
                             <p id="talent_text" class="no_text_wrap_overflow">Talent Lv. ${charObject.traces.talent}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
@@ -245,46 +317,46 @@ function openCharacterInfo(name) {
                 </div>
                 <div id="eidolon_display">
                     <div id="eidolon_1" class="eidolon_card flex_col" onclick="changeEidolon('${name}','1')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][0]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][0]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][0]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][0]}</div>
                         </div>
-                        <p>${abilityNames[0][1][0]}</p>
+                        <p>${abilityInfo[0][1][0]}</p>
                     </div>
                     <div id="eidolon_2" class="eidolon_card flex_col" onclick="changeEidolon('${name}','2')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][1]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][1]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][1]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][1]}</div>
                         </div>
-                        <p>${abilityNames[0][1][1]}</p>
+                        <p>${abilityInfo[0][1][1]}</p>
                     </div>
                     <div id="eidolon_3" class="eidolon_card flex_col" onclick="changeEidolon('${name}','3')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][2]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][2]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][2]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][2]}</div>
                         </div>
-                        <p>${abilityNames[0][1][2]}</p>
+                        <p>${abilityInfo[0][1][2]}</p>
                     </div>
                     <div id="eidolon_4" class="eidolon_card flex_col" onclick="changeEidolon('${name}','4')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][3]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][3]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][3]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][3]}</div>
                         </div>
-                        <p>${abilityNames[0][1][3]}</p>
+                        <p>${abilityInfo[0][1][3]}</p>
                     </div>
                     <div id="eidolon_5" class="eidolon_card flex_col" onclick="changeEidolon('${name}','5')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][4]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][4]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][4]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][4]}</div>
                         </div>
-                        <p>${abilityNames[0][1][4]}</p>
+                        <p>${abilityInfo[0][1][4]}</p>
                     </div>
                     <div id="eidolon_6" class="eidolon_card flex_col" onclick="changeEidolon('${name}','6')">
-                        <div class="eidolon_title">
-                            <img src="${abilityNames[0][2][5]}" width="48px" height="48px">
-                            <div class="statText">${abilityNames[0][0][5]}</div>
+                        <div class="card_title">
+                            <img src="${abilityInfo[0][2][5]}" width="48px" height="48px">
+                            <div class="statText">${abilityInfo[0][0][5]}</div>
                         </div>
-                        <p>${abilityNames[0][1][5]}</p>
+                        <p>${abilityInfo[0][1][5]}</p>
                     </div>
                 </div>
             </div>
@@ -306,35 +378,32 @@ function toggleLevelDropdown(name) {
     }
     let menu = createDiv(["dropdown_menu", "flex_col"]);
     container.append(menu);
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
     for (let i = 0; i <= 6; i++) {
         let option_1 = createDiv("dropdown_option");
         option_1.style.paddingInline = "5px";
         option_1.innerText = (i == 0 ? 1 : (i - 1) * 10 + 20) + "/" + (i * 10 + 20);
-        option_1.onclick = e => {
-            let obj = JSON.parse(localStorage.getItem("char_" + name));
-            obj.level = option_1.innerText.split("/")[0];
-            obj.ascension = i;
-            localStorage.setItem("char_" + name, JSON.stringify(obj));
-            container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + (obj.ascension * 10 + 20);
-            toggleLevelDropdown(name);
-            updateStats(obj);
-        };
+        option_1.onclick = e => updateLevel(name, option_1, i, container);
         let option_2 = createDiv("dropdown_option");
         option_2.style.paddingInline = "5px";
         option_2.innerText = (i * 10 + 20) + "/" + (i * 10 + 20);
-        option_2.onclick = e => {
-            let obj = JSON.parse(localStorage.getItem("char_" + name));
-            obj.level = option_2.innerText.split("/")[0];
-            obj.ascension = i;
-            localStorage.setItem("char_" + name, JSON.stringify(obj));
-            container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + obj.level + "/" + obj.level;
-            //toggleAllowedTraces(obj);
-            toggleLevelDropdown(name);
-            updateStats(obj);
-        };
+        option_2.onclick = e => updateLevel(name, option_2, i, container);
         menu.append(option_1);
         menu.append(option_2);
     }
+}
+
+function updateLevel(name, option, ascension, container) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    let lvlText = option.innerText.split("/");
+    obj.level = lvlText[0];
+    obj.ascension = ascension;
+    localStorage.setItem("char_" + name, JSON.stringify(obj));
+    container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + lvlText[0] + "/" + lvlText[1];
+    toggleLevelDropdown(name);
+    //TODO: Disable locked traces/lower trace levels
+    updateCard(name);
+    updateStats(obj);
 }
 
 function updateStats(obj) {
@@ -342,6 +411,18 @@ function updateStats(obj) {
     for (let key in stats) {
         document.getElementById(key).innerText = key.replace(/_/g, " ") +": " + stats[key];
     }
+}
+
+function updateCard(name) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    let infoText = document.getElementById(name).querySelector("p");
+    let cardTraceChildren = document.getElementById(name).querySelector(".card_traces").children;
+    let equipmentDisplay = document.getElementById(name).querySelector(".equipment_display");
+    cardTraceChildren[0].innerText = obj.traces.basic;
+    cardTraceChildren[1].innerText = obj.traces.skill;
+    cardTraceChildren[2].innerText = obj.traces.ultimate;
+    cardTraceChildren[3].innerText = obj.traces.talent;
+    infoText.innerHTML = name + "<br><br>" + "Lvl. " + obj.level + " E" + obj.eidolon;
 }
 
 function toggleTraceDropdown(name, id) {
@@ -370,6 +451,7 @@ function toggleTraceDropdown(name, id) {
                 localStorage.setItem("char_" + name, JSON.stringify(obj));
                 document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
                 toggleTraceDropdown(name, id);
+                updateCard(name);
             };
         } else {
             option.style.backgroundColor = "var(--custom-gray-purple)";
@@ -707,23 +789,39 @@ function createDiv(arr) {
 }
 
 /**
- * Gets a character's eidolon names, descriptions and icons as well as ability icons and returns them in an array.
+ * Gets a character's eidolon names, descriptions and icons, ability icons and major trace icons and descriptions, then returns them in an array.
  * @param {string} name The name of the character with spaces.
  * @returns The data array. [0][0][i] is the name, [0][1][i] the description and [0][2][i] the icon path of the (i+1)-th eidolon.
- * The [1] array holds the basic, skill, ultimate and talent icon path in that order.
+ * The [1] array holds the basic, skill, ultimate and talenticon path in that order.
+ * The [2][0] array holds the major trace descriptions, the [2][1] array holds their icon paths.
  */
 function getAbilityInfos(name) {
-    let arr = [[[],[],[]],[]];
+    let arr = [[[],[],[]],[],[[],[],[]]];
     for(let i = 0; i <= 5; i++) {
         arr[0][0].push(characterObjects[name].eidolons[i].name);
         arr[0][1].push(characterObjects[name].eidolons[i].desc);
         arr[0][2].push(characterObjects[name].eidolons[i].icon);
     }
     let skills = characterObjects[name].skills;
+    let traces = characterObjects[name].traces;
     arr[1].push(Array.isArray(skills['basic']) ? skills['basic'][0].icon : skills['basic'].icon);
     arr[1].push(Array.isArray(skills['skill']) ? skills['skill'][0].icon : skills['skill'].icon);
     arr[1].push(Array.isArray(skills['ult']) ? skills['ult'][0].icon : skills['ult'].icon);
     arr[1].push(Array.isArray(skills['talent']) ? skills['talent'][0].icon : skills['talent'].icon);
+    for(let i = 1; i <= 3; i++) {
+        arr[2][0].push(traces["ability_"+i].name);
+        arr[2][1].push(traces["ability_"+i].desc);
+        arr[2][2].push(traces["ability_"+i].icon);
+    }
+    return arr;
+}
+
+function getTraceInfo(name) {
+    let arr = [[],[]];
+    for(let i = 1; i <= 10; i++) {
+        arr[0].push(characterObjects[name].traces["stat_"+i].modifiers[0].type);
+        arr[1].push(characterObjects[name].traces["stat_"+i].modifiers[0].value);
+    }
     return arr;
 }
 
@@ -756,6 +854,22 @@ function toggleEidolons(name) {
         else
             document.getElementById("eidolon_" + i).classList.remove("off");
     }
+    updateCard(name);
+}
+
+function toggleTraces(name) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    if (obj.ascension > 1)
+
+    switch(obj.path) {
+        case "Nihility":
+        case "Abundance":
+        case "Erudition":
+        case "Destruction":
+        case "Hunt":
+        case "Preservation":
+        case "Harmony":
+}
 }
 
 function changeEidolon(name, val) {

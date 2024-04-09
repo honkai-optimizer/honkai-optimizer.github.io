@@ -56,17 +56,20 @@
     flex-flow:wrap;
     width:100%;
     justify-content: space-between;
+    gap: 1%;
+}
+
+#edit_info_left_segment {
+    flex-basis:30%;
+    max-width: 30%;
+    flex-grow: 0;
     gap: 8px;
 }
 
 #stat_container {
     padding-block: 15px;
-    gap: 8px;
-    height:100%;
-    flex-basis:29%;
-    max-width: 29%;
-    flex-grow: 0;
     background-color: var(--custom-dark-purple);
+    justify-content: space-between;
 }
 
 #trace_equipment_display {
@@ -92,7 +95,7 @@
     gap: 3px;
 }
 
-#eidolon_display {
+#eidolon_display, #minor_trace_container{
     display:flex;
     flex-flow: wrap;
     justify-content: space-between;
@@ -105,6 +108,7 @@
     height: 35px;
     overflow: visible;
 }
+
 #level_container.open {
     background-color: var(--custom-light-purple);
 }
@@ -121,7 +125,7 @@ h2 {
     justify-content: center;
 }
 
-.character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card {
+.character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card, .major_card {
     padding: 10px;
     background-color: var(--custom-dark-purple);
     border-radius: 5px;
@@ -133,10 +137,11 @@ h2 {
     justify-content: space-around;
 }
 
-.equipment_card, .eidolon_card {
+.equipment_card, .eidolon_card, .major_card{
     box-sizing: border-box;
     flex-grow: 0;
     margin-bottom: 5px;
+    overflow: auto;
 }
 
 .equipment_card {
@@ -147,13 +152,25 @@ h2 {
 .eidolon_card {
     max-width: 49%;
     flex-basis: 49%;
-    margin-right: 5px;
-    overflow: auto;
 }
 
-.eidolon_card.off {
+.major_card{
+    width: 100%;
+}
+
+.eidolon_card:nth-child(odd) {
+    margin-right: 1%;
+}
+
+.eidolon_card.off, .major_card.off, .minor_card.off, .major_card.locked, .minor_card.locked {
     background-color: var(--custom-gray-purple);
     color: var(--textcolor-off);
+}
+
+.major_card.locked .card_title::after, .minor_card.locked::after{
+    content: "🔒";
+    margin-left: auto;
+    margin-right: 5px;
 }
 
 .mini_card {
@@ -168,7 +185,16 @@ h2 {
     width: 100%;
 }
 
-.eidolon_title {
+.minor_card {
+    display: flex;
+    height: 45px;
+    width: 49%;
+    margin-bottom: 1%;
+    background-color: var(--custom-dark-purple);
+    align-items: center;
+}
+
+.card_title {
     display: flex;
     align-items: center;
     height: 30%;
@@ -176,7 +202,7 @@ h2 {
 
 }
 
-.off .eidolon_title {
+.off .card_title {
     display: flex;
     align-items: center;
     height: 30%;
@@ -197,13 +223,17 @@ h2 {
 
 .info_container, .card_traces {
     display: flex;
-    gap: 15px;
     align-items: center;
     justify-content: left;
     width: inherit;
 }
 
+.info_container {
+    gap: 10px;
+}
+
 .trace_circle {
+    margin: auto;
     display: flex;
     background-color: gray;
     height: 25px;
@@ -232,30 +262,6 @@ h2 {
     justify-content: center;
 }
 
-@media screen and (max-width: 830px) {
-    #button_wrapper {
-        flex-direction: column;
-    }
-
-    #edit_info_container {
-        flex-direction: column;
-    }
-    
-    #stat_container {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-    
-    .equipment_card {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-    
-    #trace_equipment_display {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-}
 
 .path_button, .type_button {
     padding: 3px;
@@ -343,4 +349,40 @@ h2 {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+@media screen and (max-width: 830px) {
+    #button_wrapper {
+        flex-direction: column;
+    }
+
+    #edit_info_container {
+        flex-direction: column;
+    }
+
+    #edit_info_left_segment {
+        flex-basis: 100%;
+        max-width: 100%;
+        flex-direction: row;
+        margin-bottom: 8px;
+    }
+    
+    #stat_container {
+        flex-basis: 40%;
+        max-width: 50%;
+    }
+
+    #trace_container {
+        flex-basis: 60%;
+    }
+    
+    .equipment_card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    
+    #trace_equipment_display {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 }
