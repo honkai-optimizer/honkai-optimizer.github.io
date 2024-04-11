@@ -84,10 +84,10 @@ function addCharToCreateList(name) {
                 skill: 1,
                 ultimate: 1,
                 talent: 1,
-                stats: [0,0,0,0,0,0,0,0,0,0],
+                stats: [false, false, false, false, false, false, false, false, false, false],
                 types: traceInfo[0],
                 amounts: traceInfo[1],
-                abilities: [0,0,0]
+                abilities: [false, false, false]
             },
             eidolon: 0,
             equip: {
@@ -143,6 +143,7 @@ function addCharToOwnedList(name) {
     card.onclick = e => {
         openCharacterInfo(card.id);
         toggleEidolons(card.id);
+        toggleTraces(card.id);
     } 
     ownedCharList.append(card);
     sortCards(ownedCharList);
@@ -278,28 +279,28 @@ function openCharacterInfo(name) {
             <div id="trace_equipment_display" class="flex_col">
                 <div id="trace_edit">
                     <div id="basic" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'basic')">
+                        <div class="dropdown_button" onclick="toggleSkillDropdown('${name}', 'basic')">
                             <img src="${abilityInfo[1][0]}" width="32px" height="32px">
                             <p id="basic_text" class="no_text_wrap_overflow">Basic Lv. ${charObject.traces.basic}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="skill" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'skill')">
+                        <div class="dropdown_button" onclick="toggleSkillDropdown('${name}', 'skill')">
                             <img src="${abilityInfo[1][1]}" width="32px" height="32px">
                             <p id="skill_text" class="no_text_wrap_overflow">Skill Lv. ${charObject.traces.skill}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="ultimate" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'ultimate')">
+                        <div class="dropdown_button" onclick="toggleSkillDropdown('${name}', 'ultimate')">
                             <img src="${abilityInfo[1][2]}" width="32px" height="32px">
                             <p id="ultimate_text" class="no_text_wrap_overflow">Ultimate Lv. ${charObject.traces.ultimate}</p>
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div id="talent" class="dropdown_container">
-                        <div class="dropdown_button" onclick="toggleTraceDropdown('${name}', 'talent')">
+                        <div class="dropdown_button" onclick="toggleSkillDropdown('${name}', 'talent')">
                             <img src="${abilityInfo[1][3]}" width="32px" height="32px">
                             <p id="talent_text" class="no_text_wrap_overflow">Talent Lv. ${charObject.traces.talent}</p>
                             <i class="fa fa-chevron-down"></i>
@@ -401,7 +402,7 @@ function updateLevel(name, option, ascension, container) {
     localStorage.setItem("char_" + name, JSON.stringify(obj));
     container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + lvlText[0] + "/" + lvlText[1];
     toggleLevelDropdown(name);
-    //TODO: Disable locked traces/lower trace levels
+    toggleTraces(name);
     updateCard(name);
     updateStats(obj);
 }
@@ -425,7 +426,7 @@ function updateCard(name) {
     infoText.innerHTML = name + "<br><br>" + "Lvl. " + obj.level + " E" + obj.eidolon;
 }
 
-function toggleTraceDropdown(name, id) {
+function toggleSkillDropdown(name, id) {
     closeDropdown(id);
     let container = document.getElementById(id);
     container.classList.toggle("open");
@@ -450,7 +451,7 @@ function toggleTraceDropdown(name, id) {
                 obj.traces[id] = i;
                 localStorage.setItem("char_" + name, JSON.stringify(obj));
                 document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
-                toggleTraceDropdown(name, id);
+                toggleSkillDropdown(name, id);
                 updateCard(name);
             };
         } else {
@@ -859,17 +860,72 @@ function toggleEidolons(name) {
 
 function toggleTraces(name) {
     let obj = JSON.parse(localStorage.getItem("char_" + name));
-    if (obj.ascension > 1)
-
-    switch(obj.path) {
-        case "Nihility":
-        case "Abundance":
-        case "Erudition":
-        case "Destruction":
-        case "Hunt":
-        case "Preservation":
-        case "Harmony":
+    let unlockedMinor;
+    let unlockedMajor;
+    switch(obj.ascension) {
+        case 0:
+            unlockedMinor = 1;
+            break;
+        case 1:
+            unlockedMinor = obj.ascension;
+            break;
+        case 2:
+            unlockedMinor = obj.ascension;
+            unlockedMajor = 1;
+            break;
+        case 3:
+            unlockedMinor = obj.ascension + 1;
+            unlockedMajor = 1;
+            break;
+        case 4:
+            unlockedMinor = obj.ascension + 1;
+            unlockedMajor = 2;
+            break;
+        case 5:
+            unlockedMinor = 7;
+            unlockedMajor = 1;
+            break;
+        case 6:
+            unlockedMinor = obj.level < 75 ? 8 : obj.level < 80 ? 9 : 10;
+            unlockedMajor = 3;
+            break;
+    }
+    for (let i = 1; i <= 10; i++) {
+        let button = document.getElementById("minor_" + i)
+        if (i <= unlockedMinor) {
+            button.classList.remove("locked");
+            button.classList.add("off");
+            button.onclick = e => toggleTrace(name, "minor", i);
+        }
+        else {
+            obj.traces.stats[i-1] = false;
+            button.classList.add("locked");
+            button.onclick = null;
+        }
+    }
+    for (let i = 1; i <= 3; i++) {
+        let button = document.getElementById("major_" + i);
+        if (i <= unlockedMajor) {
+            button.classList.remove("locked");
+            button.classList.add("off");
+            button.onclick = e => toggleTrace(name, "major", i);
+        }
+        else {
+            obj.traces.abilities[i-1] = false;
+            button.classList.add("locked");
+            button.onclick = null;
+        }
+    }
+    localStorage.setItem("char_" + name, JSON.stringify(obj));
 }
+
+function toggleTrace(name, type, i) {
+    let obj = JSON.parse(localStorage.getItem("char_" + name));
+    console.log(obj.traces);
+    if (type == "major") obj.traces.abilities[i-1] = !obj.traces.abilities[i-1];
+    else obj.traces.stats[i-1] = !obj.traces.stats[i-1];
+    localStorage.setItem("char_" + name, JSON.stringify(obj));
+    document.getElementById(type + "_" + i).classList.toggle("off");
 }
 
 function changeEidolon(name, val) {

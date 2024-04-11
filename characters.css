@@ -202,12 +202,8 @@ h2 {
 
 }
 
-.off .card_title {
-    display: flex;
-    align-items: center;
-    height: 30%;
+.off .card_title, .locked .card_title {
     background-color: var(--custom-dark-purple);
-
 }
 
 .dropdown_container {
