@@ -3,7 +3,7 @@
     --textcolor: rgb(233, 233, 233);
     --textcolor-off: rgba(233, 233, 233, 0.666);
     --boxcolor: #8a8a8a;
-    --custom-blue: #43ffe6;
+    --custom-blue: #04dbbf;
     --custom-dark-purple: #170547;
     --custom-light-purple: #6d38ff;
     --custom-gray-purple: #3b3357;
@@ -18,6 +18,81 @@
 
 body {
     background-color: #535353;
+}
+
+#add_delete_buttons {
+  justify-content:center;
+  display: flex;
+  gap: 20px;
+}
+
+#button_wrapper {
+  display:flex;
+  gap:20px;
+  justify-content: center;
+}
+
+.flex_col {
+    display:flex;
+    flex-direction: column;
+}
+
+.gap_10 {
+    gap:10px;
+}
+
+.filter_buttons {
+    display:flex;
+    justify-content: center;
+}
+
+.filter_button.off{
+    background-color: var(--button-off);
+}
+
+.filter_button.on:hover, .filter_button.off:hover{
+    background-color: var(--button-hover);
+}
+
+.filter_button.on {
+    background-color: green;
+}
+
+.filter_button {
+    padding: 3px;
+    height:30px;
+    width:50px;
+    border-radius: 0;
+    border-right: white solid 1px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter_button:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.filter_button:last-child {
+    border-radius: 0 8px 8px 0;
+    border-right: 0;
+}
+
+
+.add, .delete {
+  color:var(--textcolor);
+  border: 0;
+  height:30px;
+  border-radius: 5px;
+  width:50%;
+}
+
+.add {
+  background-color: rgb(126, 201, 13);
+}
+
+.delete {
+  background-color: rgb(201, 13, 13);
 }
 
 .box {
@@ -59,12 +134,12 @@ body {
 
 .topnav a:hover {
     background-color: #ddd;
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 .active {
     background-color: var(--custom-blue);
-    color: white;
+    border-bottom: 2px solid white;
 }
 
 .dropdown_container {

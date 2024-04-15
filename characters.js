@@ -146,6 +146,7 @@ function addCharToOwnedList(name) {
         toggleTraces(card.id);
     } 
     ownedCharList.append(card);
+    applyFilter('owned');
     sortCards(ownedCharList);
 }
 
@@ -172,7 +173,7 @@ function deleteAllCharacters() {
         });
         sortCards(createCharList);
     }
-    //TODO: Remove characters from relics and lightcones as well
+    //TODO: Remove characters from relics and lightcones
 }
 
 
@@ -195,18 +196,54 @@ function openCharacterInfo(name) {
                             </div>
                         </div>
                     </div>
-                    <div class="stat_text" id="HP">HP: ${stats.HP}</div>
-                    <div class="stat_text" id="ATK">ATK: ${stats.ATK}</div>
-                    <div class="stat_text" id="DEF">DEF: ${stats.DEF}</div>
-                    <div class="stat_text" id="SPD">SPD: ${stats.SPD}</div>
-                    <div class="stat_text" id="CRIT_RATE">CRIT RATE: ${stats.CRIT_RATE}</div>
-                    <div class="stat_text" id="CRIT_DMG">CRIT DMG: ${stats.CRIT_DMG}</div>
-                    <div class="stat_text" id="type_damage">Bonus ${charObject.type} DMG: ${stats.type_damage}%</div>
-                    <div class="stat_text" id="effect_hr">Effect Hit Rate: ${stats.effect_hr}%</div>
-                    <div class="stat_text" id="break_effect">Break Effect: ${stats.break_effect}%</div>
-                    <div class="stat_text" id="energy_regeneration_rate">Energy Regeneration Rate: ${stats.energy_regeneration_rate}%</div>
-                    <div class="stat_text" id="outgoing_healing">Bonus Outgoing Healing: ${stats.outgoing_healing}%</div>
-                    <div class="stat_text" id="effect_res">Effect RES: ${stats.effect_res}%</div>
+                    <div class="stat_text" id="HP">
+                        <img src="./icons/stats/hp.png" height="24px" width="24px">
+                        HP: ${stats.HP}
+                    </div>
+                    <div class="stat_text" id="ATK">
+                    <img src="./icons/stats/atk.png" height="24px" width="24px">
+                        ATK: ${stats.ATK}
+                    </div>
+                    <div class="stat_text" id="DEF">
+                    <img src="./icons/stats/def.png" height="24px" width="24px">
+                        DEF: ${stats.DEF}
+                    </div>
+                    <div class="stat_text" id="SPD">
+                    <img src="./icons/stats/spd.png" height="24px" width="24px">
+                        SPD: ${stats.SPD}
+                    </div>
+                    <div class="stat_text" id="CRIT_RATE">
+                    <img src="./icons/stats/crit_rate.png" height="24px" width="24px">
+                        CRIT RATE: ${stats.CRIT_RATE}
+                    </div>
+                    <div class="stat_text" id="CRIT_DMG">
+                    <img src="./icons/stats/crit_dmg.png" height="24px" width="24px">
+                        CRIT DMG: ${stats.CRIT_DMG}
+                    </div>
+                    <div class="stat_text" id="type_damage">
+                    <img src="./icons/stats/${charObject.type}.png" height="24px" width="24px">
+                        Bonus ${charObject.type} DMG: ${stats.type_damage}%
+                    </div>
+                    <div class="stat_text" id="effect_hr">
+                    <img src="./icons/stats/effect_hit.png" height="24px" width="24px">
+                        Effect Hit Rate: ${stats.effect_hr}%
+                    </div>
+                    <div class="stat_text" id="break_effect">
+                    <img src="./icons/stats/break.png" height="24px" width="24px">
+                        Break Effect: ${stats.break_effect}%
+                    </div>
+                    <div class="stat_text" id="energy_regeneration_rate">
+                    <img src="./icons/stats/energy_regeneration.png" height="24px" width="24px">
+                        Energy Regeneration Rate: ${stats.energy_regeneration_rate}%
+                    </div>
+                    <div class="stat_text" id="outgoing_healing">
+                    <img src="./icons/stats/outgoing_healing.png" height="24px" width="24px">
+                        Bonus Outgoing Healing: ${stats.outgoing_healing}%
+                    </div>
+                    <div class="stat_text" id="effect_res">
+                    <img src="./icons/stats/effect_res.png" height="24px" width="24px">
+                        Effect RES: ${stats.effect_res}%
+                    </div>
                 </div>
                 <div id="trace_container" class="flex_col">
                     <div id="major_trace_container" class="flex_col">
@@ -554,7 +591,7 @@ function sortCards(list) {
  */
 function toggleButtonClick(list, btn) {
     if (types.includes(btn) && list == 'owned') {
-        let buttons = document.getElementById("button_wrapper").querySelectorAll(".type_button");
+        let buttons = document.getElementById("button_wrapper").querySelectorAll(".filter_button.Fire, .filter_button.Ice, .filter_button.Lightning, .filter_button.Imaginary, .filter_button.Quantum, .filter_button.Physical, .filter_button.Wind");
         if (types.length == types_on_owned.length) {
             types_on_owned = [btn];
             buttons.forEach(button => {
@@ -593,7 +630,7 @@ function toggleButtonClick(list, btn) {
             }
         }
     } else if (paths.includes(btn) && list == 'owned') {
-        let buttons = document.getElementById("button_wrapper").querySelectorAll(".path_button");
+        let buttons = document.getElementById("button_wrapper").querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
         if (paths.length == paths_on_owned.length) {
             paths_on_owned = [btn];
             buttons.forEach(button => {
@@ -921,7 +958,6 @@ function toggleTraces(name) {
 
 function toggleTrace(name, type, i) {
     let obj = JSON.parse(localStorage.getItem("char_" + name));
-    console.log(obj.traces);
     if (type == "major") obj.traces.abilities[i-1] = !obj.traces.abilities[i-1];
     else obj.traces.stats[i-1] = !obj.traces.stats[i-1];
     localStorage.setItem("char_" + name, JSON.stringify(obj));

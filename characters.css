@@ -1,29 +1,7 @@
-#character_buttons {
+#add_delete_buttons {
     justify-content:center;
     display: flex;
     gap: 20px;
-}
-
-#button_wrapper {
-    display:flex;
-    gap:20px;
-    justify-content: center;
-}
-
-#add_character, #delete_characters, #delete_character {
-    color:var(--textcolor);
-    border: 0;
-    height:30px;
-    border-radius: 5px;
-    width:50%;
-}
-
-#add_character {
-    background-color: rgb(126, 201, 13);
-}
-
-#delete_characters, #delete_character {
-    background-color: rgb(201, 13, 13);
 }
 
 #delete_character {
@@ -253,33 +231,6 @@ h2 {
     font-size:18px;
 }
 
-.filter_buttons {
-    display:flex;
-    justify-content: center;
-}
-
-
-.path_button, .type_button {
-    padding: 3px;
-    height:30px;
-    width:50px;
-    border-radius: 0;
-    border-right: white solid 1px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.path_button:first-child, .type_button:first-child {
-    border-radius: 8px 0 0 8px;
-}
-
-.path_button:last-child, .type_button:last-child {
-    border-radius: 0 8px 8px 0;
-    border-right: 0;
-}
-
-
 .portrait {
     background-color: rgb(51, 51, 51);
     border-radius: 15%;
@@ -288,57 +239,37 @@ h2 {
 
 .stat_text {
     margin-top: 8px;
-    margin-left: 40px;
+    margin-left: 5%;
     font-weight: bold;
+    align-self: flex-start;
 }
 
-.flex_col {
-    display:flex;
-    flex-direction: column;
-}
-
-.gap_10 {
-    gap:10px;
-}
-
-.path_button.on {
-    background-color: green;
-}
-
-.type_button.on.Lightning {
+.filter_button.on.Lightning {
     background-color: rgb(100, 0, 100);
 }
 
-.type_button.on.Ice {
+.filter_button.on.Ice {
     background-color: rgb(29, 58, 185);
 }
 
-.type_button.on.Fire {
+.filter_button.on.Fire {
     background-color: rgb(160, 0, 0);
 }
 
-.type_button.on.Quantum {
+.filter_button.on.Quantum {
     background-color: rgb(32, 1, 146);
 }
 
-.type_button.on.Imaginary {
+.filter_button.on.Imaginary {
     background-color: rgb(120, 122, 0);
 }
 
-.type_button.on.Physical {
+.filter_button.on.Physical {
     background-color: rgb(107, 107, 107);
 }
 
-.type_button.on.Wind {
+.filter_button.on.Wind {
     background-color: rgb(0, 117, 45);
-}
-
-.path_button.off, .type_button.off {
-    background-color: var(--button-off);
-}
-
-.path_button.on:hover, .type_button.on:hover, .path_button.off:hover, .type_button.off:hover {
-    background-color: var(--button-hover);
 }
 
 .no_text_wrap_overflow {

@@ -14,7 +14,7 @@
     <div class="topnav">
         <a href="index.html" class="active">Honkai: Star Rail Optimizer</a>
         <div id="my_links" style="display:none;">
-            <a href="characters.html" style="border-bottom: white solid 3px;">Characters</a>
+            <a href="characters.html" class="active">Characters</a>
             <a href="lightcones.html">Light Cones</a>
             <a href="relics.html">Relics</a>
             <a href="optimize.html">Optimize</a>
@@ -25,114 +25,115 @@
     </div>
 
     <!-- Add or remove characters-->
-    <div class="box" id="character_buttons">
-        <button id="add_character" type="button" class="no_text_wrap_overflow" onclick="showDialog(document.getElementById('add_character_dialog'))">Add a Character</button>
-        <button id="delete_characters" type="button" class="no_text_wrap_overflow" onclick="deleteAllCharacters()">Delete all Characters</button>
+    <div class="box" id="add_delete_buttons">
+        <button type="button" class="no_text_wrap_overflow add" onclick="showDialog(document.getElementById('add_character_dialog'))">Add a Character</button>
+        <button type="button" class="no_text_wrap_overflow delete" onclick="deleteAllCharacters()">Delete all Characters</button>
     </div>
-
+    <!-- Filter Buttons -->
     <div class="box" id="button_wrapper">
         <div class="filter_buttons">
-            <div class="path_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
+            <div class="filter_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
                 <img src="./icons/path/Path_Abundance.png" width="24" height="24">
             </div>
-            <div class="path_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
+            <div class="filter_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
                 <img src="./icons/path/Path_Destruction.png" width="24" height="24">
             </div>
-            <div class="path_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
+            <div class="filter_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
                 <img src="./icons/path/Path_Erudition.png" width="24" height="24">
             </div>
-            <div class="path_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
+            <div class="filter_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
                 <img src="./icons/path/Path_Harmony.png" width="24" height="24">
             </div>
-            <div class="path_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
+            <div class="filter_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
                 <img src="./icons/path/Path_Nihility.png" width="24" height="24">
             </div>
-            <div class="path_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
+            <div class="filter_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
                 <img src="./icons/path/Path_Preservation.png" width="24" height="24">
             </div>
-            <div class="path_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
-                <img src="./icons/path/Path_The_Hunt.png" width="24" height="24">
+            <div class="filter_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
+                <img src="./icons/path/path_Hunt.png" width="24" height="24">
             </div>
         </div>
         <div class="filter_buttons">
-            <div class="type_button on Fire" onclick="toggleButtonClick('owned', 'Fire')">
+            <div class="filter_button on Fire" onclick="toggleButtonClick('owned', 'Fire')">
                 <img src="./icons/type/Type_Fire.png" width="24" height="24">
             </div>
-            <div class="type_button on Ice" onclick="toggleButtonClick('owned', 'Ice')">
+            <div class="filter_button on Ice" onclick="toggleButtonClick('owned', 'Ice')">
                 <img src="./icons/type/Type_Ice.png" width="24" height="24">
             </div>
-            <div class="type_button on Imaginary" onclick="toggleButtonClick('owned', 'Imaginary')">
+            <div class="filter_button on Imaginary" onclick="toggleButtonClick('owned', 'Imaginary')">
                 <img src="./icons/type/Type_Imaginary.png" width="24" height="24">
             </div>
-            <div class="type_button on Lightning" onclick="toggleButtonClick('owned', 'Lightning')">
+            <div class="filter_button on Lightning" onclick="toggleButtonClick('owned', 'Lightning')">
                 <img src="./icons/type/Type_Lightning.png" width="24" height="24">
             </div>
-            <div class="type_button on Physical" onclick="toggleButtonClick('owned', 'Physical')">
+            <div class="filter_button on Physical" onclick="toggleButtonClick('owned', 'Physical')">
                 <img src="./icons/type/Type_Physical.png" width="24" height="24">
             </div>
-            <div class="type_button on Quantum" onclick="toggleButtonClick('owned', 'Quantum')">
+            <div class="filter_button on Quantum" onclick="toggleButtonClick('owned', 'Quantum')">
                 <img src="./icons/type/Type_Quantum.png" width="24" height="24">
             </div>
-            <div class="type_button on Wind" onclick="toggleButtonClick('owned', 'Wind')">
+            <div class="filter_button on Wind" onclick="toggleButtonClick('owned', 'Wind')">
                 <img src="./icons/type/Type_Wind.png" width="24" height="24">
             </div>
         </div>
     </div>
 
-    <!-- Content -->
+    <!-- List of owned characters -->
     <div class="box">
         <h1>Characters:</h1>
         <div id="owned_character_list" class="character_list"></div>
     </div>
 
+    <!-- Container for character info/creation dialog -->
     <div id="dialog_container">
         <div id="add_character_dialog" class="box flex_col">
             <div>
                 <h2>Select your Character</h2>
             </div>
             <div class="filter_buttons">
-                <div class="path_button on Abundance" onclick="toggleButtonClick('create', 'Abundance')">
+                <div class="filter_button on Abundance" onclick="toggleButtonClick('create', 'Abundance')">
                     <img src="./icons/path/Path_Abundance.png" width="24" height="24">
                 </div>
-                <div class="path_button on Destruction" onclick="toggleButtonClick('create', 'Destruction')">
+                <div class="filter_button on Destruction" onclick="toggleButtonClick('create', 'Destruction')">
                     <img src="./icons/path/Path_Destruction.png" width="24" height="24">
                 </div>
-                <div class="path_button on Erudition" onclick="toggleButtonClick('create', 'Erudition')">
+                <div class="filter_button on Erudition" onclick="toggleButtonClick('create', 'Erudition')">
                     <img src="./icons/path/Path_Erudition.png" width="24" height="24">
                 </div>
-                <div class="path_button on Harmony" onclick="toggleButtonClick('create', 'Harmony')">
+                <div class="filter_button on Harmony" onclick="toggleButtonClick('create', 'Harmony')">
                     <img src="./icons/path/Path_Harmony.png" width="24" height="24">
                 </div>
-                <div class="path_button on Nihility" onclick="toggleButtonClick('create', 'Nihility')">
+                <div class="filter_button on Nihility" onclick="toggleButtonClick('create', 'Nihility')">
                     <img src="./icons/path/Path_Nihility.png" width="24" height="24">
                 </div>
-                <div class="path_button on Preservation" onclick="toggleButtonClick('create', 'Preservation')">
+                <div class="filter_button on Preservation" onclick="toggleButtonClick('create', 'Preservation')">
                     <img src="./icons/path/Path_Preservation.png" width="24" height="24">
                 </div>
-                <div class="path_button on Hunt" onclick="toggleButtonClick('create', 'Hunt')">
-                    <img src="./icons/path/Path_The_Hunt.png" width="24" height="24">
+                <div class="filter_button on Hunt" onclick="toggleButtonClick('create', 'Hunt')">
+                    <img src="./icons/path/path_Hunt.png" width="24" height="24">
                 </div>
             </div>
             <div class="filter_buttons">
-                <div class="type_button on Fire" onclick="toggleButtonClick('create', 'Fire')">
+                <div class="filter_button on Fire" onclick="toggleButtonClick('create', 'Fire')">
                     <img src="./icons/type/Type_Fire.png" width="24" height="24">
                 </div>
-                <div class="type_button on Ice" onclick="toggleButtonClick('create', 'Ice')">
+                <div class="filter_button on Ice" onclick="toggleButtonClick('create', 'Ice')">
                     <img src="./icons/type/Type_Ice.png" width="24" height="24">
                 </div>
-                <div class="type_button on Imaginary" onclick="toggleButtonClick('create', 'Imaginary')">
+                <div class="filter_button on Imaginary" onclick="toggleButtonClick('create', 'Imaginary')">
                     <img src="./icons/type/Type_Imaginary.png" width="24" height="24">
                 </div>
-                <div class="type_button on Lightning" onclick="toggleButtonClick('create', 'Lightning')">
+                <div class="filter_button on Lightning" onclick="toggleButtonClick('create', 'Lightning')">
                     <img src="./icons/type/Type_Lightning.png" width="24" height="24">
                 </div>
-                <div class="type_button on Physical" onclick="toggleButtonClick('create', 'Physical')">
+                <div class="filter_button on Physical" onclick="toggleButtonClick('create', 'Physical')">
                     <img src="./icons/type/Type_Physical.png" width="24" height="24">
                 </div>
-                <div class="type_button on Quantum" onclick="toggleButtonClick('create', 'Quantum')">
+                <div class="filter_button on Quantum" onclick="toggleButtonClick('create', 'Quantum')">
                     <img src="./icons/type/Type_Quantum.png" width="24" height="24">
                 </div>
-                <div class="type_button on Wind" onclick="toggleButtonClick('create', 'Wind')">
+                <div class="filter_button on Wind" onclick="toggleButtonClick('create', 'Wind')">
                     <img src="./icons/type/Type_Wind.png" width="24" height="24">
                 </div>
             </div>

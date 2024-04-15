@@ -24,8 +24,36 @@
     </div>
 
     <!-- Add or remove light cones-->
-    <div>
-        
+    <div class="box" id="add_delete_buttons">
+        <button id="add_character" type="button" class="no_text_wrap_overflow add" onclick="showDialog(document.getElementById('add_lightcone_dialog'))">Add a Character</button>
+        <button id="delete_characters" type="button" class="no_text_wrap_overflow delete" onclick="deleteAllCones()">Delete all Characters</button>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="box" id="button_wrapper">
+        <div class="filter_buttons">
+            <div class="path_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
+                <img src="./icons/path/Path_Abundance.png" width="24" height="24">
+            </div>
+            <div class="path_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
+                <img src="./icons/path/Path_Destruction.png" width="24" height="24">
+            </div>
+            <div class="path_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
+                <img src="./icons/path/Path_Erudition.png" width="24" height="24">
+            </div>
+            <div class="path_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
+                <img src="./icons/path/Path_Harmony.png" width="24" height="24">
+            </div>
+            <div class="path_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
+                <img src="./icons/path/Path_Nihility.png" width="24" height="24">
+            </div>
+            <div class="path_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
+                <img src="./icons/path/Path_Preservation.png" width="24" height="24">
+            </div>
+            <div class="path_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
+                <img src="./icons/path/path_Hunt.png" width="24" height="24">
+            </div>
+        </div>
     </div>
 
     <!-- Content -->
@@ -48,6 +76,7 @@
         } 
     </script>
 
+    <script src="lightcones.js"></script>
 
     <footer id="footer">
         <p>Up to date with: HSR Patch 2.0.</p>
