@@ -32,6 +32,14 @@ body {
   justify-content: center;
 }
 
+.item_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+  justify-content: center;
+}
+
 .flex_col {
     display:flex;
     flex-direction: column;

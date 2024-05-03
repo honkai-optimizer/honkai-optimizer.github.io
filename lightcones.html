@@ -51,7 +51,7 @@
                 <img src="./icons/path/Path_Preservation.png" width="24" height="24">
             </div>
             <div class="path_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
-                <img src="./icons/path/path_Hunt.png" width="24" height="24">
+                <img src="./icons/path/Path_Hunt.png" width="24" height="24">
             </div>
         </div>
     </div>
@@ -59,11 +59,43 @@
     <!-- Content -->
     <div class="box">
         <h1>Light Cones:</h1>
-        <div id="lightconeList">
+        <div id="owned_lightcone_list" class="item_list">
 
         </div>
     </div>
 
+    <!-- Dialog container -->
+    <div id="dialog_container">
+        <div id="add_lightcone_dialog" class="box flex_col">
+            <div>
+                <h2>Select your Character</h2>
+            </div>
+            <div class="filter_buttons">
+                <div class="filter_button on Abundance" onclick="toggleButtonClick('create', 'Abundance')">
+                    <img src="./icons/path/Path_Abundance.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Destruction" onclick="toggleButtonClick('create', 'Destruction')">
+                    <img src="./icons/path/Path_Destruction.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Erudition" onclick="toggleButtonClick('create', 'Erudition')">
+                    <img src="./icons/path/Path_Erudition.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Harmony" onclick="toggleButtonClick('create', 'Harmony')">
+                    <img src="./icons/path/Path_Harmony.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Nihility" onclick="toggleButtonClick('create', 'Nihility')">
+                    <img src="./icons/path/Path_Nihility.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Preservation" onclick="toggleButtonClick('create', 'Preservation')">
+                    <img src="./icons/path/Path_Preservation.png" width="24" height="24">
+                </div>
+                <div class="filter_button on Hunt" onclick="toggleButtonClick('create', 'Hunt')">
+                    <img src="./icons/path/path_Hunt.png" width="24" height="24">
+                </div>
+            </div>
+            <div id="create_lightcone_list" class="item_list">
+
+            </div>
 
     <script>
         function menuClick() {

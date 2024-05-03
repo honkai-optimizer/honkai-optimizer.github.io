@@ -95,13 +95,6 @@ h2 {
     text-align: center;
 }
 
-.character_list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 5px;
-    justify-content: center;
-}
 
 .character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card, .major_card {
     padding: 10px;
