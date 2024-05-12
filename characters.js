@@ -1,4 +1,5 @@
 const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'BlackSwan', 'Blade', 'Bronya', 'Clara', 'DanHeng', 'DanHengIL', 'DrRatio', 'FuXuan', 'Gallagher', 'Gepard', 'Guinaifen', 'Hanya', 'Herta', 'Himeko', 'Hook', 'Huohuo', 'JingYuan', 'Jingliu', 'Kafka', 'Luka', 'Luocha', 'Lynx', 'March7th', 'Misha', 'Natasha', 'Pela', 'Qingque', 'RuanMei', 'Sampo', 'Seele', 'Serval', 'SilverWolf', 'Sparkle', 'Sushang', 'Tingyun', 'TopazAndNumby', 'TrailblazerFire', 'TrailblazerPhysical', 'Welt', 'Xueyi', 'Yanqing', 'Yukong',];
+
 const ownedCharList = document.getElementById("owned_character_list");
 const createCharList = document.getElementById("create_character_list");
 const dialogContainer = document.getElementById("dialog_container");
@@ -116,7 +117,7 @@ function addCharToOwnedList(name) {
                 <img src="./icons/path/path_${val.path}.png" height="24" width="24">
                 <img src="./icons/type/Type_${val.type}.png" height="24" width="24">
             </div>
-            <div class="info_text center_text">
+            <div class="infoText">
                 <div>
                     <p>${val.key}<br><br>
                     Lvl. ${val.level} E${val.eidolon}</p>

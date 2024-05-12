@@ -10,6 +10,16 @@
     width:20%;
 }
 
+#dialog_container {
+    position: fixed;
+    width:100%;
+    top: 0;
+    bottom: 0;
+    overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility:hidden;
+}
+
 #add_character_dialog, #edit_character_dialog {
     margin-inline: auto;
     margin-top: 50px;
@@ -81,14 +91,18 @@
     background-color: var(--custom-light-purple);
 }
 
-<<<<<<< HEAD
-=======
 h2 {
     text-align: center;
 }
 
+.character_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+    justify-content: center;
+}
 
->>>>>>> e5d85a285d492b76536279945e6e71a65d5a5e7d
 .character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card, .major_card {
     padding: 10px;
     background-color: var(--custom-dark-purple);
@@ -195,7 +209,7 @@ h2 {
 .trace_circle {
     margin: auto;
     display: flex;
-    background-color: var(--custom-light-purple);
+    background-color: gray;
     height: 25px;
     width: 25px;
     justify-content: center;
@@ -262,10 +276,6 @@ h2 {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-}
-
-.center_text {
-    text-align: center;
 }
 
 @media screen and (max-width: 830px) {
