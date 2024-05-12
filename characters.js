@@ -117,7 +117,7 @@ function addCharToOwnedList(name) {
                 <img src="./icons/path/path_${val.path}.png" height="24" width="24">
                 <img src="./icons/type/Type_${val.type}.png" height="24" width="24">
             </div>
-            <div class="infoText">
+            <div class="info_text center_text">
                 <div>
                     <p>${val.key}<br><br>
                     Lvl. ${val.level} E${val.eidolon}</p>

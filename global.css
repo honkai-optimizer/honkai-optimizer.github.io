@@ -6,7 +6,7 @@
     --custom-blue: #04dbbf;
     --custom-dark-purple: #170547;
     --custom-light-purple: #6d38ff;
-    --custom-gray-purple: #3b3357;
+    --custom-gray-purple: #47415c;
     --button-hover: #7fbb84;
     --button-off: #111111;
     color:var(--textcolor);
@@ -29,6 +29,24 @@ body {
 #button_wrapper {
   display:flex;
   gap:20px;
+  justify-content: center;
+}
+
+#dialog_container {
+  position: fixed;
+  width:100%;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility:hidden;
+}
+
+.item_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
   justify-content: center;
 }
 
