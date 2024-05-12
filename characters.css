@@ -81,6 +81,14 @@
     background-color: var(--custom-light-purple);
 }
 
+<<<<<<< HEAD
+=======
+h2 {
+    text-align: center;
+}
+
+
+>>>>>>> e5d85a285d492b76536279945e6e71a65d5a5e7d
 .character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card, .major_card {
     padding: 10px;
     background-color: var(--custom-dark-purple);

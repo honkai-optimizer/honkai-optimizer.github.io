@@ -32,6 +32,7 @@ body {
   justify-content: center;
 }
 
+<<<<<<< HEAD
 #dialog_container {
   position: fixed;
   width:100%;
@@ -42,6 +43,8 @@ body {
   visibility:hidden;
 }
 
+=======
+>>>>>>> e5d85a285d492b76536279945e6e71a65d5a5e7d
 .item_list {
   display: flex;
   flex-wrap: wrap;
