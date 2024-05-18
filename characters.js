@@ -59,11 +59,11 @@ function initialize() {
 }
 
 function addCharToCreateList(name) {
-    const type = characterObjects[addSpaces(name)].element;
-    const path = characterObjects[addSpaces(name)].path;
-    const card = createDiv(["mini_card", "flex_col", characterObjects[addSpaces(name)].element, characterObjects[addSpaces(name)].path]);
-    card.id = name;
     let withSpaces = addSpaces(name);
+    const type = characterObjects[withSpaces].element;
+    const path = characterObjects[withSpaces].path;
+    const card = createDiv(["mini", "card", "flex_col", characterObjects[withSpaces].element, characterObjects[withSpaces].path]);
+    card.id = name;
     const traceInfo = getTraceInfo(withSpaces);
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
@@ -108,7 +108,7 @@ function addCharToCreateList(name) {
 
 function addCharToOwnedList(name) {
     const val = JSON.parse(localStorage.getItem("char_" + name));
-    const card = createDiv(["character_card", "flex_col", val.path, val.type]);
+    const card = createDiv(["character", "card", "flex_col", val.path, val.type]);
     card.id = name;
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
@@ -119,10 +119,11 @@ function addCharToOwnedList(name) {
             </div>
             <div class="infoText">
                 <div>
-                    <p>${val.key}<br><br>
+                    <p>${val.key}<br>
                     Lvl. ${val.level} E${val.eidolon}</p>
                 </div>
-                <div class="card_traces">
+                <img src="./icons/rarity/${characterObjects[addSpaces(name)].rarity}.png" height="30px" width="128px">
+                <div class="card traces">
                     <div class="trace_circle">${val.traces.basic}</div>
                     <div class="trace_circle">${val.traces.skill}</div>
                     <div class="trace_circle">${val.traces.ultimate}</div>
@@ -182,7 +183,7 @@ function openCharacterInfo(name) {
     const stats = calculateStats(charObject);
     const abilityInfo = getAbilityInfos(addSpaces(name));
     editDialog.innerHTML = /*HTML*/ `
-        <button id="delete_character" type="button" class="no_text_wrap_overflow" onclick="deleteCharacter('${name}')">Delete Character</button>
+        <button id="delete_character" type="button" class="no_text_wrap_overflow delete" onclick="deleteCharacter('${name}')">Delete Character</button>
         <div id="edit_info_container">
             <div id="edit_info_left_segment" class="flex_col">
                 <div id="stat_container" class="flex_col">
@@ -247,22 +248,22 @@ function openCharacterInfo(name) {
                 </div>
                 <div id="trace_container" class="flex_col">
                     <div id="major_trace_container" class="flex_col">
-                        <div id="major_1" class="major_card">
-                            <div class="card_title">
+                        <div id="major_1" class="major card">
+                            <div class="card title">
                                 <img src="${abilityInfo[2][2][0]}" width="48px" height="48px">
                                 <p>${abilityInfo[2][0][0]}</p>
                             </div>
                             <p>${abilityInfo[2][1][0]}</p>
                         </div>
-                        <div id="major_2" class="major_card">
-                            <div class="card_title">
+                        <div id="major_2" class="major card">
+                            <div class="card title">
                                 <img src="${abilityInfo[2][2][1]}" width="48px" height="48px">
                                 <p>${abilityInfo[2][0][1]}</p>
                             </div>
                             <p>${abilityInfo[2][1][1]}</p>
                         </div>
-                        <div id="major_3" class="major_card">
-                            <div class="card_title">
+                        <div id="major_3" class="major card">
+                            <div class="card title">
                                 <img src="${abilityInfo[2][2][2]}" width="48px" height="48px">
                                 <p>${abilityInfo[2][0][2]}</p>
                             </div>
@@ -270,43 +271,43 @@ function openCharacterInfo(name) {
                         </div>
                     </div>
                     <div id="minor_trace_container">
-                        <div id="minor_1" class="minor_card">
+                        <div id="minor_1" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[0]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[0] * 100}%</p>
                         </div>
-                        <div id="minor_2" class="minor_card">
+                        <div id="minor_2" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[1]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[1] * 100}%</p>
                         </div>
-                        <div id="minor_3" class="minor_card">
+                        <div id="minor_3" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[2]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[2] * 100}%</p>
                         </div>
-                        <div id="minor_4" class="minor_card">
+                        <div id="minor_4" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[3]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[3] * 100}%</p>
                         </div>
-                        <div id="minor_5" class="minor_card">
+                        <div id="minor_5" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[4]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[4] * 100}%</p>
                         </div>
-                        <div id="minor_6" class="minor_card">
+                        <div id="minor_6" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[5]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[5] * 100}%</p>
                         </div>
-                        <div id="minor_7" class="minor_card">
+                        <div id="minor_7" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[6]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[6] * 100}%</p>
                         </div>
-                        <div id="minor_8" class="minor_card">
+                        <div id="minor_8" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[7]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[7] * 100}%</p>
                         </div>
-                        <div id="minor_9" class="minor_card">
+                        <div id="minor_9" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[8]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[8] * 100}%</p>
                         </div>
-                        <div id="minor_10" class="minor_card">
+                        <div id="minor_10" class="minor card">
                             <img src="./icons/stats/${charObject.traces.types[9]}.png" width="32px" height="32px">
                             <p>+${charObject.traces.amounts[9] * 100}%</p>
                         </div>
@@ -344,53 +345,53 @@ function openCharacterInfo(name) {
                         </div>
                     </div>
                 </div>
-                <div class="lightcone_card"></div>
+                <div class="lightcone card"></div>
                 <div id="detailed_relic_display">
-                    <div id="head_card" class="equipment_card flex_col"></div>
-                    <div id="hands_card" class="equipment_card flex_col"></div>
-                    <div id="body_card" class="equipment_card flex_col"></div>
-                    <div id="foot_card" class="equipment_card flex_col"></div>
-                    <div id="orb_card" class="equipment_card flex_col"></div>
-                    <div id="rope_card" class="equipment_card flex_col"></div>
+                    <div id="head_card" class="equipment card flex_col"></div>
+                    <div id="hands_card" class="equipment card flex_col"></div>
+                    <div id="body_card" class="equipment card flex_col"></div>
+                    <div id="foot_card" class="equipment card flex_col"></div>
+                    <div id="orb_card" class="equipment card flex_col"></div>
+                    <div id="rope_card" class="equipment card flex_col"></div>
                 </div>
                 <div id="eidolon_display">
-                    <div id="eidolon_1" class="eidolon_card flex_col" onclick="changeEidolon('${name}','1')">
-                        <div class="card_title">
+                    <div id="eidolon_1" class="eidolon card flex_col" onclick="changeEidolon('${name}','1')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][0]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][0]}</div>
                         </div>
                         <p>${abilityInfo[0][1][0]}</p>
                     </div>
-                    <div id="eidolon_2" class="eidolon_card flex_col" onclick="changeEidolon('${name}','2')">
-                        <div class="card_title">
+                    <div id="eidolon_2" class="eidolon card flex_col" onclick="changeEidolon('${name}','2')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][1]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][1]}</div>
                         </div>
                         <p>${abilityInfo[0][1][1]}</p>
                     </div>
-                    <div id="eidolon_3" class="eidolon_card flex_col" onclick="changeEidolon('${name}','3')">
-                        <div class="card_title">
+                    <div id="eidolon_3" class="eidolon card flex_col" onclick="changeEidolon('${name}','3')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][2]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][2]}</div>
                         </div>
                         <p>${abilityInfo[0][1][2]}</p>
                     </div>
-                    <div id="eidolon_4" class="eidolon_card flex_col" onclick="changeEidolon('${name}','4')">
-                        <div class="card_title">
+                    <div id="eidolon_4" class="eidolon card flex_col" onclick="changeEidolon('${name}','4')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][3]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][3]}</div>
                         </div>
                         <p>${abilityInfo[0][1][3]}</p>
                     </div>
-                    <div id="eidolon_5" class="eidolon_card flex_col" onclick="changeEidolon('${name}','5')">
-                        <div class="card_title">
+                    <div id="eidolon_5" class="eidolon card flex_col" onclick="changeEidolon('${name}','5')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][4]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][4]}</div>
                         </div>
                         <p>${abilityInfo[0][1][4]}</p>
                     </div>
-                    <div id="eidolon_6" class="eidolon_card flex_col" onclick="changeEidolon('${name}','6')">
-                        <div class="card_title">
+                    <div id="eidolon_6" class="eidolon card flex_col" onclick="changeEidolon('${name}','6')">
+                        <div class="card title">
                             <img src="${abilityInfo[0][2][5]}" width="48px" height="48px">
                             <div class="statText">${abilityInfo[0][0][5]}</div>
                         </div>
@@ -454,7 +455,7 @@ function updateStats(obj) {
 function updateCard(name) {
     let obj = JSON.parse(localStorage.getItem("char_" + name));
     let infoText = document.getElementById(name).querySelector("p");
-    let cardTraceChildren = document.getElementById(name).querySelector(".card_traces").children;
+    let cardTraceChildren = document.getElementById(name).querySelector(".card.traces").children;
     let equipmentDisplay = document.getElementById(name).querySelector(".equipment_display");
     cardTraceChildren[0].innerText = obj.traces.basic;
     cardTraceChildren[1].innerText = obj.traces.skill;
@@ -669,7 +670,7 @@ function toggleButtonClick(list, btn) {
             }
         }
     } else if (types.includes(btn)) {
-        let buttons = addDialog.querySelectorAll(".type_button");
+        let buttons = addDialog.querySelectorAll(".filter_button.Fire, .filter_button.Ice, .filter_button.Lightning, .filter_button.Imaginary, .filter_button.Quantum, .filter_button.Physical, .filter_button.Wind");
         if (types.length == types_on_create.length) {
             types_on_create = [btn];
             buttons.forEach(button => {
@@ -708,7 +709,7 @@ function toggleButtonClick(list, btn) {
             }
         }
     } else {
-        let buttons = addDialog.querySelectorAll(".path_button");
+        let buttons = addDialog.querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
         if (paths.length == paths_on_create.length) {
             paths_on_create = [btn];
             buttons.forEach(button => {
@@ -760,7 +761,7 @@ function applyFilter(list) {
     let show_both = [];
     let cards;
     if (list == 'owned') {
-        cards = ownedCharList.querySelectorAll(".character_card");
+        cards = ownedCharList.querySelectorAll(".character.card");
         cards.forEach(character => {
             types_on_owned.forEach(type => {
                 if (character.classList.contains(type)) show_type.push(character);
@@ -779,7 +780,7 @@ function applyFilter(list) {
         });
     }
     else {
-        cards = createCharList.querySelectorAll(".mini_card");
+        cards = createCharList.querySelectorAll(".mini.card");
         cards.forEach(character => {
             types_on_create.forEach(type => {
                 if (character.classList.contains(type)) show_type.push(character);

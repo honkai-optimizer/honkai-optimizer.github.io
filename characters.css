@@ -103,7 +103,7 @@ h2 {
     justify-content: center;
 }
 
-.character_card, .mini_card, .equipment_card, .lightcone_card, .eidolon_card, .major_card {
+.card {
     padding: 10px;
     background-color: var(--custom-dark-purple);
     border-radius: 5px;
@@ -111,47 +111,47 @@ h2 {
     width: 330px;
 }
 
-.character_card {
+.card.character {
     justify-content: space-around;
 }
 
-.equipment_card, .eidolon_card, .major_card{
+.card.equipment, .card.eidolon, .card.major{
     box-sizing: border-box;
     flex-grow: 0;
     margin-bottom: 5px;
     overflow: auto;
 }
 
-.equipment_card {
+.card.equipment {
     max-width: 33%;
     flex-basis: 33%;
 }
 
-.eidolon_card {
+.card.eidolon {
     max-width: 49%;
     flex-basis: 49%;
 }
 
-.major_card{
+.card.major{
     width: 100%;
 }
 
-.eidolon_card:nth-child(odd) {
+.card.eidolon:nth-child(odd) {
     margin-right: 1%;
 }
 
-.eidolon_card.off, .major_card.off, .minor_card.off, .major_card.locked, .minor_card.locked {
+.card.eidolon.off, .card.major.off, .card.minor.off, .card.major.locked, .card.minor.locked {
     background-color: var(--custom-gray-purple);
     color: var(--textcolor-off);
 }
 
-.major_card.locked .card_title::after, .minor_card.locked::after{
+.card.major.locked .card.title::after, .card.minor.locked::after{
     content: "🔒";
     margin-left: auto;
     margin-right: 5px;
 }
 
-.mini_card {
+.mini.card {
     height: 120px;
     width: 250px;
     flex-direction: row;
@@ -159,28 +159,30 @@ h2 {
     gap:10px;
 }
 
-.lightcone_card {
+.lightcone.card {
     width: 100%;
 }
 
-.minor_card {
+.minor.card {
     display: flex;
     height: 45px;
     width: 49%;
     margin-bottom: 1%;
+    padding: 0;
     background-color: var(--custom-dark-purple);
     align-items: center;
 }
 
-.card_title {
+.card.title {
     display: flex;
     align-items: center;
     height: 30%;
+    width: auto;
     background-color: var(--custom-light-purple);
 
 }
 
-.off .card_title, .locked .card_title {
+.off .card.title, .locked .card.title {
     background-color: var(--custom-dark-purple);
 }
 
@@ -195,11 +197,13 @@ h2 {
 }
 
 
-.info_container, .card_traces {
+.info_container, .card.traces {
     display: flex;
+    padding: 0;
     align-items: center;
     justify-content: left;
-    width: inherit;
+    width: auto;
+    height: auto;
 }
 
 .info_container {
@@ -210,8 +214,8 @@ h2 {
     margin: auto;
     display: flex;
     background-color: gray;
-    height: 25px;
-    width: 25px;
+    height: 22px;
+    width: 22px;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
@@ -303,7 +307,7 @@ h2 {
         flex-basis: 60%;
     }
     
-    .equipment_card {
+    .equipment.card {
         flex-basis: 100%;
         max-width: 100%;
     }
