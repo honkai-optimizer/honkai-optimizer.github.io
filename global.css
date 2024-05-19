@@ -32,6 +32,10 @@ body {
   justify-content: center;
 }
 
+.flex {
+  display:flex;
+}
+
 .flex_col {
     display:flex;
     flex-direction: column;
@@ -184,6 +188,14 @@ body {
 }
 .dropdown_option:last-child {
   border-radius: 0 0 8px 8px;
+}
+
+.item_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+  justify-content: center;
 }
 
 footer {

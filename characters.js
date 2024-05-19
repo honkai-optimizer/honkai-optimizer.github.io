@@ -17,7 +17,7 @@ let relicStats;
 let relicSets;
 let lightCones;
 
-async function fetchJSON() {
+async function fetchCharJSON() {
     await fetch('./hsr-data/characters.json')
         .then(response => response.json())
         .then(data => {
@@ -45,7 +45,7 @@ async function fetchJSON() {
         });
 }
 
-function initialize() {
+function initializeChar() {
     names.forEach(name => {
         const val = localStorage.getItem("char_" + name);
         if (val != null) addCharToOwnedList(name)
@@ -117,7 +117,7 @@ function addCharToOwnedList(name) {
                 <img src="./icons/path/path_${val.path}.png" height="24" width="24">
                 <img src="./icons/type/Type_${val.type}.png" height="24" width="24">
             </div>
-            <div class="infoText">
+            <div class="info_text">
                 <div>
                     <p>${val.key}<br>
                     Lvl. ${val.level} E${val.eidolon}</p>
@@ -180,7 +180,7 @@ function deleteAllCharacters() {
 
 function openCharacterInfo(name) {
     const charObject = JSON.parse(localStorage.getItem("char_" + name));
-    const stats = calculateStats(charObject);
+    const stats = calculateCharStats(charObject);
     const abilityInfo = getAbilityInfos(addSpaces(name));
     editDialog.innerHTML = /*HTML*/ `
         <button id="delete_character" type="button" class="no_text_wrap_overflow delete" onclick="deleteCharacter('${name}')">Delete Character</button>
@@ -191,7 +191,7 @@ function openCharacterInfo(name) {
                     <div id="level_container">
                         <div class="stat_text">Lvl. ${charObject.level}/${charObject.ascension * 10 + 20}</div>
                         <div id="level" class="dropdown_container">
-                            <div class="dropdown_button" onclick="toggleLevelDropdown('${name}')">
+                            <div class="dropdown_button" onclick="toggleCharLevelDropdown('${name}')">
                                 <p>Select</p>
                                 <i class="fa fa-chevron-down"></i>
                             </div>
@@ -404,13 +404,12 @@ function openCharacterInfo(name) {
     showDialog(editDialog);
 }
 
-function toggleLevelDropdown(name) {
+function toggleCharLevelDropdown(name) {
     closeDropdown("level");
     let container = document.getElementById("level_container").querySelector(".dropdown_container");
     container.classList.toggle("open");
     let img = container.querySelector("i");
-    img.classList.toggle("fa-chevron-up");
-    img.classList.toggle("fa-chevron-down");
+    swapChevron(img);
     if (!container.classList.contains("open")) {
         container.querySelector(".dropdown_menu").remove();
         return;
@@ -422,37 +421,37 @@ function toggleLevelDropdown(name) {
         let option_1 = createDiv("dropdown_option");
         option_1.style.paddingInline = "5px";
         option_1.innerText = (i == 0 ? 1 : (i - 1) * 10 + 20) + "/" + (i * 10 + 20);
-        option_1.onclick = e => updateLevel(name, option_1, i, container);
+        option_1.onclick = e => updateCharLevel(name, option_1, i, container);
         let option_2 = createDiv("dropdown_option");
         option_2.style.paddingInline = "5px";
         option_2.innerText = (i * 10 + 20) + "/" + (i * 10 + 20);
-        option_2.onclick = e => updateLevel(name, option_2, i, container);
+        option_2.onclick = e => updateCharLevel(name, option_2, i, container);
         menu.append(option_1);
         menu.append(option_2);
     }
 }
 
-function updateLevel(name, option, ascension, container) {
+function updateCharLevel(name, option, ascension, container) {
     let obj = JSON.parse(localStorage.getItem("char_" + name));
     let lvlText = option.innerText.split("/");
     obj.level = lvlText[0];
     obj.ascension = ascension;
     localStorage.setItem("char_" + name, JSON.stringify(obj));
     container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + lvlText[0] + "/" + lvlText[1];
-    toggleLevelDropdown(name);
+    toggleCharLevelDropdown(name);
     toggleTraces(name);
-    updateCard(name);
-    updateStats(obj);
+    updateCharCard(name);
+    updateCharStats(obj);
 }
 
-function updateStats(obj) {
-    const stats = calculateStats(obj);
+function updateCharStats(obj) {
+    const stats = calculateCharStats(obj);
     for (let key in stats) {
         document.getElementById(key).innerText = key.replace(/_/g, " ") +": " + stats[key];
     }
 }
 
-function updateCard(name) {
+function updateCharCard(name) {
     let obj = JSON.parse(localStorage.getItem("char_" + name));
     let infoText = document.getElementById(name).querySelector("p");
     let cardTraceChildren = document.getElementById(name).querySelector(".card.traces").children;
@@ -461,7 +460,7 @@ function updateCard(name) {
     cardTraceChildren[1].innerText = obj.traces.skill;
     cardTraceChildren[2].innerText = obj.traces.ultimate;
     cardTraceChildren[3].innerText = obj.traces.talent;
-    infoText.innerHTML = name + "<br><br>" + "Lvl. " + obj.level + " E" + obj.eidolon;
+    infoText.innerHTML = name + "<br>" + "Lvl. " + obj.level + " E" + obj.eidolon;
 }
 
 function toggleSkillDropdown(name, id) {
@@ -469,8 +468,7 @@ function toggleSkillDropdown(name, id) {
     let container = document.getElementById(id);
     container.classList.toggle("open");
     let img = container.querySelector("i");
-    img.classList.toggle("fa-chevron-up");
-    img.classList.toggle("fa-chevron-down");
+    swapChevron(img);
     if (!container.classList.contains("open")) {
         container.querySelector(".dropdown_menu").remove();
         return;
@@ -490,7 +488,7 @@ function toggleSkillDropdown(name, id) {
                 localStorage.setItem("char_" + name, JSON.stringify(obj));
                 document.getElementById(id + "_text").innerText = (id.charAt(0).toUpperCase() + id.slice(1)) + " Lv. " + i;
                 toggleSkillDropdown(name, id);
-                updateCard(name);
+                updateCharCard(name);
             };
         } else {
             option.style.backgroundColor = "var(--custom-gray-purple)";
@@ -521,7 +519,7 @@ function swapChevron(img) {
  * @returns An object containing all the relevant stats with the following keys:
  *          ATK, DEF, HP, SPD, CRIT RATE, CRIT DMG, type_damage, effect_hr, break_effect, energy_regeneration_rate, outgoing_healing, effect_res
  */
-function calculateStats(obj) {
+function calculateCharStats(obj) {
     const ascension = characterObjects[obj.key].ascension[obj.ascension];
     const stats = {};
     for (let key in ascension) {
@@ -893,7 +891,7 @@ function toggleEidolons(name) {
         else
             document.getElementById("eidolon_" + i).classList.remove("off");
     }
-    updateCard(name);
+    updateCharCard(name);
 }
 
 function toggleTraces(name) {
@@ -976,9 +974,9 @@ function changeEidolon(name, val) {
 /**
  * Waits for the JSON files to be fetched and then initializes the website.
  */
-async function boot() {
-    await fetchJSON();
-    initialize();
+async function bootChar() {
+    await fetchCharJSON();
+    initializeChar();
 }
 
-boot();
+bootChar();

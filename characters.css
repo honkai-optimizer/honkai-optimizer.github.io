@@ -83,6 +83,7 @@
     display: flex;
     gap: 5px;
     align-items:center;
+    justify-content: space-between;
     height: 35px;
     overflow: visible;
 }
@@ -93,14 +94,6 @@
 
 h2 {
     text-align: center;
-}
-
-.character_list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 5px;
-    justify-content: center;
 }
 
 .card {
@@ -235,6 +228,10 @@ h2 {
     font-size:18px;
 }
 
+#level {
+    width: 30%;
+    align-self: flex-end;
+}
 .portrait {
     background-color: rgb(51, 51, 51);
     border-radius: 15%;
