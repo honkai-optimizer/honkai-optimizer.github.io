@@ -25,32 +25,32 @@
 
     <!-- Add or remove light cones-->
     <div class="box" id="add_delete_buttons">
-        <button id="add_character" type="button" class="no_text_wrap_overflow add" onclick="showDialog(document.getElementById('add_lightcone_dialog'))">Add a Light Cone</button>
-        <button id="delete_characters" type="button" class="no_text_wrap_overflow delete" onclick="deleteAllCones()">Delete all Light Cones</button>
+        <button id="add_character" type="button" class="no_text_wrap_overflow add" onclick="showLCDialog(document.getElementById('add_lc_dialog'))">Add a Light Cone</button>
+        <button id="delete_characters" type="button" class="no_text_wrap_overflow delete" onclick="deleteAllLightcones()">Delete all Light Cones</button>
     </div>
 
     <!-- Filter Buttons -->
     <div class="box" id="button_wrapper">
         <div class="filter_buttons">
-            <div class="filter_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
+            <div class="filter_button on Abundance" onclick="toggleButtonClickLC('owned', 'Abundance')">
                 <img src="./icons/path/Path_Abundance.png" width="24" height="24">
             </div>
-            <div class="filter_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
+            <div class="filter_button on Destruction" onclick="toggleButtonClickLC('owned', 'Destruction')">
                 <img src="./icons/path/Path_Destruction.png" width="24" height="24">
             </div>
-            <div class="filter_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
+            <div class="filter_button on Erudition" onclick="toggleButtonClickLC('owned', 'Erudition')">
                 <img src="./icons/path/Path_Erudition.png" width="24" height="24">
             </div>
-            <div class="filter_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
+            <div class="filter_button on Harmony" onclick="toggleButtonClickLC('owned', 'Harmony')">
                 <img src="./icons/path/Path_Harmony.png" width="24" height="24">
             </div>
-            <div class="filter_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
+            <div class="filter_button on Nihility" onclick="toggleButtonClickLC('owned', 'Nihility')">
                 <img src="./icons/path/Path_Nihility.png" width="24" height="24">
             </div>
-            <div class="filter_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
+            <div class="filter_button on Preservation" onclick="toggleButtonClickLC('owned', 'Preservation')">
                 <img src="./icons/path/Path_Preservation.png" width="24" height="24">
             </div>
-            <div class="filter_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
+            <div class="filter_button on Hunt" onclick="toggleButtonClickLC('owned', 'Hunt')">
                 <img src="./icons/path/path_Hunt.png" width="24" height="24">
             </div>
         </div>
@@ -66,30 +66,30 @@
 
     <!-- Container for character info/creation dialog -->
     <div id="dialog_container">
-        <div id="add_lc_dialog" class="box flex_col">
+        <div id="add_lc_dialog" class="box flex_col dialog">
             <div>
                 <h2>Select a Light Cone</h2>
             </div>
             <div class="filter_buttons">
-                <div class="filter_button on Abundance" onclick="toggleButtonClick('create', 'Abundance')">
+                <div class="filter_button on Abundance" onclick="toggleButtonClickLC('create', 'Abundance')">
                     <img src="./icons/path/Path_Abundance.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Destruction" onclick="toggleButtonClick('create', 'Destruction')">
+                <div class="filter_button on Destruction" onclick="toggleButtonClickLC('create', 'Destruction')">
                     <img src="./icons/path/Path_Destruction.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Erudition" onclick="toggleButtonClick('create', 'Erudition')">
+                <div class="filter_button on Erudition" onclick="toggleButtonClickLC('create', 'Erudition')">
                     <img src="./icons/path/Path_Erudition.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Harmony" onclick="toggleButtonClick('create', 'Harmony')">
+                <div class="filter_button on Harmony" onclick="toggleButtonClickLC('create', 'Harmony')">
                     <img src="./icons/path/Path_Harmony.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Nihility" onclick="toggleButtonClick('create', 'Nihility')">
+                <div class="filter_button on Nihility" onclick="toggleButtonClickLC('create', 'Nihility')">
                     <img src="./icons/path/Path_Nihility.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Preservation" onclick="toggleButtonClick('create', 'Preservation')">
+                <div class="filter_button on Preservation" onclick="toggleButtonClickLC('create', 'Preservation')">
                     <img src="./icons/path/Path_Preservation.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Hunt" onclick="toggleButtonClick('create', 'Hunt')">
+                <div class="filter_button on Hunt" onclick="toggleButtonClickLC('create', 'Hunt')">
                     <img src="./icons/path/path_Hunt.png" width="24" height="24">
                 </div>
             </div>
@@ -97,7 +97,7 @@
 
             </div>
         </div>
-        <div id="edit_character_dialog" class="box flex_col">
+        <div id="edit_character_dialog" class="box flex_col dialog">
             
         </div>
     </div>

@@ -2,15 +2,15 @@ const names = ['Acheron', 'Argenti', 'Arlan', 'Asta', 'Aventurine', 'Bailu', 'Bl
 
 const ownedCharList = document.getElementById("owned_character_list");
 const createCharList = document.getElementById("create_character_list");
-const dialogContainer = document.getElementById("dialog_container");
+const dialogContainerChar = document.getElementById("dialog_container");
 const addDialog = document.getElementById("add_character_dialog");
 const editDialog = document.getElementById("edit_character_dialog");
-const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
-const types = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
-let paths_on_owned = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
-let types_on_owned = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
-let paths_on_create = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
-let types_on_create = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
+const pathsChar = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+const typesChar = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
+let pathsOnOwnedChar = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let typesOnOwnedChar = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
+let pathsOnCreateChar = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let typesOnCreateChar = ['Fire', 'Ice', 'Imaginary', 'Lightning', 'Physical', 'Quantum', 'Wind'];
 let characterObjects;
 let relicRolls;
 let relicStats;
@@ -51,9 +51,9 @@ function initializeChar() {
         if (val != null) addCharToOwnedList(name)
         else addCharToCreateList(name);
     });
-    dialogContainer.addEventListener("click", e => {
-        if (e.target === dialogContainer) {
-            closeDialog();
+    dialogContainerChar.addEventListener("click", e => {
+        if (e.target === dialogContainerChar) {
+            closeDialogChar();
         }
     });
 }
@@ -100,7 +100,7 @@ function addCharToCreateList(name) {
                 rope: null
             }
         }));
-        closeDialog();
+        closeDialogChar();
         addCharToOwnedList(name);
         card.remove();
     }
@@ -147,7 +147,7 @@ function addCharToOwnedList(name) {
         toggleTraces(card.id);
     } 
     ownedCharList.append(card);
-    applyFilter('owned');
+    applyFilterChar('owned');
     sortCards(ownedCharList);
 }
 
@@ -157,7 +157,7 @@ function deleteCharacter(name) {
         document.getElementById(name).remove();
         addCharToCreateList(name);
         sortCards(createCharList);
-        closeDialog();
+        closeDialogChar();
     }
     //TODO: Remove character from relics and lightcone
 }
@@ -401,7 +401,7 @@ function openCharacterInfo(name) {
             </div>
         </div>
     `;
-    showDialog(editDialog);
+    showCharDialog(editDialog);
 }
 
 function toggleCharLevelDropdown(name) {
@@ -543,8 +543,8 @@ function calculateCharStats(obj) {
  * Shows the dialog represented by the passed div element. It should be a child of the div dialog_container.
  * @param {HTMLDivElement} div The element to display. 
  */
-function showDialog(div) {
-    dialogContainer.style.visibility = "visible";
+function showCharDialog(div) {
+    dialogContainerChar.style.visibility = "visible";
     div.style.display = "flex";
 }
 
@@ -588,11 +588,11 @@ function sortCards(list) {
  * @param {string} list The list this filter button applies to - pass 'owned' to specify the list of owned characters, and 'create' for the list of creatable characters.
  * @param {string} btn This argument should be the type or path that the button represents, with the first letter capitalized (for example 'Erudition').
  */
-function toggleButtonClick(list, btn) {
-    if (types.includes(btn) && list == 'owned') {
+function toggleButtonClickChar(list, btn) {
+    if (typesChar.includes(btn) && list == 'owned') {
         let buttons = document.getElementById("button_wrapper").querySelectorAll(".filter_button.Fire, .filter_button.Ice, .filter_button.Lightning, .filter_button.Imaginary, .filter_button.Quantum, .filter_button.Physical, .filter_button.Wind");
-        if (types.length == types_on_owned.length) {
-            types_on_owned = [btn];
+        if (typesChar.length == typesOnOwnedChar.length) {
+            typesOnOwnedChar = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -603,23 +603,23 @@ function toggleButtonClick(list, btn) {
                 }
             });
         } else {
-            if (types_on_owned.includes(btn)) {
-                types_on_owned.splice(types_on_owned.indexOf(btn), 1);
+            if (typesOnOwnedChar.includes(btn)) {
+                typesOnOwnedChar.splice(typesOnOwnedChar.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (types_on_owned.length == 0) {
-                    types_on_owned = types;
+                if (typesOnOwnedChar.length == 0) {
+                    typesOnOwnedChar = typesChar;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                types_on_owned.push(btn);
+                typesOnOwnedChar.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -628,10 +628,10 @@ function toggleButtonClick(list, btn) {
                 });
             }
         }
-    } else if (paths.includes(btn) && list == 'owned') {
+    } else if (pathsChar.includes(btn) && list == 'owned') {
         let buttons = document.getElementById("button_wrapper").querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
-        if (paths.length == paths_on_owned.length) {
-            paths_on_owned = [btn];
+        if (pathsChar.length == pathsOnOwnedChar.length) {
+            pathsOnOwnedChar = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -642,23 +642,23 @@ function toggleButtonClick(list, btn) {
                 }
             })
         } else {
-            if (paths_on_owned.includes(btn)) {
-                paths_on_owned.splice(paths_on_owned.indexOf(btn), 1);
+            if (pathsOnOwnedChar.includes(btn)) {
+                pathsOnOwnedChar.splice(pathsOnOwnedChar.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (paths_on_owned.length == 0) {
-                    paths_on_owned = paths;
+                if (pathsOnOwnedChar.length == 0) {
+                    pathsOnOwnedChar = pathsChar;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                paths_on_owned.push(btn);
+                pathsOnOwnedChar.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -667,10 +667,10 @@ function toggleButtonClick(list, btn) {
                 });
             }
         }
-    } else if (types.includes(btn)) {
+    } else if (typesChar.includes(btn)) {
         let buttons = addDialog.querySelectorAll(".filter_button.Fire, .filter_button.Ice, .filter_button.Lightning, .filter_button.Imaginary, .filter_button.Quantum, .filter_button.Physical, .filter_button.Wind");
-        if (types.length == types_on_create.length) {
-            types_on_create = [btn];
+        if (typesChar.length == typesOnCreateChar.length) {
+            typesOnCreateChar = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -681,23 +681,23 @@ function toggleButtonClick(list, btn) {
                 }
             });
         } else {
-            if (types_on_create.includes(btn)) {
-                types_on_create.splice(types_on_create.indexOf(btn), 1);
+            if (typesOnCreateChar.includes(btn)) {
+                typesOnCreateChar.splice(typesOnCreateChar.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (types_on_create.length == 0) {
-                    types_on_create = types;
+                if (typesOnCreateChar.length == 0) {
+                    typesOnCreateChar = typesChar;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                types_on_create.push(btn);
+                typesOnCreateChar.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -708,8 +708,8 @@ function toggleButtonClick(list, btn) {
         }
     } else {
         let buttons = addDialog.querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
-        if (paths.length == paths_on_create.length) {
-            paths_on_create = [btn];
+        if (pathsChar.length == pathsOnCreateChar.length) {
+            pathsOnCreateChar = [btn];
             buttons.forEach(button => {
                 if (!button.classList.contains(btn)) {
                     button.classList.remove("on");
@@ -720,23 +720,23 @@ function toggleButtonClick(list, btn) {
                 }
             })
         } else {
-            if (paths_on_create.includes(btn)) {
-                paths_on_create.splice(paths_on_create.indexOf(btn), 1);
+            if (pathsOnCreateChar.includes(btn)) {
+                pathsOnCreateChar.splice(pathsOnCreateChar.indexOf(btn), 1);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("on");
                         button.classList.add("off");
                     }
                 });
-                if (paths_on_create.length == 0) {
-                    paths_on_create = paths;
+                if (pathsOnCreateChar.length == 0) {
+                    pathsOnCreateChar = pathsChar;
                     buttons.forEach(button => {
                         button.classList.add("on");
                         button.classList.remove("off");
                     });
                 }
             } else {
-                paths_on_create.push(btn);
+                pathsOnCreateChar.push(btn);
                 buttons.forEach(button => {
                     if (button.classList.contains(btn)) {
                         button.classList.remove("off");
@@ -746,14 +746,14 @@ function toggleButtonClick(list, btn) {
             }
         }
     }
-    applyFilter(list);
+    applyFilterChar(list);
 }
 
 /**
  * Applies the specified list's filter to that list.
  * @param {string} list The list the filter applies to - pass 'owned' to specify the list of owned characters, and 'create' for the list of creatable characters.
  */
-function applyFilter(list) {
+function applyFilterChar(list) {
     let show_type = [];
     let show_path = [];
     let show_both = [];
@@ -761,12 +761,12 @@ function applyFilter(list) {
     if (list == 'owned') {
         cards = ownedCharList.querySelectorAll(".character.card");
         cards.forEach(character => {
-            types_on_owned.forEach(type => {
+            typesOnOwnedChar.forEach(type => {
                 if (character.classList.contains(type)) show_type.push(character);
             });
         });
         cards.forEach(character => {
-            paths_on_owned.forEach(path => {
+            pathsOnOwnedChar.forEach(path => {
                 if (character.classList.contains(path)) show_path.push(character);
             });
         });
@@ -780,12 +780,12 @@ function applyFilter(list) {
     else {
         cards = createCharList.querySelectorAll(".mini.card");
         cards.forEach(character => {
-            types_on_create.forEach(type => {
+            typesOnCreateChar.forEach(type => {
                 if (character.classList.contains(type)) show_type.push(character);
             });
         });
         cards.forEach(character => {
-            paths_on_create.forEach(path => {
+            pathsOnCreateChar.forEach(path => {
                 if (character.classList.contains(path)) show_path.push(character);
             });
         });
@@ -801,16 +801,16 @@ function applyFilter(list) {
 /**
  * Closes any dialog and resets the filter on the list of characters in the creation dialog.
  */
-function closeDialog() {
-    dialogContainer.style.visibility = "hidden";
-    for (const child of dialogContainer.children) child.style.display = "none";
+function closeDialogChar() {
+    dialogContainerChar.style.visibility = "hidden";
+    for (const child of dialogContainerChar.children) child.style.display = "none";
     addDialog.querySelectorAll(".path_button, .type_button").forEach(button => {
         button.classList.add("on");
         button.classList.remove("off");
     });
-    paths_on_create = paths;
-    types_on_create = types;
-    applyFilter('create');
+    pathsOnCreateChar = pathsChar;
+    typesOnCreateChar = typesChar;
+    applyFilterChar('create');
 }
 
 /**

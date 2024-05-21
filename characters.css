@@ -10,25 +10,6 @@
     width:20%;
 }
 
-#dialog_container {
-    position: fixed;
-    width:100%;
-    top: 0;
-    bottom: 0;
-    overflow: scroll;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility:hidden;
-}
-
-#add_character_dialog, #edit_character_dialog {
-    margin-inline: auto;
-    margin-top: 50px;
-    width:80%;
-    display:none;
-    gap:8px;
-    padding:20px;
-}
-
 #edit_info_container {
     display:flex;
     flex-flow:wrap;

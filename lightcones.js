@@ -1,12 +1,12 @@
 
 const ownedLCList = document.getElementById("owned_lc_list");
 const createLCList = document.getElementById("create_lc_list");
-const dialogContainer = document.getElementById("dialog_container");
+const dialogContainerLC = document.getElementById("dialog_container");
 const addDialog = document.getElementById("add_lc_dialog");
 const editDialog = document.getElementById("edit_lc_dialog");
-const paths = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
-let paths_on_owned = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
-let paths_on_create = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+const pathsLC = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let pathsOnOwnedLC = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
+let pathsOnCreateLC = ['Abundance', 'Destruction', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Hunt'];
 let lightCones;
 
 async function fetchLCJSON() {
@@ -18,26 +18,28 @@ async function fetchLCJSON() {
 }
 
 function initializeLC() {
-    lightCones.forEach(name => {
-        const val = localStorage.getItem("lc_" + name);
-        if (val != null) addLCToOwnedList(name)
-        else addLCToCreateList(name);
+    Object.keys(lightCones).forEach(name => {
+        withoutSpaces = name.replace(/ /g, '');
+        const val = localStorage.getItem("lc_" + withoutSpaces);
+        if (val != null) addLCToOwnedList(withoutSpaces)
+        else addLCToCreateList(withoutSpaces);
     });
-    dialogContainer.addEventListener("click", e => {
-        if (e.target === dialogContainer) {
-            closeDialog();
+    dialogContainerLC.addEventListener("click", e => {
+        if (e.target === dialogContainerLC) {
+            closeDialogLC();
         }
     });
 }
 
 function addLCToCreateList(name) {
-    const path = lightCones[name].path;
-    const card = createDiv(["mini_card", "flex_col", lightCones[name].path]);
     const withSpaces = addSpaces(name);
+    const path = lightCones[withSpaces].path === "The Hunt" ? "Hunt" : lightCones[withSpaces].path;
+    const card = createDiv(["mini_card", "flex_col", path]);
+    const imgPath = name == "WhatIsReal?" ? "WhatIsReal.png" : name + ".png";
     card.id = name;
     card.innerHTML = /*HTML*/ `
         <div class="info_container">
-            <img class="portrait" src="./icons/lightcones/${name}.png" height="124px" width="112px">
+            <img class="portrait" src="./icons/lightcones/${imgPath}" height="124px" width="112px">
             <div class="info_text flex_col">${withSpaces}</div>
         </div>
     `;
@@ -51,7 +53,7 @@ function addLCToCreateList(name) {
             superimposed: 1,
             location: "Inventory"
         }));
-        closeDialog();
+        closeDialogLC();
         addLCToOwnedList(name);
         card.remove();
     }
@@ -88,7 +90,7 @@ function addLCToOwnedList(name) {
         </div>
     `;
     ownedLCList.append(card);
-    applyFilter('owned');
+    applyFilterLC('owned');
     sortCards(ownedLCList);
 }
 
@@ -98,19 +100,20 @@ function deleteLightcone(name) {
         document.getElementById(name).remove();
         addLCToCreateList(name);
         sortCards(createLCList);
-        closeDialog();
+        closeDialogLC();
     }
     //TODO: Remove character from relics and lightcone
 }
 
 function deleteAllLightcones() {
     if (confirm("Are you sure you want to delete all Light Cones?")) {
-        lightCones.forEach(lightcone => {
-            localStorage.removeItem("lc_" + lightcone);
-            let card = document.getElementById(lightcone);
+        Object.keys(lightCones).forEach(lightcone => {
+            withoutSpaces = lightcone.replace(/ /g, '');
+            localStorage.removeItem("lc_" + withoutSpaces);
+            let card = document.getElementById(withoutSpaces);
             if (card != null) {
                 card.remove();
-                addLCToCreateList(lightcone);
+                addLCToCreateList(withoutSpaces);
             }
         });
         sortCards(createLCList);
@@ -123,7 +126,7 @@ function openLCInfo(name) {
     const LCData = lightCones[addSpaces(name)];
     const stats = calculateLCStats(LCObject);
     editDialog.innerHTML = /*HTML*/ `
-        <button id="delete_character" type="button" class="no_text_wrap_overflow delete" onclick="deleteCharacter('${name}')">Delete Character</button>
+        <button id="delete_character" type="button" class="no_text_wrap_overflow delete" onclick="deleteLightcone('${name}')">Delete Lightcone</button>
         <div id="edit_info_container" class="flex">
             <div id="edit_info_left_segment">
                 <div id="left_container" class="flex_col">
@@ -173,7 +176,7 @@ function openLCInfo(name) {
             <i class="fa fa-chevron-down"></i>
         </div>
     `;
-    showDialog(editDialog);
+    showCharDialog(editDialog);
 }
 
 function toggleLCLevelDropdown(name) {
@@ -213,7 +216,7 @@ function updateLCLevel(name, option, ascension, container) {
     container.parentElement.querySelector(".stat_text").innerText = "Lvl. " + lvlText[0] + "/" + lvlText[1];
     toggleLCLevelDropdown(name);
     updateLCCard(name);
-    updateCharStats(obj);
+    updateLCStats(obj);
 }
 
 function updateLCStats(obj) {
@@ -272,6 +275,142 @@ function closeDropdown(id) {
     }
 }
 
+function calculateLCStats(obj) {
+    const ascension = lightCones[obj.key].ascension[obj.ascension];
+    const stats = {};
+    for (let key in ascension) {
+            stats[key.toUpperCase()] = Math.floor(ascension[key].base + ascension[key].step * (obj.level - 1));
+            break;
+    }
+    return stats;
+}
+
+function showLCDialog(div) {
+    dialogContainerLC.style.visibility = "visible";
+    div.style.display = "flex";
+}
+
+function toggleButtonClickLC(list, btn) {
+    if (list == 'owned') {
+        let buttons = document.getElementById("button_wrapper").querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
+        if (pathsLC.length == pathsOnOwnedLC.length) {
+            pathsOnOwnedLC = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            })
+        } else {
+            if (pathsOnOwnedLC.includes(btn)) {
+                pathsOnOwnedLC.splice(pathsOnOwnedLC.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (pathsOnOwnedLC.length == 0) {
+                    pathsOnOwnedLC = pathsLC;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                pathsOnOwnedLC.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
+    } else {
+        let buttons = addDialog.querySelectorAll(".filter_button.Abundance, .filter_button.Erudition, .filter_button.Nihility, .filter_button.Preservation, .filter_button.Harmony, .filter_button.Destruction, .filter_button.Hunt");
+        if (pathsLC.length == pathsOnCreateLC.length) {
+            pathsOnCreateLC = [btn];
+            buttons.forEach(button => {
+                if (!button.classList.contains(btn)) {
+                    button.classList.remove("on");
+                    button.classList.add("off");
+                } else {
+                    button.classList.remove("off");
+                    button.classList.add("on");
+                }
+            })
+        } else {
+            if (pathsOnCreateLC.includes(btn)) {
+                pathsOnCreateLC.splice(pathsOnCreateLC.indexOf(btn), 1);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("on");
+                        button.classList.add("off");
+                    }
+                });
+                if (pathsOnCreateLC.length == 0) {
+                    pathsOnCreateLC = pathsLC;
+                    buttons.forEach(button => {
+                        button.classList.add("on");
+                        button.classList.remove("off");
+                    });
+                }
+            } else {
+                pathsOnCreateLC.push(btn);
+                buttons.forEach(button => {
+                    if (button.classList.contains(btn)) {
+                        button.classList.remove("off");
+                        button.classList.add("on");
+                    }
+                });
+            }
+        }
+    }
+    applyFilterLC(list);
+}
+
+function applyFilterLC(list) {
+    let show = [];
+    let cards;
+    if (list == 'owned') {
+        cards = ownedLCList.querySelectorAll(".lightcone.card");
+        cards.forEach(lightcone => {
+            pathsOnOwnedLC.forEach(path => {
+                if (lightcone.classList.contains(path)) show.push(lightcone);
+            });
+        });
+        cards.forEach(lightcone => {
+            lightcone.style.display = show.includes(lightcone) ? "flex" : "none";
+        });
+    }
+    else {
+        cards = createLCList.querySelectorAll(".mini.card");
+        cards.forEach(lightcone => {
+            pathsOnOwnedLC.forEach(path => {
+                if (lightcone.classList.contains(path)) show.push(lightcone);
+            });
+        });
+        cards.forEach(lightcone => {
+            lightcone.style.display = show.includes(lightcone) ? "flex" : "none";
+        });
+    }
+}
+
+function closeDialogLC() {
+    dialogContainerLC.style.visibility = "hidden";
+    for (const child of dialogContainerLC.children) child.style.display = "none";
+    addDialog.querySelectorAll(".path_button").forEach(button => {
+        button.classList.add("on");
+        button.classList.remove("off");
+    });
+    pathsOnCreateLC = pathsLC;
+    applyFilterLC('create');
+}
+
 function formatLCAbility(LCObject, LCData) {
     let abilityDesc = LCData.ability.desc;
     for(let i = 0; i < LCData.ability.params[0].length; i++) {
@@ -279,3 +418,80 @@ function formatLCAbility(LCObject, LCData) {
     }
     return abilityDesc;
 }
+
+function createDiv(arr) {
+    const div = document.createElement("div")
+    if (arr.constructor === Array) div.classList.add(...arr);
+    else div.classList.add(arr);
+    return div;
+}
+
+function addSpaces(name) {
+    if (name === "Geniuses'Repose") return "Geniuses' Repose"
+    if (name === "RiverFlowsinSpring") return "River Flows in Spring"
+    if (name === "PastSelfinMirror") return "Past Self in Mirror"
+    if (name === "CruisingintheStellarSea") return "Cruising in the Stellar Sea"
+    for (let i = 1; i < name.length; i++) {
+        if (name[i] === name[i].toUpperCase() && name[i] != "-" && name[i-1] != "-" && name[i] != "\'" && name[i-1] != "\'" && name[i] != "!" && name[i] != "," && name[i] != "?") {
+            name = name.substring(0, i) + " " + name.substring(i);
+            i++;
+        } else if (name.length > i + 3) {
+            if (name[i] === "t" && name[i+1] === "h" && name[i+2] === "e") {
+                if (name == "Today Is AnotherPeacefulDay") return "Today Is Another Peaceful Day";
+                if (name == "OntheFallofanAeon") return "On the Fall of an Aeon";
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+            else if(name[i] === "o" && name[i+1] === "f") {
+                if (name === "Woof!WalkTime!") return "Woof! Walk Time!"
+                if (name === "EchoesoftheCoffin") return "Echoes of the Coffin"
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+            else if(name[i] === "i" && name[i+1] === "n" && name[i+2] === name[i+2].toUpperCase) {
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+            else if(name[i] === "t" && name[i+1] === "o") {
+                if (name == "NightontheMilkyWay") return "Night on the Milky Way";
+                if (name == "NightofFright") return "Night of Fright";
+                if (name == "MomentofVictory") return "Moment of Victory";
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+            else if(name[i] === "a" && name[i+1] === "n" && name[i+2] === "d") {
+                if (name === "Landau'sChoice") return "Landau's Choice"
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+            else if(name[i] === "f" && name[i+1] === "o" && name[i+2] === "r") {
+                if (name == "BeforetheTutorialMissionStarts") return "Before the Tutorial Mission Starts";
+                if (name == "BeforeDawn") return "Before Dawn";
+                if (name == "An Instant BeforeAGaze") return "An Instant Before A Gaze";
+                if (name == "ReforgedRemembrance") return "Reforged Remembrance";
+                name = name.substring(0, i) + " " + name.substring(i);
+                i++;
+            }
+        }
+    }
+    return name;
+}
+
+function sortCards(list) {
+    const children = Array.from(list.children)
+    children.sort((a, b) => {
+        const idA = a.id.toUpperCase();
+        const idB = b.id.toUpperCase();
+        if (idA < idB) return -1;
+        if (idA > idB) return 1;
+        return 0;
+    });
+    children.forEach(child => list.appendChild(child));
+}
+
+async function bootLC() {
+    await fetchLCJSON();
+    initializeLC();
+}
+
+bootLC();

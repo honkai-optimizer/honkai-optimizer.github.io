@@ -32,6 +32,16 @@ body {
   justify-content: center;
 }
 
+#dialog_container {
+  position: fixed;
+  width:100%;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility:hidden;
+}
+
 .flex {
   display:flex;
 }
@@ -196,6 +206,15 @@ body {
   gap: 5px;
   margin-top: 5px;
   justify-content: center;
+}
+
+.dialog {
+  margin-inline: auto;
+  margin-top: 50px;
+  width:80%;
+  display:none;
+  gap:8px;
+  padding:20px;
 }
 
 footer {

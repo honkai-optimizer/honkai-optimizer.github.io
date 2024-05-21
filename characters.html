@@ -26,54 +26,54 @@
 
     <!-- Add or remove characters-->
     <div class="box" id="add_delete_buttons">
-        <button type="button" class="no_text_wrap_overflow add" onclick="showDialog(document.getElementById('add_character_dialog'))">Add a Character</button>
+        <button type="button" class="no_text_wrap_overflow add" onclick="showCharDialog(document.getElementById('add_character_dialog'))">Add a Character</button>
         <button type="button" class="no_text_wrap_overflow delete" onclick="deleteAllCharacters()">Delete all Characters</button>
     </div>
     <!-- Filter Buttons -->
     <div class="box" id="button_wrapper">
         <div class="filter_buttons">
-            <div class="filter_button on Abundance" onclick="toggleButtonClick('owned', 'Abundance')">
+            <div class="filter_button on Abundance" onclick="toggleButtonClickChar('owned', 'Abundance')">
                 <img src="./icons/path/Path_Abundance.png" width="24" height="24">
             </div>
-            <div class="filter_button on Destruction" onclick="toggleButtonClick('owned', 'Destruction')">
+            <div class="filter_button on Destruction" onclick="toggleButtonClickChar('owned', 'Destruction')">
                 <img src="./icons/path/Path_Destruction.png" width="24" height="24">
             </div>
-            <div class="filter_button on Erudition" onclick="toggleButtonClick('owned', 'Erudition')">
+            <div class="filter_button on Erudition" onclick="toggleButtonClickChar('owned', 'Erudition')">
                 <img src="./icons/path/Path_Erudition.png" width="24" height="24">
             </div>
-            <div class="filter_button on Harmony" onclick="toggleButtonClick('owned', 'Harmony')">
+            <div class="filter_button on Harmony" onclick="toggleButtonClickChar('owned', 'Harmony')">
                 <img src="./icons/path/Path_Harmony.png" width="24" height="24">
             </div>
-            <div class="filter_button on Nihility" onclick="toggleButtonClick('owned', 'Nihility')">
+            <div class="filter_button on Nihility" onclick="toggleButtonClickChar('owned', 'Nihility')">
                 <img src="./icons/path/Path_Nihility.png" width="24" height="24">
             </div>
-            <div class="filter_button on Preservation" onclick="toggleButtonClick('owned', 'Preservation')">
+            <div class="filter_button on Preservation" onclick="toggleButtonClickChar('owned', 'Preservation')">
                 <img src="./icons/path/Path_Preservation.png" width="24" height="24">
             </div>
-            <div class="filter_button on Hunt" onclick="toggleButtonClick('owned', 'Hunt')">
+            <div class="filter_button on Hunt" onclick="toggleButtonClickChar('owned', 'Hunt')">
                 <img src="./icons/path/path_Hunt.png" width="24" height="24">
             </div>
         </div>
         <div class="filter_buttons">
-            <div class="filter_button on Fire" onclick="toggleButtonClick('owned', 'Fire')">
+            <div class="filter_button on Fire" onclick="toggleButtonClickChar('owned', 'Fire')">
                 <img src="./icons/type/Type_Fire.png" width="24" height="24">
             </div>
-            <div class="filter_button on Ice" onclick="toggleButtonClick('owned', 'Ice')">
+            <div class="filter_button on Ice" onclick="toggleButtonClickChar('owned', 'Ice')">
                 <img src="./icons/type/Type_Ice.png" width="24" height="24">
             </div>
-            <div class="filter_button on Imaginary" onclick="toggleButtonClick('owned', 'Imaginary')">
+            <div class="filter_button on Imaginary" onclick="toggleButtonClickChar('owned', 'Imaginary')">
                 <img src="./icons/type/Type_Imaginary.png" width="24" height="24">
             </div>
-            <div class="filter_button on Lightning" onclick="toggleButtonClick('owned', 'Lightning')">
+            <div class="filter_button on Lightning" onclick="toggleButtonClickChar('owned', 'Lightning')">
                 <img src="./icons/type/Type_Lightning.png" width="24" height="24">
             </div>
-            <div class="filter_button on Physical" onclick="toggleButtonClick('owned', 'Physical')">
+            <div class="filter_button on Physical" onclick="toggleButtonClickChar('owned', 'Physical')">
                 <img src="./icons/type/Type_Physical.png" width="24" height="24">
             </div>
-            <div class="filter_button on Quantum" onclick="toggleButtonClick('owned', 'Quantum')">
+            <div class="filter_button on Quantum" onclick="toggleButtonClickChar('owned', 'Quantum')">
                 <img src="./icons/type/Type_Quantum.png" width="24" height="24">
             </div>
-            <div class="filter_button on Wind" onclick="toggleButtonClick('owned', 'Wind')">
+            <div class="filter_button on Wind" onclick="toggleButtonClickChar('owned', 'Wind')">
                 <img src="./icons/type/Type_Wind.png" width="24" height="24">
             </div>
         </div>
@@ -87,53 +87,53 @@
 
     <!-- Container for character info/creation dialog -->
     <div id="dialog_container">
-        <div id="add_character_dialog" class="box flex_col">
+        <div id="add_character_dialog" class="box flex_col dialog">
             <div>
                 <h2>Select your Character</h2>
             </div>
             <div class="filter_buttons">
-                <div class="filter_button on Abundance" onclick="toggleButtonClick('create', 'Abundance')">
+                <div class="filter_button on Abundance" onclick="toggleButtonClickChar('create', 'Abundance')">
                     <img src="./icons/path/Path_Abundance.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Destruction" onclick="toggleButtonClick('create', 'Destruction')">
+                <div class="filter_button on Destruction" onclick="toggleButtonClickChar('create', 'Destruction')">
                     <img src="./icons/path/Path_Destruction.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Erudition" onclick="toggleButtonClick('create', 'Erudition')">
+                <div class="filter_button on Erudition" onclick="toggleButtonClickChar('create', 'Erudition')">
                     <img src="./icons/path/Path_Erudition.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Harmony" onclick="toggleButtonClick('create', 'Harmony')">
+                <div class="filter_button on Harmony" onclick="toggleButtonClickChar('create', 'Harmony')">
                     <img src="./icons/path/Path_Harmony.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Nihility" onclick="toggleButtonClick('create', 'Nihility')">
+                <div class="filter_button on Nihility" onclick="toggleButtonClickChar('create', 'Nihility')">
                     <img src="./icons/path/Path_Nihility.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Preservation" onclick="toggleButtonClick('create', 'Preservation')">
+                <div class="filter_button on Preservation" onclick="toggleButtonClickChar('create', 'Preservation')">
                     <img src="./icons/path/Path_Preservation.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Hunt" onclick="toggleButtonClick('create', 'Hunt')">
+                <div class="filter_button on Hunt" onclick="toggleButtonClickChar('create', 'Hunt')">
                     <img src="./icons/path/path_Hunt.png" width="24" height="24">
                 </div>
             </div>
             <div class="filter_buttons">
-                <div class="filter_button on Fire" onclick="toggleButtonClick('create', 'Fire')">
+                <div class="filter_button on Fire" onclick="toggleButtonClickChar('create', 'Fire')">
                     <img src="./icons/type/Type_Fire.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Ice" onclick="toggleButtonClick('create', 'Ice')">
+                <div class="filter_button on Ice" onclick="toggleButtonClickChar('create', 'Ice')">
                     <img src="./icons/type/Type_Ice.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Imaginary" onclick="toggleButtonClick('create', 'Imaginary')">
+                <div class="filter_button on Imaginary" onclick="toggleButtonClickChar('create', 'Imaginary')">
                     <img src="./icons/type/Type_Imaginary.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Lightning" onclick="toggleButtonClick('create', 'Lightning')">
+                <div class="filter_button on Lightning" onclick="toggleButtonClickChar('create', 'Lightning')">
                     <img src="./icons/type/Type_Lightning.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Physical" onclick="toggleButtonClick('create', 'Physical')">
+                <div class="filter_button on Physical" onclick="toggleButtonClickChar('create', 'Physical')">
                     <img src="./icons/type/Type_Physical.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Quantum" onclick="toggleButtonClick('create', 'Quantum')">
+                <div class="filter_button on Quantum" onclick="toggleButtonClickChar('create', 'Quantum')">
                     <img src="./icons/type/Type_Quantum.png" width="24" height="24">
                 </div>
-                <div class="filter_button on Wind" onclick="toggleButtonClick('create', 'Wind')">
+                <div class="filter_button on Wind" onclick="toggleButtonClickChar('create', 'Wind')">
                     <img src="./icons/type/Type_Wind.png" width="24" height="24">
                 </div>
             </div>
@@ -141,7 +141,7 @@
 
             </div>
         </div>
-        <div id="edit_character_dialog" class="box flex_col">
+        <div id="edit_character_dialog" class="box flex_col dialog">
             
         </div>
     </div>
